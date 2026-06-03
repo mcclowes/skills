@@ -60,6 +60,7 @@ Max is allergic to hype. Write like an engineer reporting facts, not a brand sel
 ## Rhythm and structure
 
 - **Vary sentence length.** A short one lands hard after a couple of longer ones. All-short reads choppy; all-long reads exhausting.
+- **No mic-drop cadence.** The percussive short sentence dropped for drama - and especially the reversal "X isn't Y. It's Z." - is a TED-talk tic, not Max's voice. "People aren't resources to be allocated. They're the ones who ship the thing." reads like a LinkedIn post; the full stop is doing theatrical work the idea hasn't earned. One punchy fragment in a long piece is spice (see Example 4); a steady drumbeat of them is a model performing profundity. When you catch yourself building to a one-line mic-drop, fold it back into the sentence before it or just state the point plainly.
 - **Lists are for genuinely multi-part ideas** - several parallel items, steps, or options where the structure helps the reader. Don't bullet a single thought or a flowing argument; that belongs in prose. If you have one or two items, it's a sentence, not a list.
 - **One idea per paragraph.** White space is a feature.
 - **Bold sparingly**, for the one phrase a skimmer must catch. Bold everywhere is bold nowhere.
@@ -82,6 +83,11 @@ After: "## What's new"
 Plain: "The migration removes the old code paths."
 With spice: "The migration quietly strips out the old code paths. Nothing left to rot."
 (One vivid word, "rot", not five. And note the full stop instead of a dash before "Nothing" - two clean sentences, no dash needed.)
+
+**Example 5 - killing the mic-drop**
+Before: "People aren't resources to be allocated. They're the ones who do the work."
+After: "People aren't resources to be allocated - they do the work."
+(The "X isn't Y. It's Z." reversal begs for applause. Folding it into one sentence keeps the point and drops the drama.)
 
 ## Calibration by context
 
