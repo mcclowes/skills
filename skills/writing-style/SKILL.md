@@ -32,6 +32,8 @@ Words to avoid: delve, leverage (as a verb), utilize (just say "use"), robust, s
 
 Phrases to avoid: "it's worth noting that", "it's important to note", "in today's fast-paced world", "in the ever-evolving landscape of", "at the end of the day", "when it comes to", "dive into", "let's dive in", "navigate the complexities", "a testament to", "plays a crucial role", "the world of", "look no further".
 
+**Hollow intensifiers.** Watch for "genuinely", "honestly", "truly", "really", and "actually" stapled onto a judgment to make it sound weightier: "the problem is genuinely serious", "this is honestly concerning", "it's really important". The intensifier adds no information - it just signals the model is trying to convince you. Either drop it ("the problem is serious") or, better, say *why* it's serious in concrete terms ("this drops every write under load"). The exception is the rare case where the word draws a real/not-real distinction - "only worth a list if it's genuinely multi-part" means *actually*, not *very* - and that's fine.
+
 The fix is almost always to delete the phrase or replace it with a concrete verb. "Leverage our robust API to streamline your workflow" becomes "Use the API to do X faster." Notice the second one actually says what happens.
 
 ## No padding, no preamble
