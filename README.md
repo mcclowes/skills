@@ -97,3 +97,18 @@ See [LICENCE](LICENCE) file for details.
 ## Contributing
 
 Contributions welcome — please feel free to submit issues or pull requests.
+
+### Skill validation
+
+Each skill's `SKILL.md` description must be **1024 characters or fewer**. Skills that exceed this limit are silently dropped by `npx skills add` and won't appear in the install picker.
+
+`scripts/validate-skills.sh` enforces this (plus the presence of `name` and `description` frontmatter) across every `skills/*/SKILL.md`. It runs in two places:
+
+- **CI** — `.github/workflows/validate-skills.yml` runs it on every push and pull request.
+- **Pre-commit** — `.githooks/pre-commit` runs it before each commit. Enable it once per clone:
+
+  ```bash
+  git config core.hooksPath .githooks
+  ```
+
+  Bypass with `git commit --no-verify` if needed. Run the check manually any time with `./scripts/validate-skills.sh`.

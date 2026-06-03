@@ -2,8 +2,8 @@
   "skill_name": "code-frontmatter",
   "notes": "Two suites. Navigation runs against a fixture that ALREADY has frontmatter (the skill's payoff case) and is graded on answer correctness while the benchmark tracks tokens — the skill's whole claim is token efficiency. Authoring runs against a stripped copy with no frontmatter and is graded on whether valid, accurate headers get added. Baseline for both is the pre-improvement skill snapshot.",
   "fixtures": {
-    "navigation": "../code-frontmatter-workspace/fixtures/url-shortener/src",
-    "authoring": "../code-frontmatter-workspace/fixtures/url-shortener-bare/src"
+    "navigation": "../../benchmarking/code-frontmatter-workspace/fixtures/url-shortener/src",
+    "authoring": "../../benchmarking/code-frontmatter-workspace/fixtures/url-shortener-bare/src"
   },
   "evals": [
     {
