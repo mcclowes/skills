@@ -1,0 +1,8 @@
+{
+  "expectations": [
+    {"text": "Advises against the reflexive smart/dumb/styles 3-way split", "passed": true, "evidence": "\"don't do the classic three-way split\"; \"Skip the container/presentational split.\""},
+    {"text": "Recommends extracting a hook (abstraction) instead of splitting container/view files", "passed": true, "evidence": "Provides useSavedCards() hook code and states \"extract an abstraction, not files\"; \"Abstraction before file structure.\""},
+    {"text": "Notes ~180 lines is acceptable as one file (raised size threshold)", "passed": true, "evidence": "\"180 lines of one coherent concern is not too big\"; ceiling \"a few hundred lines\" / \"~300 lines\"."},
+    {"text": "Grounds advice in AI agents' reluctance to read adjacent files / cross-file context cost", "passed": true, "evidence": "\"AI agents... remarkably reluctant to open adjacent files\"; \"doubled the cross-file lookups the agent is least likely to perform.\""}
+  ]
+}

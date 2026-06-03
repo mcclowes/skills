@@ -1,0 +1,22 @@
+{
+  "name": "mcclowes-skills",
+  "owner": {
+    "name": "mcclowes",
+    "email": "max@mcclowes.com"
+  },
+  "metadata": {
+    "description": "A general-purpose collection of Claude agent skills",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "mcclowes-skills",
+      "description": "A grab bag of agent skills across software engineering and writing, including opinionated API design patterns",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/api-design"
+      ]
+    }
+  ]
+}

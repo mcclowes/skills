@@ -1,0 +1,8 @@
+{
+  "expectations": [
+    {"text": "Advises against the reflexive smart/dumb/styles 3-way split", "passed": true, "evidence": "\"Don't do the three-way container/dumb/styles split. It's solving a 2017 problem.\""},
+    {"text": "Recommends extracting a hook (abstraction) instead of splitting container/view files", "passed": true, "evidence": "\"split by concern... extracted as hooks, not components\": useSavedCards, useCheckoutSubmit."},
+    {"text": "Notes ~180 lines is acceptable as one file (raised size threshold)", "passed": true, "evidence": "\"180 lines is not large... a normal, readable size.\""},
+    {"text": "Grounds advice in AI agents' reluctance to read adjacent files / cross-file context cost", "passed": true, "evidence": "\"More files is not free... a two-file edit that has to stay in sync\" — though framed via typed seams, not agent reluctance to open siblings."}
+  ]
+}

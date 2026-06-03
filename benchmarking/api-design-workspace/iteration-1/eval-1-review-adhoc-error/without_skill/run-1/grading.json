@@ -1,0 +1,35 @@
+{
+  "expectations": [
+    {
+      "text": "Recommends a unified `issues` array shape",
+      "passed": false,
+      "evidence": "Recommends a top-level `error` object envelope (`error.code`, `error.message`, `error.details`), not an `issues` array."
+    },
+    {
+      "text": "Critiques the numeric/opaque `code` and recommends descriptive string codes",
+      "passed": true,
+      "evidence": "Calls out `code: 401` as duplicating the status and recommends stable snake_case `token_invalid`."
+    },
+    {
+      "text": "Identifies the missing correlation ID and adds one",
+      "passed": true,
+      "evidence": "\"No way to correlate with your logs\" \u2014 adds `error.request_id`."
+    },
+    {
+      "text": "Provides a concrete before/after JSON example with an old\u2192new field mapping",
+      "passed": true,
+      "evidence": "Before/after summary table plus recommended JSON."
+    },
+    {
+      "text": "Recommends consistency across all endpoints",
+      "passed": true,
+      "evidence": "\"One envelope, everywhere... every endpoint returns the same structure.\""
+    }
+  ],
+  "summary": {
+    "pass_rate": 0.8,
+    "passed": 4,
+    "failed": 1,
+    "total": 5
+  }
+}

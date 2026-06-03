@@ -1,0 +1,25 @@
+{
+  "expectations": [
+    {
+      "text": "Every substantive source file has a frontmatter block",
+      "passed": true,
+      "evidence": "index: documented 7, missing [] -> 7/7"
+    },
+    {
+      "text": "validate reports zero issues (parses, purpose present, related paths resolve)",
+      "passed": true,
+      "evidence": "validate exit 0: 7 files validated, no issues"
+    },
+    {
+      "text": "Purposes are accurate and specific, not generic restatements of the filename",
+      "passed": true,
+      "evidence": "e.g. validate.ts purpose calls out http(s)-only + SSRF guard"
+    }
+  ],
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 3,
+    "failed": 0,
+    "total": 3
+  }
+}

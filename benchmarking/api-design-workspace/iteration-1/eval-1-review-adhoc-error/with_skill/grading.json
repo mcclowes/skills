@@ -1,0 +1,35 @@
+{
+  "expectations": [
+    {
+      "text": "Recommends a unified `issues` array shape",
+      "passed": true,
+      "evidence": "\"Adopt a single `issues` array used by every non-success response\" with concrete JSON."
+    },
+    {
+      "text": "Critiques the numeric/opaque `code` and recommends descriptive string codes",
+      "passed": true,
+      "evidence": "Calls out `code: 401` as redundant and recommends `unauthorized.token_expired`."
+    },
+    {
+      "text": "Identifies the missing correlation ID and adds one",
+      "passed": true,
+      "evidence": "\"No traceability... single most valuable field to add\" \u2014 adds `correlationId` and echo of `X-Correlation-ID`."
+    },
+    {
+      "text": "Provides a concrete before/after JSON example with an old\u2192new field mapping",
+      "passed": true,
+      "evidence": "Before block plus recommended JSON and a mapping table of old vs new fields."
+    },
+    {
+      "text": "Recommends consistency across all endpoints",
+      "passed": true,
+      "evidence": "\"One `issues` array, everywhere. Same shape in responses, webhooks, and callbacks.\""
+    }
+  ],
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 5,
+    "failed": 0,
+    "total": 5
+  }
+}

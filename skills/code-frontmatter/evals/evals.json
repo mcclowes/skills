@@ -1,0 +1,45 @@
+{
+  "skill_name": "code-frontmatter",
+  "notes": "Two suites. Navigation runs against a fixture that ALREADY has frontmatter (the skill's payoff case) and is graded on answer correctness while the benchmark tracks tokens — the skill's whole claim is token efficiency. Authoring runs against a stripped copy with no frontmatter and is graded on whether valid, accurate headers get added. Baseline for both is the pre-improvement skill snapshot.",
+  "fixtures": {
+    "navigation": "../code-frontmatter-workspace/fixtures/url-shortener/src",
+    "authoring": "../code-frontmatter-workspace/fixtures/url-shortener-bare/src"
+  },
+  "evals": [
+    {
+      "id": 0,
+      "name": "nav-add-backend",
+      "suite": "navigation",
+      "prompt": "I'm looking at the TypeScript project in <FIXTURE_NAV>. I want to add a Postgres storage backend. Which single file should I model my new implementation on, what interface must it satisfy, and which file wires the backend up at startup? Answer concisely.",
+      "expected_output": "Identifies store.ts as defining the LinkStore interface to implement, store-redis.ts as the example to model on, and server.ts as where the backend is constructed/wired. Should reach this from frontmatter without reading every file body.",
+      "assertions": [
+        {"text": "Names store.ts as the file defining the interface to implement (LinkStore)", "kind": "manual"},
+        {"text": "Identifies store-redis.ts as the existing implementation to model on", "kind": "manual"},
+        {"text": "Identifies server.ts as where the store is wired up at startup", "kind": "manual"}
+      ]
+    },
+    {
+      "id": 1,
+      "name": "nav-trace-click",
+      "suite": "navigation",
+      "prompt": "In the project at <FIXTURE_NAV>, trace what happens when a user visits a short link: which files are involved, in order, and where does the click counter get incremented? Keep it brief.",
+      "expected_output": "Traces server.ts (GET handler) -> shortener.ts resolve() -> store.incrementClicks (store.ts / store-redis.ts). Click increment happens in the store's incrementClicks, called by Shortener.resolve.",
+      "assertions": [
+        {"text": "Traces the path through server.ts then shortener.ts", "kind": "manual"},
+        {"text": "Correctly locates the click increment in the store layer (incrementClicks), called from Shortener.resolve", "kind": "manual"}
+      ]
+    },
+    {
+      "id": 2,
+      "name": "author-add-frontmatter",
+      "suite": "authoring",
+      "prompt": "The TypeScript files in <FIXTURE_AUTHOR> have no file-level documentation headers. Add code-frontmatter headers to each substantive source file so the next person can navigate the codebase without reading every file. Keep them concise.",
+      "expected_output": "Each substantive .ts file gains a valid frontmatter block: a one-line purpose and a related list whose paths resolve. Should be runnable through `validate` with no errors.",
+      "assertions": [
+        {"text": "Every substantive source file (codec, store, store-redis, validate, config, shortener, server) has a frontmatter block", "kind": "script"},
+        {"text": "`validate` reports zero issues across the files (parses, purpose present, related paths resolve)", "kind": "script"},
+        {"text": "Purposes are accurate and specific to each file, not generic restatements of the filename", "kind": "manual"}
+      ]
+    }
+  ]
+}

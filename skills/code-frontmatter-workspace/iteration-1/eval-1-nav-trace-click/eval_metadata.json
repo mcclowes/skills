@@ -1,0 +1,9 @@
+{
+  "eval_id": 1,
+  "eval_name": "nav-trace-click",
+  "prompt": "Navigation question: trace a click through the files and locate where the click counter increments.",
+  "assertions": [
+    {"text": "Traces the path through server.ts then shortener.ts"},
+    {"text": "Locates click increment in the store layer (incrementClicks), called from Shortener.resolve"}
+  ]
+}

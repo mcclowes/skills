@@ -1,0 +1,35 @@
+{
+  "expectations": [
+    {
+      "text": "Uses a single top-level `issues` array to carry the failures",
+      "passed": true,
+      "evidence": "Each case wrapped in `{ \"issues\": [ ... ] }`."
+    },
+    {
+      "text": "Issue codes are descriptive, lowercase, namespaced `{type}.{detail}` strings (not numeric or SCREAMING_SNAKE)",
+      "passed": true,
+      "evidence": "`unauthorized.bank_token_expired`, `validation.daily_limit_exceeded`, `internal.provider_rejected`."
+    },
+    {
+      "text": "Each issue includes `type`, `severity`, and `correlationId`",
+      "passed": true,
+      "evidence": "All three present on every issue object plus `dateTime`."
+    },
+    {
+      "text": "Sequra's rejection is surfaced via a `thirdParty` passthrough object",
+      "passed": true,
+      "evidence": "`thirdParty: { provider: \"sequra\", code: \"PAYOUT_DECLINED_RISK\", message: ... }`, noted as opaque passthrough."
+    },
+    {
+      "text": "Covers all three failure modes with distinct, descriptive codes",
+      "passed": true,
+      "evidence": "Token expiry, daily limit, provider rejection each modelled separately."
+    }
+  ],
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 5,
+    "failed": 0,
+    "total": 5
+  }
+}

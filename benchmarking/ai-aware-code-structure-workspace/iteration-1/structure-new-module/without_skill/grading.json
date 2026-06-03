@@ -1,0 +1,8 @@
+{
+  "expectations": [
+    {"text": "Advises starting coarser / not pre-splitting the three phases into many tiny files", "passed": false, "evidence": "Net recommendation is MORE structure up front — csv/, jobs/, status/ subfolders each with multiple files (generate-csv.ts, serializers.ts, create-export-job.ts, run-export-job.ts, job-store.ts...). The 'don't over-build day one' caveat is secondary and uses a ~200-line scan-comfort heuristic."},
+    {"text": "Co-locates tightly coupled job lifecycle / polling", "passed": true, "evidence": "Keeps enqueue/worker/status-read as wired pieces and suggests usePollExportStatus hook owning interval/backoff."},
+    {"text": "Recommends an abstraction (hook/module) over bare file splits", "passed": true, "evidence": "Suggests usePollExportStatus hook and a trigger-agnostic run-export-job(jobId) module boundary."},
+    {"text": "Mentions a ~300-line threshold as the split trigger", "passed": false, "evidence": "Uses ~200 lines as a scan-comfort cue, and frames structure type-first rather than size-driven; no ~300-line signal-to-noise threshold."}
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "expectations": [
+    {
+      "text": "Recommends one consistent error shape reused across both REST responses and webhooks",
+      "passed": true,
+      "evidence": "Defines one canonical `error` object reused in REST body and nested unchanged in the webhook event."
+    },
+    {
+      "text": "Uses the `issues` array with `severity` to distinguish errors vs warnings",
+      "passed": false,
+      "evidence": "Single `error` object (RFC 9457-style) with `retryable`/`status`; no `issues` array and no `severity`, so warnings can't ride alongside."
+    },
+    {
+      "text": "Provides a React consumption example",
+      "passed": true,
+      "evidence": "`extractError`, `apiFetch`, `ErrorBanner`, and an SSE hook for webhook-driven errors."
+    },
+    {
+      "text": "Surfaces the `correlationId` to the client",
+      "passed": true,
+      "evidence": "`request_id` rendered as Reference in `ErrorBanner`."
+    },
+    {
+      "text": "Notes consumers should tolerate unknown issue codes",
+      "passed": false,
+      "evidence": "Uses a closed `ERROR_CATALOG` enum (`satisfies Record<...>`); no guidance to tolerate unknown codes."
+    }
+  ],
+  "summary": {
+    "pass_rate": 0.6,
+    "passed": 3,
+    "failed": 2,
+    "total": 5
+  }
+}

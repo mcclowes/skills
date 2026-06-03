@@ -1,0 +1,8 @@
+{
+  "expectations": [
+    {"text": "Concludes the layout is over-split for an AI-heavy codebase", "passed": true, "evidence": "\"this is over-split, and 'we use AI assistants heavily' is an argument against this layout.\""},
+    {"text": "Recommends merging tightly-coupled view+logic+types into one component file", "passed": true, "evidence": "\"collapse to UserBadge.tsx... inline types/styles/logic.\""},
+    {"text": "Identifies the dumb-view-props-shaped-by-sibling smell / cross-file context problem", "passed": true, "evidence": "\"It fragments context... more chance an AI edits one and forgets a sibling.\""},
+    {"text": "Keeps styles separate as the defensible split", "passed": false, "evidence": "Recommends inlining styles into the single file (\"inline types/styles/logic\") rather than keeping the genuinely-isolatable styles split."}
+  ]
+}

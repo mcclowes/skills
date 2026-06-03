@@ -1,0 +1,8 @@
+{
+  "expectations": [
+    {"text": "Advises starting coarser / not pre-splitting the three phases into many tiny files", "passed": true, "evidence": "\"don't pre-split this into a dozen 30-line files... Start coarser than feels natural and let files grow.\""},
+    {"text": "Co-locates tightly coupled job lifecycle / polling", "passed": true, "evidence": "export-job.ts keeps create/run/status together; use-export.ts co-locates start + poll \"rather than splitting two hooks that need each other.\""},
+    {"text": "Recommends an abstraction (hook/module) over bare file splits", "passed": true, "evidence": "\"Prefer extracting an abstraction over extracting a file\"; use-export hook with {start, status, error}."},
+    {"text": "Mentions a ~300-line threshold as the split trigger", "passed": true, "evidence": "\"split further only when a file crosses ~300 lines or genuinely covers independent concerns.\""}
+  ]
+}

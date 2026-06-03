@@ -1,0 +1,323 @@
+{
+  "metadata": {
+    "skill_name": "api-design",
+    "skill_path": "/Users/mcclowes/Development/mcclowes/skills/skills/api-design",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-06-03T09:20:01Z",
+    "evals_run": [
+      0,
+      1,
+      2
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 0,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 48.9,
+        "tokens": 25199,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Uses a single top-level `issues` array to carry the failures",
+          "passed": true,
+          "evidence": "Each case wrapped in `{ \"issues\": [ ... ] }`."
+        },
+        {
+          "text": "Issue codes are descriptive, lowercase, namespaced `{type}.{detail}` strings (not numeric or SCREAMING_SNAKE)",
+          "passed": true,
+          "evidence": "`unauthorized.bank_token_expired`, `validation.daily_limit_exceeded`, `internal.provider_rejected`."
+        },
+        {
+          "text": "Each issue includes `type`, `severity`, and `correlationId`",
+          "passed": true,
+          "evidence": "All three present on every issue object plus `dateTime`."
+        },
+        {
+          "text": "Sequra's rejection is surfaced via a `thirdParty` passthrough object",
+          "passed": true,
+          "evidence": "`thirdParty: { provider: \"sequra\", code: \"PAYOUT_DECLINED_RISK\", message: ... }`, noted as opaque passthrough."
+        },
+        {
+          "text": "Covers all three failure modes with distinct, descriptive codes",
+          "passed": true,
+          "evidence": "Token expiry, daily limit, provider rejection each modelled separately."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 57.9,
+        "tokens": 25655,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends a unified `issues` array shape",
+          "passed": true,
+          "evidence": "\"Adopt a single `issues` array used by every non-success response\" with concrete JSON."
+        },
+        {
+          "text": "Critiques the numeric/opaque `code` and recommends descriptive string codes",
+          "passed": true,
+          "evidence": "Calls out `code: 401` as redundant and recommends `unauthorized.token_expired`."
+        },
+        {
+          "text": "Identifies the missing correlation ID and adds one",
+          "passed": true,
+          "evidence": "\"No traceability... single most valuable field to add\" \u2014 adds `correlationId` and echo of `X-Correlation-ID`."
+        },
+        {
+          "text": "Provides a concrete before/after JSON example with an old\u2192new field mapping",
+          "passed": true,
+          "evidence": "Before block plus recommended JSON and a mapping table of old vs new fields."
+        },
+        {
+          "text": "Recommends consistency across all endpoints",
+          "passed": true,
+          "evidence": "\"One `issues` array, everywhere. Same shape in responses, webhooks, and callbacks.\""
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 71.0,
+        "tokens": 29728,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends one consistent error shape reused across both REST responses and webhooks",
+          "passed": true,
+          "evidence": "Same `issues` array shown byte-for-byte identical in REST body and webhook envelope."
+        },
+        {
+          "text": "Uses the `issues` array with `severity` to distinguish errors vs warnings",
+          "passed": true,
+          "evidence": "`severity` field; React `IssueList` splits `error` (role=alert) vs `warning` (role=status)."
+        },
+        {
+          "text": "Provides a React consumption example",
+          "passed": true,
+          "evidence": "Shared types, one `handleIssues` entry point, EventSource webhook wiring, `IssueList` component."
+        },
+        {
+          "text": "Surfaces the `correlationId` to the client",
+          "passed": true,
+          "evidence": "`correlationId` rendered as Reference and threaded through REST + webhook + logs."
+        },
+        {
+          "text": "Notes consumers should tolerate unknown issue codes",
+          "passed": true,
+          "evidence": "\"issue: string \u2014 plain string, not a union \u2014 tolerate unknown codes as the taxonomy grows.\""
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 0,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.2,
+        "passed": 1,
+        "failed": 4,
+        "total": 5,
+        "time_seconds": 48.1,
+        "tokens": 19905,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Uses a single top-level `issues` array to carry the failures",
+          "passed": false,
+          "evidence": "Uses a `{ \"error\": { code, message, details, request_id } }` envelope \u2014 single error object, not an issues array."
+        },
+        {
+          "text": "Issue codes are descriptive, lowercase, namespaced `{type}.{detail}` strings (not numeric or SCREAMING_SNAKE)",
+          "passed": false,
+          "evidence": "Codes are SCREAMING_SNAKE and not namespaced: `BANK_TOKEN_EXPIRED`, `PAYOUT_LIMIT_EXCEEDED`, `PROVIDER_REJECTED`."
+        },
+        {
+          "text": "Each issue includes `type`, `severity`, and `correlationId`",
+          "passed": false,
+          "evidence": "No `type` or `severity` fields; uses `code` and `request_id` instead."
+        },
+        {
+          "text": "Sequra's rejection is surfaced via a `thirdParty` passthrough object",
+          "passed": false,
+          "evidence": "Vendor data placed under `details.provider*`, not a `thirdParty` object."
+        },
+        {
+          "text": "Covers all three failure modes with distinct, descriptive codes",
+          "passed": true,
+          "evidence": "All three cases modelled with distinct codes and good rationale."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8,
+        "passed": 4,
+        "failed": 1,
+        "total": 5,
+        "time_seconds": 39.7,
+        "tokens": 19243,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends a unified `issues` array shape",
+          "passed": false,
+          "evidence": "Recommends a top-level `error` object envelope (`error.code`, `error.message`, `error.details`), not an `issues` array."
+        },
+        {
+          "text": "Critiques the numeric/opaque `code` and recommends descriptive string codes",
+          "passed": true,
+          "evidence": "Calls out `code: 401` as duplicating the status and recommends stable snake_case `token_invalid`."
+        },
+        {
+          "text": "Identifies the missing correlation ID and adds one",
+          "passed": true,
+          "evidence": "\"No way to correlate with your logs\" \u2014 adds `error.request_id`."
+        },
+        {
+          "text": "Provides a concrete before/after JSON example with an old\u2192new field mapping",
+          "passed": true,
+          "evidence": "Before/after summary table plus recommended JSON."
+        },
+        {
+          "text": "Recommends consistency across all endpoints",
+          "passed": true,
+          "evidence": "\"One envelope, everywhere... every endpoint returns the same structure.\""
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.6,
+        "passed": 3,
+        "failed": 2,
+        "total": 5,
+        "time_seconds": 71.5,
+        "tokens": 22778,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends one consistent error shape reused across both REST responses and webhooks",
+          "passed": true,
+          "evidence": "Defines one canonical `error` object reused in REST body and nested unchanged in the webhook event."
+        },
+        {
+          "text": "Uses the `issues` array with `severity` to distinguish errors vs warnings",
+          "passed": false,
+          "evidence": "Single `error` object (RFC 9457-style) with `retryable`/`status`; no `issues` array and no `severity`, so warnings can't ride alongside."
+        },
+        {
+          "text": "Provides a React consumption example",
+          "passed": true,
+          "evidence": "`extractError`, `apiFetch`, `ErrorBanner`, and an SSE hook for webhook-driven errors."
+        },
+        {
+          "text": "Surfaces the `correlationId` to the client",
+          "passed": true,
+          "evidence": "`request_id` rendered as Reference in `ErrorBanner`."
+        },
+        {
+          "text": "Notes consumers should tolerate unknown issue codes",
+          "passed": false,
+          "evidence": "Uses a closed `ERROR_CATALOG` enum (`satisfies Record<...>`); no guidance to tolerate unknown codes."
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 59.2667,
+        "stddev": 11.1132,
+        "min": 48.9,
+        "max": 71.0
+      },
+      "tokens": {
+        "mean": 26860.6667,
+        "stddev": 2493.6287,
+        "min": 25199,
+        "max": 29728
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.5333,
+        "stddev": 0.3055,
+        "min": 0.2,
+        "max": 0.8
+      },
+      "time_seconds": {
+        "mean": 53.1,
+        "stddev": 16.4791,
+        "min": 39.7,
+        "max": 71.5
+      },
+      "tokens": {
+        "mean": 20642.0,
+        "stddev": 1879.2107,
+        "min": 19243,
+        "max": 22778
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.47",
+      "time_seconds": "+6.2",
+      "tokens": "+6219"
+    }
+  },
+  "notes": []
+}

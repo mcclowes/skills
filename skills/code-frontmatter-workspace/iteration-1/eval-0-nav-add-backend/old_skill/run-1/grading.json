@@ -1,0 +1,25 @@
+{
+  "expectations": [
+    {
+      "text": "Names store.ts as the file defining the interface to implement (LinkStore)",
+      "passed": true,
+      "evidence": "answer.md names LinkStore in store.ts with 4 methods"
+    },
+    {
+      "text": "Identifies store-redis.ts as the existing implementation to model on",
+      "passed": true,
+      "evidence": "answer.md: model on RedisStore in store-redis.ts"
+    },
+    {
+      "text": "Identifies server.ts as where the store is wired up at startup",
+      "passed": true,
+      "evidence": "answer.md: server.ts line 19 instantiates backend"
+    }
+  ],
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 3,
+    "failed": 0,
+    "total": 3
+  }
+}

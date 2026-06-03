@@ -1,0 +1,35 @@
+{
+  "expectations": [
+    {
+      "text": "Uses a single top-level `issues` array to carry the failures",
+      "passed": false,
+      "evidence": "Uses a `{ \"error\": { code, message, details, request_id } }` envelope \u2014 single error object, not an issues array."
+    },
+    {
+      "text": "Issue codes are descriptive, lowercase, namespaced `{type}.{detail}` strings (not numeric or SCREAMING_SNAKE)",
+      "passed": false,
+      "evidence": "Codes are SCREAMING_SNAKE and not namespaced: `BANK_TOKEN_EXPIRED`, `PAYOUT_LIMIT_EXCEEDED`, `PROVIDER_REJECTED`."
+    },
+    {
+      "text": "Each issue includes `type`, `severity`, and `correlationId`",
+      "passed": false,
+      "evidence": "No `type` or `severity` fields; uses `code` and `request_id` instead."
+    },
+    {
+      "text": "Sequra's rejection is surfaced via a `thirdParty` passthrough object",
+      "passed": false,
+      "evidence": "Vendor data placed under `details.provider*`, not a `thirdParty` object."
+    },
+    {
+      "text": "Covers all three failure modes with distinct, descriptive codes",
+      "passed": true,
+      "evidence": "All three cases modelled with distinct codes and good rationale."
+    }
+  ],
+  "summary": {
+    "pass_rate": 0.2,
+    "passed": 1,
+    "failed": 4,
+    "total": 5
+  }
+}

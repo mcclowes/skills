@@ -1,0 +1,253 @@
+{
+  "metadata": {
+    "skill_name": "code-frontmatter",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-06-03T09:41:52Z",
+    "evals_run": [
+      0,
+      1,
+      2
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 0,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "time_seconds": 44.4,
+        "tokens": 24621,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Names store.ts as the file defining the interface to implement (LinkStore)",
+          "passed": true,
+          "evidence": "answer.md names LinkStore in store.ts with 4 methods"
+        },
+        {
+          "text": "Identifies store-redis.ts as the existing implementation to model on",
+          "passed": true,
+          "evidence": "answer.md: model on RedisStore in store-redis.ts"
+        },
+        {
+          "text": "Identifies server.ts as where the store is wired up at startup",
+          "passed": true,
+          "evidence": "answer.md: server.ts line 19 instantiates backend"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 2,
+        "failed": 0,
+        "total": 2,
+        "time_seconds": 43.0,
+        "tokens": 27224,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Traces the path through server.ts then shortener.ts",
+          "passed": true,
+          "evidence": "server.ts -> shortener.resolve correctly traced"
+        },
+        {
+          "text": "Locates click increment in the store layer (incrementClicks), called from Shortener.resolve",
+          "passed": true,
+          "evidence": "RedisStore.incrementClicks lines 55-57, from Shortener.resolve line 52"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "time_seconds": 60.4,
+        "tokens": 29329,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Every substantive source file has a frontmatter block",
+          "passed": true,
+          "evidence": "index: documented 7, missing [] -> 7/7"
+        },
+        {
+          "text": "validate reports zero issues (parses, purpose present, related paths resolve)",
+          "passed": true,
+          "evidence": "validate exit 0: 7 files validated, no issues"
+        },
+        {
+          "text": "Purposes are accurate and specific, not generic restatements of the filename",
+          "passed": true,
+          "evidence": "purposes specific per file; SSRF guard noted in validate.ts"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 0,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "time_seconds": 45.2,
+        "tokens": 24096,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Names store.ts as the file defining the interface to implement (LinkStore)",
+          "passed": true,
+          "evidence": "answer.md: 'LinkStore, defined in src/store.ts' with full method list"
+        },
+        {
+          "text": "Identifies store-redis.ts as the existing implementation to model on",
+          "passed": true,
+          "evidence": "answer.md: 'Model your implementation on src/store-redis.ts'"
+        },
+        {
+          "text": "Identifies server.ts as where the store is wired up at startup",
+          "passed": true,
+          "evidence": "answer.md: 'src/server.ts line 19 constructs the service'; also flagged the stale doc-comment in store.ts"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 2,
+        "failed": 0,
+        "total": 2,
+        "time_seconds": 83.3,
+        "tokens": 28153,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Traces the path through server.ts then shortener.ts",
+          "passed": true,
+          "evidence": "server.ts GET handler -> Shortener.resolve in shortener.ts"
+        },
+        {
+          "text": "Locates click increment in the store layer (incrementClicks), called from Shortener.resolve",
+          "passed": true,
+          "evidence": "RedisStore.incrementClicks (hincrby), triggered by store.incrementClicks in Shortener.resolve"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "time_seconds": 52.3,
+        "tokens": 30228,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Every substantive source file has a frontmatter block",
+          "passed": true,
+          "evidence": "index: documented 7, missing [] -> 7/7"
+        },
+        {
+          "text": "validate reports zero issues (parses, purpose present, related paths resolve)",
+          "passed": true,
+          "evidence": "validate exit 0: 7 files validated, no issues"
+        },
+        {
+          "text": "Purposes are accurate and specific, not generic restatements of the filename",
+          "passed": true,
+          "evidence": "e.g. validate.ts purpose calls out http(s)-only + SSRF guard"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "old_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 49.2667,
+        "stddev": 9.6671,
+        "min": 43.0,
+        "max": 60.4
+      },
+      "tokens": {
+        "mean": 27058.0,
+        "stddev": 2358.3857,
+        "min": 24621,
+        "max": 29329
+      }
+    },
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 60.2667,
+        "stddev": 20.2609,
+        "min": 45.2,
+        "max": 83.3
+      },
+      "tokens": {
+        "mean": 27492.3333,
+        "stddev": 3118.9287,
+        "min": 24096,
+        "max": 30228
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.00",
+      "time_seconds": "-11.0",
+      "tokens": "-434"
+    }
+  },
+  "notes": []
+}

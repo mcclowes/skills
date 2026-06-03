@@ -1,0 +1,99 @@
+{
+  "metadata": {
+    "skill_name": "ai-aware-code-structure",
+    "skill_path": "/Users/mcclowes/Development/mcclowes/skills/skills/ai-aware-code-structure",
+    "executor_model": "claude-opus-4-8",
+    "timestamp": "2026-06-03T00:00:00Z",
+    "evals_run": [0, 1, 2],
+    "runs_per_configuration": 1
+  },
+  "runs": [
+    {
+      "eval_id": 0, "eval_name": "split-growing-component", "configuration": "with_skill", "run_number": 1,
+      "result": {"pass_rate": 1.0, "passed": 4, "failed": 0, "total": 4, "time_seconds": 44.6, "tokens": 22148},
+      "expectations": [
+        {"text": "Advises against the reflexive smart/dumb/styles 3-way split", "passed": true},
+        {"text": "Recommends extracting a hook (abstraction) instead of splitting container/view files", "passed": true},
+        {"text": "Notes ~180 lines is acceptable as one file (raised size threshold)", "passed": true},
+        {"text": "Grounds advice in AI agents' reluctance to read adjacent files", "passed": true}
+      ]
+    },
+    {
+      "eval_id": 0, "eval_name": "split-growing-component", "configuration": "without_skill", "run_number": 1,
+      "result": {"pass_rate": 1.0, "passed": 4, "failed": 0, "total": 4, "time_seconds": 52.1, "tokens": 19870},
+      "expectations": [
+        {"text": "Advises against the reflexive smart/dumb/styles 3-way split", "passed": true},
+        {"text": "Recommends extracting a hook (abstraction) instead of splitting container/view files", "passed": true},
+        {"text": "Notes ~180 lines is acceptable as one file (raised size threshold)", "passed": true},
+        {"text": "Grounds advice in AI agents' reluctance to read adjacent files", "passed": true}
+      ],
+      "notes": ["Reaches the same conclusion via a different argument (hooks made the container pattern obsolete) rather than the agent-context framing."]
+    },
+    {
+      "eval_id": 1, "eval_name": "review-over-split-feature", "configuration": "with_skill", "run_number": 1,
+      "result": {"pass_rate": 1.0, "passed": 4, "failed": 0, "total": 4, "time_seconds": 44.4, "tokens": 22090},
+      "expectations": [
+        {"text": "Concludes the layout is over-split for an AI-heavy codebase", "passed": true},
+        {"text": "Recommends merging tightly-coupled view+logic+types into one component file", "passed": true},
+        {"text": "Identifies the dumb-view-props-shaped-by-sibling smell", "passed": true},
+        {"text": "Keeps styles separate as the defensible split", "passed": true}
+      ]
+    },
+    {
+      "eval_id": 1, "eval_name": "review-over-split-feature", "configuration": "without_skill", "run_number": 1,
+      "result": {"pass_rate": 0.75, "passed": 3, "failed": 1, "total": 4, "time_seconds": 40.1, "tokens": 19251},
+      "expectations": [
+        {"text": "Concludes the layout is over-split for an AI-heavy codebase", "passed": true},
+        {"text": "Recommends merging tightly-coupled view+logic+types into one component file", "passed": true},
+        {"text": "Identifies the dumb-view-props-shaped-by-sibling smell", "passed": true},
+        {"text": "Keeps styles separate as the defensible split", "passed": false}
+      ],
+      "notes": ["Inlines styles into the single file rather than keeping the genuinely-isolatable styles split."]
+    },
+    {
+      "eval_id": 2, "eval_name": "structure-new-module", "configuration": "with_skill", "run_number": 1,
+      "result": {"pass_rate": 1.0, "passed": 4, "failed": 0, "total": 4, "time_seconds": 52.2, "tokens": 22223},
+      "expectations": [
+        {"text": "Advises starting coarser / not pre-splitting the three phases", "passed": true},
+        {"text": "Co-locates tightly coupled job lifecycle / polling", "passed": true},
+        {"text": "Recommends an abstraction (hook/module) over bare file splits", "passed": true},
+        {"text": "Mentions a ~300-line threshold as the split trigger", "passed": true}
+      ]
+    },
+    {
+      "eval_id": 2, "eval_name": "structure-new-module", "configuration": "without_skill", "run_number": 1,
+      "result": {"pass_rate": 0.5, "passed": 2, "failed": 2, "total": 4, "time_seconds": 45.7, "tokens": 19380},
+      "expectations": [
+        {"text": "Advises starting coarser / not pre-splitting the three phases", "passed": false},
+        {"text": "Co-locates tightly coupled job lifecycle / polling", "passed": true},
+        {"text": "Recommends an abstraction (hook/module) over bare file splits", "passed": true},
+        {"text": "Mentions a ~300-line threshold as the split trigger", "passed": false}
+      ],
+      "notes": ["Recommends MORE structure up front (csv/, jobs/, status/ subfolders, multiple files each) — the opposite of the skill's 'start coarser' thesis. This is the eval where the skill changes the answer most."]
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {"mean": 1.0, "stddev": 0.0, "min": 1.0, "max": 1.0},
+      "time_seconds": {"mean": 47.07, "stddev": 3.63, "min": 44.4, "max": 52.2},
+      "tokens": {"mean": 22153.67, "stddev": 54.4, "min": 22090, "max": 22223}
+    },
+    "without_skill": {
+      "pass_rate": {"mean": 0.75, "stddev": 0.204, "min": 0.5, "max": 1.0},
+      "time_seconds": {"mean": 45.97, "stddev": 4.90, "min": 40.1, "max": 52.1},
+      "tokens": {"mean": 19500.33, "stddev": 266.6, "min": 19251, "max": 19870}
+    },
+    "delta": {
+      "pass_rate": "+0.25",
+      "time_seconds": "+1.10",
+      "tokens": "+2653"
+    }
+  },
+  "notes": [
+    "Baseline (no skill) is already strong at 75% — modern Claude reasons well about AI-aware code organisation unaided. The skill's job is consistency and the specific framing, not reversing wrong answers.",
+    "Eval 0 (split-growing-component): both configs pass 4/4. The skill adds nothing on net here — the base model already pushes back on the 3-way split and recommends hooks.",
+    "Eval 2 (structure-new-module) is where the skill earns its keep: the baseline recommends MORE structure up front (csv/jobs/status subfolders), directly contradicting the 'start coarser' thesis. With the skill it reliably advises starting coarse and splitting at ~300 lines.",
+    "The skill costs ~+2.6k tokens and ~+1s — negligible. No time/quality tradeoff worth worrying about.",
+    "Single run per configuration — without_skill pass-rate stddev reflects across-eval variance, not run-to-run flakiness. Consider 3 runs/config before drawing strong conclusions."
+  ]
+}

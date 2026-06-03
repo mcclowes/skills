@@ -1,0 +1,35 @@
+{
+  "expectations": [
+    {
+      "text": "Recommends one consistent error shape reused across both REST responses and webhooks",
+      "passed": true,
+      "evidence": "Same `issues` array shown byte-for-byte identical in REST body and webhook envelope."
+    },
+    {
+      "text": "Uses the `issues` array with `severity` to distinguish errors vs warnings",
+      "passed": true,
+      "evidence": "`severity` field; React `IssueList` splits `error` (role=alert) vs `warning` (role=status)."
+    },
+    {
+      "text": "Provides a React consumption example",
+      "passed": true,
+      "evidence": "Shared types, one `handleIssues` entry point, EventSource webhook wiring, `IssueList` component."
+    },
+    {
+      "text": "Surfaces the `correlationId` to the client",
+      "passed": true,
+      "evidence": "`correlationId` rendered as Reference and threaded through REST + webhook + logs."
+    },
+    {
+      "text": "Notes consumers should tolerate unknown issue codes",
+      "passed": true,
+      "evidence": "\"issue: string \u2014 plain string, not a union \u2014 tolerate unknown codes as the taxonomy grows.\""
+    }
+  ],
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 5,
+    "failed": 0,
+    "total": 5
+  }
+}

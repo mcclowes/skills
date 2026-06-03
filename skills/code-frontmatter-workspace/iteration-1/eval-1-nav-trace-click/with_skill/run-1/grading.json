@@ -1,0 +1,20 @@
+{
+  "expectations": [
+    {
+      "text": "Traces the path through server.ts then shortener.ts",
+      "passed": true,
+      "evidence": "server.ts GET handler -> Shortener.resolve in shortener.ts"
+    },
+    {
+      "text": "Locates click increment in the store layer (incrementClicks), called from Shortener.resolve",
+      "passed": true,
+      "evidence": "RedisStore.incrementClicks (hincrby), triggered by store.incrementClicks in Shortener.resolve"
+    }
+  ],
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 2,
+    "failed": 0,
+    "total": 2
+  }
+}

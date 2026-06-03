@@ -1,0 +1,26 @@
+{
+  "skill_name": "ai-aware-code-structure",
+  "evals": [
+    {
+      "id": 0,
+      "name": "split-growing-component",
+      "prompt": "I've got a React component file CheckoutForm.tsx that's grown to about 180 lines. It holds the form state, a useEffect that fetches saved cards, the submit handler that calls our payments API, and the JSX. My instinct is to break it into a smart container, a dumb presentational component, and a styles file like I used to. Most of my editing happens through Claude Code these days. Should I split it, and how?",
+      "expected_output": "Recommends NOT reflexively doing the 3-file split because the logic and rendering are tightly coupled and would each be meaningless alone, forcing cross-file lookups the agent won't perform. 180 lines is fine for one cohesive file. Suggests extracting a real abstraction (e.g. a useCheckout hook) over splitting files; if the presentational part is genuinely props-in/JSX-out it can be peeled off. Applies the 'understood in isolation?' test.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "review-over-split-feature",
+      "prompt": "Review the file structure of this feature folder. We have: UserBadge/index.ts, UserBadge/UserBadge.view.tsx (just JSX), UserBadge/UserBadge.logic.ts (40 lines), UserBadge/UserBadge.styles.ts, UserBadge/types.ts. Each file is small and single-purpose. Is this a good layout for a codebase where we use AI assistants heavily?",
+      "expected_output": "Flags that the view file's props are shaped by the logic file, so an agent editing the view lacks context and may make confident breaking changes — the classic smell. Notes the files are split below the human-era size reflex with no isolation benefit (40-line logic + small view could be one ~100-line file). Recommends co-locating tightly coupled pieces and keeping a split only where each side stands alone.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "structure-new-module",
+      "prompt": "I'm starting a new data-export module from scratch in our Next.js app — it'll handle generating CSVs, kicking off a background job, and polling for status. How should I organise the files so it's easy for both me and Claude to work in?",
+      "expected_output": "Advises starting coarser than the old instinct: let files grow to a few hundred lines while each stays one coherent concern, rather than pre-splitting. Reach for an abstraction (well-named function/module with a clear interface) when a part earns one, not a new file for its own sake. Keep tightly coupled code co-located so an agent works from a complete picture; split only when a piece can be understood in isolation or a file passes ~300 lines.",
+      "files": []
+    }
+  ]
+}

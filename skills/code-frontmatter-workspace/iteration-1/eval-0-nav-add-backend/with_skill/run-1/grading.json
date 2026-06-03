@@ -1,0 +1,25 @@
+{
+  "expectations": [
+    {
+      "text": "Names store.ts as the file defining the interface to implement (LinkStore)",
+      "passed": true,
+      "evidence": "answer.md: 'LinkStore, defined in src/store.ts' with full method list"
+    },
+    {
+      "text": "Identifies store-redis.ts as the existing implementation to model on",
+      "passed": true,
+      "evidence": "answer.md: 'Model your implementation on src/store-redis.ts'"
+    },
+    {
+      "text": "Identifies server.ts as where the store is wired up at startup",
+      "passed": true,
+      "evidence": "answer.md: 'src/server.ts line 19 constructs the service'; also flagged the stale doc-comment in store.ts"
+    }
+  ],
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 3,
+    "failed": 0,
+    "total": 3
+  }
+}

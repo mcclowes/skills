@@ -1,0 +1,33 @@
+{
+  "skill_name": "api-design",
+  "evals": [
+    {
+      "id": 0,
+      "name": "design-payouts-endpoint",
+      "prompt": "I'm building a POST /api/v1/payouts endpoint in our Next.js app. It can fail in a few ways: the user's connected bank token has expired, the requested amount exceeds their daily payout limit, and sometimes our payment provider (a vendor called Sequra) rejects it with its own error code. Design the JSON error response body the API should return for these cases.",
+      "expected_output": "An issues array with one entry per failure, each having a single namespaced issue code in {domain}.{class}.{reason} form (e.g. payout.unauthorized.token_expired) and NO separate type field, plus severity, correlationId, dateTime; the Sequra rejection surfaced via a thirdParty object; descriptive string codes not numeric; links and message where useful.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "review-adhoc-error",
+      "prompt": "Can you review the error response our API currently returns and suggest improvements? Right now for a failed auth it returns:\n\n{ \"error\": \"Unauthorized\", \"code\": 401, \"msg\": \"token bad\" }\n\nWe want something more consistent and developer-friendly across all our endpoints.",
+      "expected_output": "Critique identifying the ad-hoc shape, numeric/opaque code, lack of correlationId, no path forward; recommends a unified issues array with a single descriptive namespaced string code ({domain}.{class}.{reason}, no separate type field), severity, correlationId, message title/detail, and links. Shows a concrete before/after.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "unify-rest-and-webhooks",
+      "prompt": "Our REST API returns errors one way but our webhooks deliver failures in a totally different shape, and our React frontend has to special-case both. How should we make error handling consistent across responses and webhooks, and how would we consume the unified shape in the frontend?",
+      "expected_output": "Recommends one consistent issues shape reused across responses and webhooks; explains the consistency principle; provides a React consumption example splitting errors vs warnings by severity and surfacing correlationId; tolerates unknown issue codes and parses the class from the code rather than a separate type field.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "design-order-status-lifecycle",
+      "prompt": "We're modelling the lifecycle of an order in our API. Right now we have a single `status` string that can be `created`, `paid`, `payment_failed`, `shipped`, or `delivered`, and we fire a webhook on every change. But a failed payment can be retried, and the frontend keeps having to special-case `payment_failed` to know what to show the user and whether they can try again. How should we model and name the order's states and the events?",
+      "expected_output": "Recommends drawing the state machine first; separates the event (what happened, past-tense verb on the webhook envelope) from the status (where the resource is, a persistent {domain}.{state}.{substate} string) from the issue (why / what to do); points out payment_failed conflates a state with a failure reason and that failure should loop back rather than be terminal; names states by obligation; discusses enum-vs-parseable-string trade-off and the shared grammar with issue codes.",
+      "files": []
+    }
+  ]
+}
