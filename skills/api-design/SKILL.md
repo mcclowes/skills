@@ -4,7 +4,7 @@ description: 'Use when designing, reviewing, or implementing HTTP APIs — error
 license: MIT
 metadata:
   author: mcclowes
-  version: "1.2.0"
+  version: "1.3.0"
 ---
 
 # API design
@@ -89,6 +89,7 @@ These are the choices that separate a usable error contract from a frustrating o
 - **Omit `active` rather than lie.** A stale `active: true` is worse than no signal. Only include it when resolution state is genuinely tracked (e.g. a device offline until reconnect, an auth grant expired until re-auth).
 - **`message` is a convenience, English-only.** Integrators may override the copy and own localisation. Don't block on perfect wording.
 - **`thirdParty` is opaque.** Pass `provider`/`code`/`message` through unchanged, never build API logic on those values (use your own `issue` field), and assume it's *not* fit for end users.
+- **Use US spelling for everything machine-readable.** Field names, enum values, `issue`/`status` codes, and webhook event names follow US spelling — `authorization`, `color`, `canceled`, `fulfillment` — never `authorisation`/`colour`/`cancelled`/`fulfilment`. It's the lingua franca of HTTP and existing standards (`Authorization` header, `Referer`), so it minimises surprise and keeps codes that flow through one channel internally consistent. This is a contract decision: spelling is part of the identifier, and changing it later is a breaking change. The one exception is human-readable `message` copy, which is English-prose and integrator-overridable (see the `message` rule above) — `"Payment not authorised"` is fine there.
 
 ## State and events: three carriers, three questions
 
