@@ -9,6 +9,9 @@
 #   - SKILL.md has a `name` field
 #   - SKILL.md has a `description` field
 #   - description is <= 1024 CHARACTERS (not bytes; em-dashes count as 1)
+#   - description frontmatter is valid YAML (an unquoted plain scalar
+#     containing ": " is parsed as a nested mapping and throws, which
+#     makes `npx skills add` SILENTLY drop the skill)
 #
 # Used by both the pre-commit hook (.githooks/pre-commit) and CI
 # (.github/workflows/validate-skills.yml).
@@ -63,6 +66,20 @@ for f in skills/*/SKILL.md; do
     fail=1
     continue
   fi
+
+  # YAML parseability: a plain (unquoted) scalar cannot contain ": " — YAML
+  # reads it as a nested mapping and throws, and the CLI swallows the error.
+  # Quoted ('...'/"...") and block (|/>) scalars are exempt.
+  first_char="${desc:0:1}"
+  case "$first_char" in
+    "'"|'"'|'|'|'>') ;;  # quoted or block scalar — safe
+    *)
+      if printf '%s' "$desc" | grep -q ': '; then
+        echo "FAIL $f: unquoted description contains ': ' — YAML misparses it and 'npx skills add' silently drops the skill. Wrap the description in single quotes."
+        fail=1
+      fi
+      ;;
+  esac
 
   len="$(charlen "$desc")"
   if [ "$len" -gt "$LIMIT" ]; then
