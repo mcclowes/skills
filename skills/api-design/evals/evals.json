@@ -28,6 +28,20 @@
       "prompt": "We're modelling the lifecycle of an order in our API. Right now we have a single `status` string that can be `created`, `paid`, `payment_failed`, `shipped`, or `delivered`, and we fire a webhook on every change. But a failed payment can be retried, and the frontend keeps having to special-case `payment_failed` to know what to show the user and whether they can try again. How should we model and name the order's states and the events?",
       "expected_output": "Recommends drawing the state machine first; separates the event (what happened, past-tense verb on the webhook envelope) from the status (where the resource is, a persistent {domain}.{state}.{substate} string) from the issue (why / what to do); points out payment_failed conflates a state with a failure reason and that failure should loop back rather than be terminal; names states by obligation; discusses enum-vs-parseable-string trade-off and the shared grammar with issue codes.",
       "files": []
+    },
+    {
+      "id": 4,
+      "name": "dashboard-endpoint-vs-resources",
+      "prompt": "Our React dashboard has a customer detail screen that shows the customer, their last 5 invoices, their outstanding balance, and a formatted 'next action' label. Right now the frontend calls GET /customers/{id}, then GET /customers/{id}/invoices, then computes the balance and the label itself. It feels chatty and the logic is duplicated in our mobile app. Should we just add all those fields to GET /customers/{id}? How should we structure this?",
+      "expected_output": "Distinguishes view/presentation endpoints from canonical resource endpoints; warns against accreting UI-specific/derived fields (balance, formatted label) onto the canonical /customers/{id} resource because it couples the platform API to one screen; recommends a dedicated view/BFF endpoint that aggregates and formats for that screen, owned by the frontend, sitting over the resource layer; notes writes still go to resource endpoints; may reference BFF/GraphQL/CQRS.",
+      "files": []
+    },
+    {
+      "id": 5,
+      "name": "ambiguous-auth-schemes",
+      "prompt": "Our API docs just say 'authenticate with your API key in the Authorization header'. Internally we have a normal access token and a 'stepped-up' token (after the user does an extra verification) that's required for sensitive endpoints like moving money — but it's technically the same token type. Integrators keep getting confused about what to send where. How should we present auth?",
+      "expected_output": "Treats security schemes as discrete, named contracts each endpoint maps to exactly one of; separates the credential's implementation from the consumer-facing scheme (make the API-key-to-header transform explicit); explains that the normal vs stepped-up token are functionally different schemes even though technically the same token, and each endpoint should declare which it requires; recommends modelling this explicitly (e.g. OpenAPI named securitySchemes + per-operation security).",
+      "files": []
     }
   ]
 }

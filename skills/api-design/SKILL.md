@@ -1,24 +1,27 @@
 ---
 name: api-design
-description: Use when designing, reviewing, or implementing HTTP API responses — error and warning handling, and resource state/lifecycle. Triggers on tasks involving API error responses, error formats, error schemas, response envelopes, webhook payloads, "how should this endpoint fail", reviewing an API's error shape, or making error handling consistent across endpoints. ALSO triggers on modelling a resource's lifecycle: designing or naming a `status` field, building a state machine, naming webhook events, deciding between an enum and a parseable status string, or splitting "what happened" / "where is it" / "why". Apply this whenever an API surfaces a failure, warning, partial success, or state change to a client, even if the user just says "handle errors", "design the response", or "what statuses should this have" without naming a pattern.
+description: Use when designing, reviewing, or implementing HTTP APIs — error/warning handling, resource state and lifecycle, read-endpoint structure, pagination, and authentication. Triggers on API error responses, error formats, response envelopes, webhook payloads, "how should this endpoint fail", or making error handling consistent. ALSO triggers on: modelling a resource's lifecycle (naming a `status` field, a state machine, webhook event names, enum-vs-parseable-string, splitting "what happened"/"where is it"/"why"); structuring read endpoints (screen-shaped/BFF vs canonical resource, frontend-vs-backend data shaping, aggregating entities, cursor vs offset pagination); and authentication design (security schemes, API keys vs bearer tokens, stepped-up tokens, which auth an endpoint requires). Apply whenever an API surfaces a failure, state change, view of data, or auth requirement to a client — even if the user just says "design the response" or "how should I paginate" without naming a pattern.
 license: MIT
 metadata:
   author: mcclowes
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # API design
 
-Opinionated patterns for designing developer-friendly HTTP APIs. Two components are developed so far, and they're designed to fit together:
+Opinionated patterns for designing developer-friendly HTTP APIs. Several components are developed so far, and they're designed to fit together:
 
 - **Error and warning handling** via a unified `issues` array — see below and [references/error-handling.md](references/error-handling.md).
 - **State and events** — modelling a resource's lifecycle, and the split between *what happened* (event), *where the resource is* (status), and *why / what to do* (issue) — see [references/event-status-design.md](references/event-status-design.md).
+- **View endpoints vs data endpoints** — whether an endpoint exists to render a screen or to expose a canonical entity, and why that changes shape, richness, and pagination. Includes pagination (cursor vs offset). See [references/view-vs-data-endpoints.md](references/view-vs-data-endpoints.md).
+- **Auth schemes** — treating security schemes as discrete, named contracts rather than one undifferentiated "auth" blob. See [references/auth-schemes.md](references/auth-schemes.md).
+- **Evolution and operations** — short stances on versioning and on not building infrastructure you can buy (see [Evolution and operations](#evolution-and-operations) below).
 
-As more components are added (pagination, versioning, naming), they live alongside these in `references/`.
+As more components are added (naming, data conventions), they live alongside these in `references/`.
 
 ## When this applies
 
-Reach for this whenever an API needs to communicate that something went wrong, partially succeeded, or warrants attention — in a response body, a webhook, or a component callback. It also applies whenever you're modelling a resource's lifecycle: designing a `status` field, naming webhook events, or building a state machine. The goal is responses a developer can act on without guesswork, and that they can relay to *their* end users.
+Reach for this whenever an API needs to communicate that something went wrong, partially succeeded, or warrants attention — in a response body, a webhook, or a component callback. It also applies whenever you're modelling a resource's lifecycle (a `status` field, webhook events, a state machine), deciding whether a read endpoint should be screen-shaped or canonical, choosing a pagination style, or documenting how clients authenticate. The goal is responses a developer can act on without guesswork, and that they can relay to *their* end users.
 
 ## The core idea: one `issues` array
 
@@ -101,6 +104,33 @@ Two namespaced strings — the status and the issue code — share one grammar, 
 
 Full guidance — modelling the state machine, naming states vs events, the enum-vs-string trade-off, and the unresolved boundary around `active` — is in [references/event-status-design.md](references/event-status-design.md). Read it before designing a `status` field, naming webhook events, or building a lifecycle state machine.
 
+## View endpoints vs data endpoints
+
+The most consequential structural choice in an API is whether an endpoint exists to **render a view** or to **expose a resource** — they're different jobs, and the same data deserves a different contract depending on which. A view endpoint aggregates, derives, and formats data for one screen, owned by the frontend and changing fast; a data endpoint returns a normalised, raw, canonical entity, owned by the domain and changing slowly.
+
+Build only one and the other job leaks somewhere worse: with only data endpoints the frontend stitches entities client-side (chatty, N+1, duplicated domain logic); with a "data" endpoint that tries to help, UI-specific fields accrete onto the canonical resource until you can't change a screen without a platform release. Naming the two jobs is what lets each stay honest.
+
+**Pagination is the clearest case of this.** Cursor-based pagination is usually more efficient (cost doesn't grow as you page deeper, stable under inserts) and is fine for data endpoints and infinite scroll — but a UI that needs "page 3 of 47", jump-to-page, or total counts needs offset/page-number pagination, and that means accepting the database cost *because it's a presentation requirement*. The pagination style falls out of the job the endpoint does.
+
+Full guidance — what changes between the two, the pagination trade-off, ownership, how they coexist, and the BFF/GraphQL/CQRS lineage — is in [references/view-vs-data-endpoints.md](references/view-vs-data-endpoints.md).
+
+## Auth: discrete security schemes
+
+Treat each way of authenticating as a **discrete, named scheme with its own contract**, and have every endpoint declare which *one* it requires — not "auth, somehow." The common failure is a jumbled mess where the consumer can't tell what to send to call a given endpoint.
+
+Two traps, both seen in the wild:
+- **Conflating the credential's mechanics with the scheme.** Codat left the relationship between "an API key" and `Authorization: Basic {base64 api key}` ambiguous — the key *is* the thing you base64-encode, but that mapping was never made explicit, so consumers couldn't turn what they had into what the API wanted. Describe the scheme from the consumer's side and state the transform.
+- **Functionally distinct schemes sharing one implementation.** Weavr's stepped-up tokens are technically the same token as ordinary ones, but functionally they're different schemes: some endpoints require a stepped-up token, others accept a standard one, and an endpoint maps to one *or* the other. Scheme identity is the contract, not the mechanism.
+
+Model it explicitly (OpenAPI's named `securitySchemes` + per-operation `security` already does exactly this). Full guidance and the worked examples are in [references/auth-schemes.md](references/auth-schemes.md).
+
+## Evolution and operations
+
+Two short, deliberately opinionated stances:
+
+- **Co-version the ecosystem.** Keep the parts of an ecosystem versioned together for clarity — API version 6 goes with SDK version 6. This is hard to keep aligned and demands more considered change-management thinking, but the alternative (independently drifting versions a consumer has to reconcile) is worse. Beyond that, the skill stays thin on versioning on purpose.
+- **Buy webhook infrastructure, don't build it.** Webhook *delivery* — retries, signing, dedup, ordering, replay, fan-out — is a solved, undifferentiated problem. Pay a service like [Svix](https://www.svix.com/) rather than reimplementing it. (Designing the webhook *payload* — the event and issue shapes — is still yours; see the state/events and error-handling components.)
+
 ## Consuming the pattern
 
 The contract is only as good as how cleanly clients can consume it. For TypeScript types, a React form/handler example, and an SDK provider pattern, see [references/consuming-in-react.md](references/consuming-in-react.md). Point developers there when they ask how to *handle* these responses, not just shape them.
@@ -109,5 +139,7 @@ The contract is only as good as how cleanly clients can consume it. For TypeScri
 
 - **Designing a new endpoint's failures:** enumerate the ways it can fail, map each to a namespaced `{domain}.{class}.{reason}` `issue` code, and decide severity. Produce a concrete `issues` example, not just prose.
 - **Designing a resource's lifecycle:** draw the state machine first (nodes are states, edges are transitions), name states for the obligation they imply (`requires_action` beats `pending`), keep failure recoverable where it can be, and split *what happened* / *where it is* / *why* across event, status, and issue. See [references/event-status-design.md](references/event-status-design.md).
-- **Reviewing an existing API:** check it against the seven principles and the field table. The most common gaps are missing `correlationId`, numeric/opaque codes, errors and warnings split across different fields, no `links` to help the developer act, and a `status` field doing the job of an event or an issue.
+- **Designing a read endpoint:** first decide whether it renders a view or exposes a resource, and shape it for that job — don't let one endpoint do both. Choose pagination to match (cursor for throughput, offset/page-number when a UI needs it). See [references/view-vs-data-endpoints.md](references/view-vs-data-endpoints.md).
+- **Documenting auth:** enumerate the distinct schemes, name each, and make every endpoint declare the one it requires; keep the consumer-facing scheme separate from its implementation. See [references/auth-schemes.md](references/auth-schemes.md).
+- **Reviewing an existing API:** check it against the seven principles and the field table. The most common gaps are missing `correlationId`, numeric/opaque codes, errors and warnings split across different fields, no `links` to help the developer act, a `status` field doing the job of an event or an issue, one endpoint trying to be both a view and a canonical resource, and an ambiguous/jumbled auth story.
 - **Keeping it consistent:** the same `issues` shape should appear in responses, webhooks, and callbacks, and status/issue codes should share one grammar. Flag any context where the shape diverges.

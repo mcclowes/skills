@@ -15,7 +15,11 @@
       "source": "./",
       "strict": false,
       "skills": [
-        "./skills/api-design"
+        "./skills/ai-aware-code-structure",
+        "./skills/api-design",
+        "./skills/code-frontmatter",
+        "./skills/language-design",
+        "./skills/react-compound-components"
       ]
     }
   ]

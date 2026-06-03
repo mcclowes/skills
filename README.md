@@ -30,7 +30,11 @@ npx skills add mcclowes/skills --list
 
 | Skill | Description |
 |-------|-------------|
-| **api-design** | Design and review developer-friendly HTTP API responses — a unified `issues` array for consistent error and warning handling, with field reference and React consumption examples |
+| **ai-aware-code-structure** | How to organise code across files when an AI coding agent is one of the readers — when to split or merge a file, where to draw module boundaries, and how self-contained each file should be |
+| **api-design** | Design and review developer-friendly HTTP API responses — a unified `issues` array for consistent error and warning handling, plus resource state/lifecycle and event naming, with field reference and React consumption examples |
+| **code-frontmatter** | Context-efficient codebase navigation using structured frontmatter headers — index a tree's headers in one pass instead of reading every file, and generate or validate frontmatter with the bundled scripts |
+| **language-design** | Patterns for designing language features — lexer, parser, AST, and interpreter design |
+| **react-compound-components** | Implementing React compound component patterns with dot notation — share state via context for composable, multi-part UI components |
 
 ## Alternative installation methods
 
