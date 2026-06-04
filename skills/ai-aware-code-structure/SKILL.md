@@ -1,6 +1,6 @@
 ---
 name: ai-aware-code-structure
-description: Use when deciding how to organise code in an AI-assisted codebase — whether to split or merge a file, where to draw module boundaries, how big a file should get, or whether to separate logic from rendering/styles/data. Triggers on "should I split this file", "this file is getting too big", "separate concerns", "where should this code live", reviewing or refactoring file/module organisation, structuring a new component or feature, or any architecture decision where part of the audience is an AI coding agent. Apply this whenever someone is choosing how to lay code out across files and an LLM will be reading or editing it, even if they only say "refactor this" or "clean up the structure" without mentioning AI.
+description: Use when deciding how to organise code in an AI-assisted codebase — whether to split or merge a file, where to draw module boundaries, how big a file should get, whether to separate logic from rendering/styles/data, whether to use barrel/index re-export files, or where types and test files should live. Triggers on "should I split this file", "this file is getting too big", "separate concerns", "where should this code live", "are barrel files worth it", "central types file or co-locate", "colocate tests or a tests folder", reviewing or refactoring file/module organisation, structuring a new component or feature, or any architecture decision where part of the audience is an AI coding agent. Apply this whenever someone is choosing how to lay code out across files and an LLM will be reading or editing it, even if they only say "refactor this" or "clean up the structure" without mentioning AI.
 license: MIT
 metadata:
   author: mcclowes
@@ -14,6 +14,8 @@ How to organise code across files when an AI coding agent is one of the readers.
 ## When this applies
 
 Reach for this whenever the question is *where code lives*, not what it does: splitting a growing file, drawing a module boundary, deciding whether to peel logic out of a component, or reviewing an existing layout. It assumes an LLM will read or edit the result — which today is almost always true.
+
+The examples here lean on React because that's where these questions surface most, but nothing in the reasoning is React-specific. It applies just as well to a Go package, a Python module, or a stylesheet.
 
 ## The core shift: a third reader
 
@@ -55,6 +57,16 @@ So separation is still good — but the boundary has to be one where each side s
 
 **When you do split, make each side self-contained.** The test for a good split is whether each resulting file can be understood and edited without opening the others. If a file references props, types, or values that only make sense by reading a sibling, the boundary is in the wrong place — either move it or merge back.
 
+## Three placement calls worth naming
+
+The principles above settle most layout questions, but three specific ones come up constantly, and on each the AI-aware answer leans against a common human-era default. They're all the same move underneath: don't make the agent chase a definition across a boundary it won't cross.
+
+**Barrel files (re-export `index.ts`).** A barrel that re-exports a folder reads nicely at the call site, but it inserts a hop on the exact axis agents are weakest. `import { Card } from '@/components'` no longer says where `Card` lives, so the agent either chases a wall of re-exports or, more often, guesses the component's shape and edits confidently wrong. Prefer direct paths (`@/components/Card`) that carry the address in the import itself. Keep a barrel only where it's a hand-curated public API at a real package boundary — there the barrel *is* the abstraction, naming what's public and hiding the rest. Direct imports also dodge the usual barrel costs: circular imports, broken tree-shaking, and slow test and dev-server startup.
+
+**Where types live.** A central `types.ts` that everything imports is the sibling the agent won't open. Define a type next to the code that owns it, so changing the code and changing the type is one edit in one file, not two files where the agent does the first and forgets the second. Lift a type into a shared or feature-level file only when several modules genuinely share it, and keep the handful of truly global primitives central. "Single source of truth" means the definition exists once, not that all definitions live in one file.
+
+**Test placement.** Put a unit test beside its source (`Foo.tsx` next to `Foo.test.tsx`), not in a `tests/` tree that mirrors `src/`. When the agent opens the source, a colocated test is right there in the directory listing, so it actually reads it, keeps it in sync, and uses it as a spec for how the code should behave. A mirrored tree puts maximum distance between the two, so the agent edits the source and never sees the test go stale. Keep a thin top-level dir only for cross-cutting integration or e2e tests that have no single home.
+
 ## Quick reference
 
 | Situation | Lean toward |
@@ -65,6 +77,9 @@ So separation is still good — but the boundary has to be one where each side s
 | File past ~300 lines or covering several concerns | **Split** — signal-to-noise is now the problem |
 | Tempted to split a file purely for readability | **Extract an abstraction** (hook/function/module) instead |
 | A proposed split leaves files that only make sense together | **Don't split** — the boundary is wrong |
+| Barrel / re-export `index.ts` for a folder's internals | **Direct imports** — keep a barrel only at a real public-API boundary |
+| A type used by a single module | **Co-locate** it with that module, not a central `types.ts` |
+| Unit test for one source file | **Beside the source**, not a mirrored `tests/` tree |
 
 ## Applying this skill
 

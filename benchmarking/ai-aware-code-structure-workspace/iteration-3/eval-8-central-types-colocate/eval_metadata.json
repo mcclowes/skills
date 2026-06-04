@@ -1,0 +1,11 @@
+{
+  "eval_id": 8,
+  "eval_name": "central-types-colocate",
+  "prompt": "We keep all our shared TypeScript types in one src/types.ts file. It's about 400 lines now and basically every component and service imports from it. It felt clean to have a single source of truth. We do most of our editing through Claude Code now. Is a central types file a good idea, or should types live somewhere else?",
+  "assertions": [
+    "Recommends co-locating a type with the module that owns it as the default (not a central types.ts)",
+    "Reframes 'single source of truth' as defined-once, not all-in-one-file",
+    "Keeps genuinely shared/global types in a shared or feature-level file (does NOT advise one-type-per-file scattering)",
+    "Grounds it in the agent skipping the cross-file lookup (the central types file is the sibling it won't open)"
+  ]
+}

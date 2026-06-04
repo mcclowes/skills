@@ -1,0 +1,526 @@
+{
+  "metadata": {
+    "skill_name": "ai-aware-code-structure",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-06-04T21:57:27Z",
+    "evals_run": [
+      7,
+      8
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 7,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 33.0,
+        "tokens": 22788,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends dropping the reflexive per-folder and big aggregator barrels in favour of direct path imports",
+          "passed": true,
+          "evidence": "'I'd drop the per-folder index.ts barrels and the big src/components/index.ts, and switch to direct imports like import { Button } from \"@/components/Button\"'"
+        },
+        {
+          "text": "Grounds it in agent indirection: the barrel hides where a symbol lives, so the agent hops or guesses the shape",
+          "passed": true,
+          "evidence": "'the import has lost its address... it guesses the component's shape and props and edits confidently wrong'"
+        },
+        {
+          "text": "Keeps a deliberate barrel only at a real public-API / package boundary (does NOT say delete all barrels)",
+          "passed": true,
+          "evidence": "'Keep exactly one curated barrel only if you have a real package boundary (e.g. a shared UI lib)'"
+        },
+        {
+          "text": "Names at least one concrete secondary cost (circular imports, tree-shaking, or slow build/test startup)",
+          "passed": true,
+          "evidence": "Lists circular imports, broken tree-shaking, and slow dev-server/test startup"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 30.3,
+        "tokens": 22796,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends dropping the reflexive per-folder and big aggregator barrels in favour of direct path imports",
+          "passed": true,
+          "evidence": "'drop the per-folder index.ts re-exports and the big src/components/index.ts, and switch to direct imports'"
+        },
+        {
+          "text": "Grounds it in agent indirection: the barrel hides where a symbol lives, so the agent hops or guesses the shape",
+          "passed": true,
+          "evidence": "'the import line no longer tells the agent where Card actually lives... it guesses Card's props/shape... and edits confidently wrong'"
+        },
+        {
+          "text": "Keeps a deliberate barrel only at a real public-API / package boundary (does NOT say delete all barrels)",
+          "passed": true,
+          "evidence": "'Keep a barrel only where it's a designed public API at a package boundary'"
+        },
+        {
+          "text": "Names at least one concrete secondary cost (circular imports, tree-shaking, or slow build/test startup)",
+          "passed": true,
+          "evidence": "Lists circular imports, broken tree-shaking, slow startup/test runs"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 31.3,
+        "tokens": 22822,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends dropping the reflexive per-folder and big aggregator barrels in favour of direct path imports",
+          "passed": true,
+          "evidence": "'drop the reflexive per-folder and central barrels, move to direct imports'"
+        },
+        {
+          "text": "Grounds it in agent indirection: the barrel hides where a symbol lives, so the agent hops or guesses the shape",
+          "passed": true,
+          "evidence": "'The import no longer says where Card lives'; options: chase the re-export (often won't) or 'Guess the shape of Card... and edit confidently wrong'"
+        },
+        {
+          "text": "Keeps a deliberate barrel only at a real public-API / package boundary (does NOT say delete all barrels)",
+          "passed": true,
+          "evidence": "'Keep a barrel only where it's a hand-curated public API at a real boundary'"
+        },
+        {
+          "text": "Names at least one concrete secondary cost (circular imports, tree-shaking, or slow build/test startup)",
+          "passed": true,
+          "evidence": "Lists circular imports, broken tree-shaking, slow startup (Vitest/dev-server)"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 8,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 31.5,
+        "tokens": 22702,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends co-locating a type with the module that owns it as the default (not a central types.ts)",
+          "passed": true,
+          "evidence": "'Define a type next to the code that owns it.' Tier 1: 'Type used by one module \u2192 co-locate it in that module's file. This is most of your 400 lines.'"
+        },
+        {
+          "text": "Reframes 'single source of truth' as defined-once, not all-in-one-file",
+          "passed": true,
+          "evidence": "'It means each type is defined once, not that all definitions live in one file. Those are different things, and only the first one actually matters.'"
+        },
+        {
+          "text": "Keeps genuinely shared/global types in a shared or feature-level file (does NOT advise one-type-per-file scattering)",
+          "passed": true,
+          "evidence": "Feature-level file for shared types, central file for global primitives; warns 'don't over-correct into a per-type file explosion.'"
+        },
+        {
+          "text": "Grounds it in the agent skipping the cross-file lookup (the central types file is the sibling it won't open)",
+          "passed": true,
+          "evidence": "'A central types.ts is the textbook version of \"the sibling the agent won't open.\"' Agent edits the user and never opens types.ts."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 8,
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 30.7,
+        "tokens": 22617,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends co-locating a type with the module that owns it as the default (not a central types.ts)",
+          "passed": true,
+          "evidence": "'Move it next to that code. This is most of your file.' Title: 'Move most types next to the code that owns them.'"
+        },
+        {
+          "text": "Reframes 'single source of truth' as defined-once, not all-in-one-file",
+          "passed": true,
+          "evidence": "'Single source of truth means each type is defined once... It does not mean every definition lives in the same physical file.'"
+        },
+        {
+          "text": "Keeps genuinely shared/global types in a shared or feature-level file (does NOT advise one-type-per-file scattering)",
+          "passed": true,
+          "evidence": "Feature-folder types.ts for shared, central for global primitives; 'don't overcorrect into zero shared types either.'"
+        },
+        {
+          "text": "Grounds it in the agent skipping the cross-file lookup (the central types file is the sibling it won't open)",
+          "passed": true,
+          "evidence": "'AI tools are weirdly reluctant to open adjacent files... the agent reliably does the first and forgets the second.'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 8,
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 30.3,
+        "tokens": 22647,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends co-locating a type with the module that owns it as the default (not a central types.ts)",
+          "passed": true,
+          "evidence": "'Type used by a single module \u2192 co-locate it. Define it in the same file as the function/component/service that owns it... most of your 400 lines.'"
+        },
+        {
+          "text": "Reframes 'single source of truth' as defined-once, not all-in-one-file",
+          "passed": true,
+          "evidence": "'it means each type is defined once \u2014 not that every definition lives in one file. You can keep the former while dropping the latter.'"
+        },
+        {
+          "text": "Keeps genuinely shared/global types in a shared or feature-level file (does NOT advise one-type-per-file scattering)",
+          "passed": true,
+          "evidence": "Feature-level file (checkout/types.ts) for shared, small central file for global primitives; 'Don't over-correct into scattering... not one type per file.'"
+        },
+        {
+          "text": "Grounds it in the agent skipping the cross-file lookup (the central types file is the sibling it won't open)",
+          "passed": true,
+          "evidence": "'types.ts is the sibling file an agent won't open... it guesses the shape from usage and edits confidently wrong.'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 178.1,
+        "tokens": 22178,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends dropping the reflexive per-folder and big aggregator barrels in favour of direct path imports",
+          "passed": true,
+          "evidence": "'Delete the per-folder barrels... Replace the monolithic src/components/index.ts with direct imports'"
+        },
+        {
+          "text": "Grounds it in agent indirection: the barrel hides where a symbol lives, so the agent hops or guesses the shape",
+          "passed": true,
+          "evidence": "'a mandatory extra file between \"I see Card used here\" and \"here's where Card actually lives\"'; agents reluctant to look at adjacent files"
+        },
+        {
+          "text": "Keeps a deliberate barrel only at a real public-API / package boundary (does NOT say delete all barrels)",
+          "passed": true,
+          "evidence": "'a single, deliberate, public-API barrel at a real boundary \u2014 e.g. a shared design-system package... Keep those'"
+        },
+        {
+          "text": "Names at least one concrete secondary cost (circular imports, tree-shaking, or slow build/test startup)",
+          "passed": true,
+          "evidence": "Lists circular imports, defeated tree-shaking, slow cold dev-server/test startup"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 190.9,
+        "tokens": 22137,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends dropping the reflexive per-folder and big aggregator barrels in favour of direct path imports",
+          "passed": true,
+          "evidence": "'Drop the big aggregator barrel'; 'delete any per-folder barrel that's just a passthrough' in favour of direct path imports"
+        },
+        {
+          "text": "Grounds it in agent indirection: the barrel hides where a symbol lives, so the agent hops or guesses the shape",
+          "passed": true,
+          "evidence": "'AI tools are remarkably reluctant to look at other files... it often won't, and works from a guess about the component's props'"
+        },
+        {
+          "text": "Keeps a deliberate barrel only at a real public-API / package boundary (does NOT say delete all barrels)",
+          "passed": true,
+          "evidence": "'Keep small, explicit, hand-written barrels for the few folders that are real modules with a public API'"
+        },
+        {
+          "text": "Names at least one concrete secondary cost (circular imports, tree-shaking, or slow build/test startup)",
+          "passed": true,
+          "evidence": "Lists circular imports, tree-shaking/bundle bloat, slow cold starts and test runs"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 191.7,
+        "tokens": 22528,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends dropping the reflexive per-folder and big aggregator barrels in favour of direct path imports",
+          "passed": true,
+          "evidence": "'Delete the big src/components/index.ts'; 'Drop the per-folder index.ts re-exports too, by default' with direct path imports"
+        },
+        {
+          "text": "Grounds it in agent indirection: the barrel hides where a symbol lives, so the agent hops or guesses the shape",
+          "passed": true,
+          "evidence": "'agents are reluctant to look at other files... the answer to \"where is Button defined?\" is two hops away... or \u2014 more commonly \u2014 guesses'"
+        },
+        {
+          "text": "Keeps a deliberate barrel only at a real public-API / package boundary (does NOT say delete all barrels)",
+          "passed": true,
+          "evidence": "'Keep barrels only where there's a true package boundary with a deliberately curated public API (@acme/ui)'"
+        },
+        {
+          "text": "Names at least one concrete secondary cost (circular imports, tree-shaking, or slow build/test startup)",
+          "passed": true,
+          "evidence": "Lists tree-shaking hazards, build/test-watch slowness, circular-dependency traps"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 8,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 33.7,
+        "tokens": 21338,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends co-locating a type with the module that owns it as the default (not a central types.ts)",
+          "passed": true,
+          "evidence": "'a type should live next to the code that owns it... A type used by exactly one module belongs in that module's file, not in types.ts.'"
+        },
+        {
+          "text": "Reframes 'single source of truth' as defined-once, not all-in-one-file",
+          "passed": true,
+          "evidence": "'Single source of truth is the right instinct; \"single file\" is the part to drop.'"
+        },
+        {
+          "text": "Keeps genuinely shared/global types in a shared or feature-level file (does NOT advise one-type-per-file scattering)",
+          "passed": true,
+          "evidence": "Feature-local types file + small global file for primitives; 'Don't shatter it into one-type-per-file \u2014 that swings too far the other way.'"
+        },
+        {
+          "text": "Grounds it in the agent skipping the cross-file lookup (the central types file is the sibling it won't open)",
+          "passed": true,
+          "evidence": "'The agent is reluctant to go look at adjacent files... that's a cross-file lookup the agent often won't make \u2014 so it works from a partial picture.'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 8,
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 2,
+        "failed": 2,
+        "total": 4,
+        "time_seconds": 192.6,
+        "tokens": 24435,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends co-locating a type with the module that owns it as the default (not a central types.ts)",
+          "passed": false,
+          "evidence": "Stance is 'keep it, with caveats'; recommends keeping the central file as the home for shared contracts and only pushing single-use types down. Argues 'the single file beats the scattered version for an agent.' Co-location is the exception, not the default."
+        },
+        {
+          "text": "Reframes 'single source of truth' as defined-once, not all-in-one-file",
+          "passed": false,
+          "evidence": "Does not reframe SSOT; instead defends the single file ('one predictable location it can read once') and credits the instinct as 'right for the shared contracts.' No defined-once-vs-one-file distinction is drawn."
+        },
+        {
+          "text": "Keeps genuinely shared/global types in a shared or feature-level file (does NOT advise one-type-per-file scattering)",
+          "passed": true,
+          "evidence": "Keeps central location for shared contracts, suggests types/ directory by domain with a barrel index; explicitly warns against scattering ('A pile of co-located, per-feature type files would actually be worse')."
+        },
+        {
+          "text": "Grounds it in the agent skipping the cross-file lookup (the central types file is the sibling it won't open)",
+          "passed": true,
+          "evidence": "'the agent's biggest weakness is reluctance to look in other files... Pulling that type 400 lines away means every change is two files, and the agent does one and forgets the other.'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 8,
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 173.8,
+        "tokens": 21643,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends co-locating a type with the module that owns it as the default (not a central types.ts)",
+          "passed": true,
+          "evidence": "'Co-locate types with the code that owns them... A type used by exactly one module \u2192 define it in that module's file. This is the single highest-value move.' Moves away from central types.ts."
+        },
+        {
+          "text": "Reframes 'single source of truth' as defined-once, not all-in-one-file",
+          "passed": true,
+          "evidence": "'The truth you care about is the definition exists once \u2014 not all definitions live in one file.'"
+        },
+        {
+          "text": "Keeps genuinely shared/global types in a shared or feature-level file (does NOT advise one-type-per-file scattering)",
+          "passed": true,
+          "evidence": "Feature folder for shared, global types split by domain; 'Co-location isn't \"one type per file\" \u2014 it's \"the type lives with its owner.\"'"
+        },
+        {
+          "text": "Grounds it in the agent skipping the cross-file lookup (the central types file is the sibling it won't open)",
+          "passed": true,
+          "evidence": "'they're reluctant to go look at other files... the type it needs is never in the file \u2014 it's always one hop away in types.ts... the hop Claude Code is most likely to skip.'"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 31.1833,
+        "stddev": 1.0206,
+        "min": 30.3,
+        "max": 33.0
+      },
+      "tokens": {
+        "mean": 22728.6667,
+        "stddev": 85.5749,
+        "min": 22617,
+        "max": 22822
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.9167,
+        "stddev": 0.2041,
+        "min": 0.5,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 160.1333,
+        "stddev": 62.4373,
+        "min": 33.7,
+        "max": 192.6
+      },
+      "tokens": {
+        "mean": 22376.5,
+        "stddev": 1093.0363,
+        "min": 21338,
+        "max": 24435
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.08",
+      "time_seconds": "-128.9",
+      "tokens": "+352"
+    }
+  },
+  "notes": [
+    "Scope: iteration-3 validates ONLY the two new evals (barrel-files, central-types) added as coverage for the placement guidance now in SKILL.md. The other 7 evals stay validated by iteration-2; the SKILL.md change is additive and orthogonal to them.",
+    "Baseline reuse: without_skill answers are the clean blind-spot probe runs for the same prompts (same model, no skill). without_skill durations are unreliable - those runs hit an API congestion spike - so don't read the timing delta here.",
+    "barrel-files: tie, 4/4 both configs. The base model already gives the right barrel advice unaided, so this eval is a regression guard, not a discriminator. It confirms the new SKILL section doesn't break the answer.",
+    "central-types: with_skill 4/4 across all runs; one without_skill run defended keeping the central types.ts (the weaker answer), dropping baseline to ~0.83. Mild but real edge - the skill reliably steers to co-locate-by-default where the base model occasionally drifts to defending the status quo.",
+    "Takeaway consistent with iteration-2 and the probe: the skill's value is consistency and the specific framing, not reversing wrong answers. central-types is the one spot where a small wrong->right effect showed up."
+  ]
+}

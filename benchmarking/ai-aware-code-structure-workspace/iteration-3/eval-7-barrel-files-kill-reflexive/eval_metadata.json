@@ -1,0 +1,11 @@
+{
+  "eval_id": 7,
+  "eval_name": "barrel-files-kill-reflexive",
+  "prompt": "Our React + TypeScript app re-exports everything through barrel files: every folder has an index.ts that re-exports its contents, and there's a big src/components/index.ts too. Imports look like `import { Button, Modal, Card } from '@/components'`. We now do almost all our editing through Claude Code and Cursor. Is the barrel-file pattern helping or hurting us, and would you keep it?",
+  "assertions": [
+    "Recommends dropping the reflexive per-folder and big aggregator barrels in favour of direct path imports",
+    "Grounds it in agent indirection: the barrel hides where a symbol lives, so the agent hops or guesses the shape",
+    "Keeps a deliberate barrel only at a real public-API / package boundary (does NOT say delete all barrels)",
+    "Names at least one concrete secondary cost (circular imports, tree-shaking, or slow build/test startup)"
+  ]
+}
