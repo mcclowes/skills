@@ -1,0 +1,9 @@
+{
+  "expectations": [
+    {"text": "Concludes the layout is over-split for an AI-heavy codebase", "passed": true, "evidence": "\"I'd actually merge most of it back. The layout looks tidy, but 'small and single-purpose' is the wrong target when an AI assistant is one of your main readers.\""},
+    {"text": "Recommends merging tightly-coupled view+logic+types into one component file", "passed": true, "evidence": "\"Merge view + logic + types into UserBadge.tsx... gives the agent the whole component in one read.\""},
+    {"text": "Identifies the dumb-view-props-shaped-by-sibling smell (cross-file context the agent won't fetch)", "passed": true, "evidence": "\"they're very reluctant to look at files other than the one in front of them. They'll make confident edits to UserBadge.view.tsx... break things because the prop shape lives in types.ts... a 'dumb' render file whose meaning lives next door.\""},
+    {"text": "Keeps genuinely isolatable styles as a defensible separate file (does not blanket-merge everything)", "passed": true, "evidence": "\"Keep UserBadge.styles.ts separate if styles are genuinely bulky or use a styling system that wants its own file. Styles are closer to the 'understood in isolation' line.\""}
+  ],
+  "summary": {"passed": 4, "failed": 0, "total": 4, "pass_rate": 1.0}
+}

@@ -1,0 +1,11 @@
+{
+  "eval_id": 2,
+  "eval_name": "structure-new-module",
+  "prompt": "I'm starting a new data-export module from scratch in our Next.js app \u2014 it'll handle generating CSVs, kicking off a background job, and polling for status. How should I organise the files so it's easy for both me and Claude to work in?",
+  "assertions": [
+    "Advises starting coarser / not pre-splitting the three phases into many files up front",
+    "Co-locates tightly coupled job lifecycle / polling",
+    "Recommends an abstraction (function/module) over bare file splits",
+    "Mentions a ~300-line threshold (or 'a few hundred lines') as the split trigger"
+  ]
+}

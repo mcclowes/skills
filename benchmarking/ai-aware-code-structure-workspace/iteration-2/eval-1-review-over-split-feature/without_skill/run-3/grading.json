@@ -1,0 +1,9 @@
+{
+  "expectations": [
+    {"text": "Concludes the layout is over-split for an AI-heavy codebase", "passed": true, "evidence": "\"this is over-split for what it is. I'd collapse it... that cost is higher, not lower, when AI assistants are doing most of the editing.\""},
+    {"text": "Recommends merging tightly-coupled view+logic+types into one component file", "passed": true, "evidence": "\"Collapse to one file... UserBadge.tsx # types + logic (hook) + styles + JSX, in that reading order.\""},
+    {"text": "Identifies the dumb-view-props-shaped-by-sibling smell (cross-file context the agent won't fetch)", "passed": false, "evidence": "Notes a 'view that's just JSX can't be understood... without the logic and types open beside it' and that an agent 'adds a prop in view but forgets types,' but attributes it to context-load/sync cost, not the agent's unwillingness to fetch the sibling shaping the view's props."},
+    {"text": "Keeps genuinely isolatable styles as a defensible separate file (does not blanket-merge everything)", "passed": true, "evidence": "\"Styles earn their own file when there's a lot of them, or your styling lib mandates it (e.g. CSS/SCSS modules — which... you'd want as UserBadge.module.scss).\" Defends a separate stylesheet as a real exception rather than blanket-merging."}
+  ],
+  "summary": {"passed": 3, "failed": 1, "total": 4, "pass_rate": 0.75}
+}

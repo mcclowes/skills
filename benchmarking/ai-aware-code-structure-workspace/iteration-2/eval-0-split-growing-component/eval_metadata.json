@@ -1,0 +1,11 @@
+{
+  "eval_id": 0,
+  "eval_name": "split-growing-component",
+  "prompt": "I've got a React component file CheckoutForm.tsx that's grown to about 180 lines. It holds the form state, a useEffect that fetches saved cards, the submit handler that calls our payments API, and the JSX. My instinct is to break it into a smart container, a dumb presentational component, and a styles file like I used to. Most of my editing happens through Claude Code these days. Should I split it, and how?",
+  "assertions": [
+    "Advises against the reflexive smart/dumb/styles 3-way split",
+    "Recommends extracting a hook (abstraction) instead of splitting container/view files",
+    "Notes ~180 lines is acceptable as one cohesive file (raised size threshold)",
+    "Grounds advice in AI agents' reluctance to read adjacent files / cross-file context cost"
+  ]
+}

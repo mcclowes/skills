@@ -1,0 +1,9 @@
+{
+  "expectations": [
+    {"text": "Advises starting coarser / not pre-splitting the three phases into many files up front", "passed": true, "evidence": "\"Don't reach for this many folders if the module is genuinely small... a flat features/export/ with four or five files... is better than the nested version. Start flat, and split a folder out the moment one concern grows past two or three files.\""},
+    {"text": "Co-locates tightly coupled job lifecycle / polling", "passed": false, "evidence": "Lifecycle split into create-export-job.ts / run-export-job.ts / job-store.ts / queue.ts and status into get-export-status.ts — coupled job phases placed in separate files rather than co-located."},
+    {"text": "Recommends an abstraction (function/module) over bare file splits", "passed": true, "evidence": "\"job-store.ts read/write job state... behind one interface\"; \"queue.ts enqueue/handler wiring\"; \"index.ts re-exports the handful of functions... a clear front door.\""},
+    {"text": "Mentions a ~300-line threshold (or 'a few hundred lines') as the split trigger", "passed": false, "evidence": "No line-count threshold given. Split trigger is expressed only by file count — \"split a folder out the moment one concern grows past two or three files\" — not a ~300/few-hundred-line trigger."}
+  ],
+  "summary": {"passed": 2, "failed": 2, "total": 4, "pass_rate": 0.50}
+}

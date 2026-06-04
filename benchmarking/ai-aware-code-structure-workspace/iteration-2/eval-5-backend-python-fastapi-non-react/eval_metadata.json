@@ -1,0 +1,11 @@
+{
+  "eval_id": 5,
+  "eval_name": "backend-python-fastapi-non-react",
+  "prompt": "Python / FastAPI backend, no frontend here. I have an orders.py route module that's about 250 lines: the route handlers, the Pydantic request/response models, the SQLAlchemy queries, and a chunk of discount-calculation business logic. It's growing and I want to organise it so Claude can work in it effectively. How should I lay it out?",
+  "assertions": [
+    "Applies the reasoning to Python/backend (does NOT give React- or hook-specific advice)",
+    "Recommends a real abstraction (pure function / service / repository) over reflexive file-splitting",
+    "Co-locates tightly coupled handler+logic; separates only cleanly-standalone layers (e.g. discount calc or DB access)",
+    "Applies the understood-in-isolation test and/or the ~300-line guidance to the module"
+  ]
+}

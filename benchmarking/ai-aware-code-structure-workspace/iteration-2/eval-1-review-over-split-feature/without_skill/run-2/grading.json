@@ -1,0 +1,9 @@
+{
+  "expectations": [
+    {"text": "Concludes the layout is over-split for an AI-heavy codebase", "passed": true, "evidence": "\"this is over-split for what it is, and I'd consolidate. The fact that you use AI assistants heavily is actually an argument against this layout, not for it.\""},
+    {"text": "Recommends merging tightly-coupled view+logic+types into one component file", "passed": true, "evidence": "\"Collapse it to one or two files... UserBadge.tsx # types + logic + JSX together.\""},
+    {"text": "Identifies the dumb-view-props-shaped-by-sibling smell (cross-file context the agent won't fetch)", "passed": false, "evidence": "Mentions 'hallucinate a prop that doesn't line up across types.ts and .logic.ts' and that split files 'tell the agent very little' alone, but frames it as context-assembly/sync cost rather than the specific reluctance to fetch a sibling that shapes a dumb view's props."},
+    {"text": "Keeps genuinely isolatable styles as a defensible separate file (does not blanket-merge everything)", "passed": true, "evidence": "\"Keep styles separate only if your styling system forces it (e.g. a .module.scss companion) — and a CSS/SCSS module is a fine exception because it's a different language and tooling.\""}
+  ],
+  "summary": {"passed": 3, "failed": 1, "total": 4, "pass_rate": 0.75}
+}

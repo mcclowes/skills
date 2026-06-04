@@ -1,0 +1,9 @@
+{
+  "expectations": [
+    {"text": "Advises starting coarser / not pre-splitting the three phases into many files up front", "passed": true, "evidence": "\"start coarser than your instinct probably tells you\"; \"resist the urge to add types.ts, constants.ts, utils.ts barrels up front\"; explicitly warns against pre-splitting the job into enqueue.ts/runner.ts/writer.ts."},
+    {"text": "Co-locates tightly coupled job lifecycle / polling", "passed": true, "evidence": "\"The job lifecycle is tightly coupled — co-locate it.\" Keeps enqueue/run/write-status in one export-job.ts; client trigger+poll pushed into one use-export() hook rather than split."},
+    {"text": "Recommends an abstraction (function/module) over bare file splits", "passed": true, "evidence": "\"prefer a hook over splitting UI from logic\" — useExport() that hides state; \"That's a real abstraction reducing context, not just relocated code.\""},
+    {"text": "Mentions a ~300-line threshold (or 'a few hundred lines') as the split trigger", "passed": true, "evidence": "\"Only split when it crosses ~300 lines or genuinely splits into separate concerns.\""}
+  ],
+  "summary": {"passed": 4, "failed": 0, "total": 4, "pass_rate": 1.00}
+}

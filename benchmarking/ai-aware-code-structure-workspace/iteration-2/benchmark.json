@@ -1,0 +1,1902 @@
+{
+  "metadata": {
+    "skill_name": "ai-aware-code-structure",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-06-04T20:25:05Z",
+    "evals_run": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 0,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 36.3,
+        "tokens": 21974,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Advises against the reflexive smart/dumb/styles 3-way split",
+          "passed": true,
+          "evidence": "\"don't do the classic smart/dumb/styles three-way split here\" \u2014 opens by rejecting the split."
+        },
+        {
+          "text": "Recommends extracting a hook (abstraction) instead of splitting container/view files",
+          "passed": true,
+          "evidence": "\"reach for an abstraction, not a file split... Extract it into a hook: const { cards, loading, error } = useSavedCards();\""
+        },
+        {
+          "text": "Notes ~180 lines is acceptable as one cohesive file (raised size threshold)",
+          "passed": true,
+          "evidence": "\"Keep it as one file for now. 180 lines of one coherent concern (a checkout form) is fine\"; agents handle a few hundred lines before signal-to-noise degrades."
+        },
+        {
+          "text": "Grounds advice in AI agents' reluctance to read adjacent files / cross-file context cost",
+          "passed": true,
+          "evidence": "\"AI agents... They're stubbornly reluctant to open adjacent files\" and \"doubled the cross-file lookups the agent skips.\""
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 0,
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 33.1,
+        "tokens": 21802,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Advises against the reflexive smart/dumb/styles 3-way split",
+          "passed": true,
+          "evidence": "\"don't do the three-way smart/dumb/styles split here. At 180 lines this is one coherent concern\""
+        },
+        {
+          "text": "Recommends extracting a hook (abstraction) instead of splitting container/view files",
+          "passed": true,
+          "evidence": "\"reach for an abstraction, not a file split... a natural custom hook: const { savedCards, values, setValue, submit, status } = useCheckoutForm()\""
+        },
+        {
+          "text": "Notes ~180 lines is acceptable as one cohesive file (raised size threshold)",
+          "passed": true,
+          "evidence": "\"Leave it as one file for now. 180 lines of cohesive checkout logic is comfortably within the range an agent handles well.\""
+        },
+        {
+          "text": "Grounds advice in AI agents' reluctance to read adjacent files / cross-file context cost",
+          "passed": true,
+          "evidence": "\"An AI agent doesn't \u2014 it works with the file in front of it and is genuinely reluctant to go open adjacent files\"; \"doubled the cross-file lookups the agent won't perform.\""
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 0,
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 29.6,
+        "tokens": 21819,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Advises against the reflexive smart/dumb/styles 3-way split",
+          "passed": true,
+          "evidence": "\"don't do the three-file smart/dumb/styles split. At 180 lines and one coherent concern, that pattern would make this file worse\""
+        },
+        {
+          "text": "Recommends extracting a hook (abstraction) instead of splitting container/view files",
+          "passed": true,
+          "evidence": "\"reach for an abstraction, not a file split. ... Extract a useSavedCards() hook: const { cards, loading } = useSavedCards();\""
+        },
+        {
+          "text": "Notes ~180 lines is acceptable as one cohesive file (raised size threshold)",
+          "passed": true,
+          "evidence": "\"Keep it as one file. 180 lines of one cohesive component is comfortably under the threshold... (roughly a few hundred lines).\""
+        },
+        {
+          "text": "Grounds advice in AI agents' reluctance to read adjacent files / cross-file context cost",
+          "passed": true,
+          "evidence": "\"An agent... works with the file that's open and is reluctant to go read the siblings\"; \"doubled the cross-file lookups the agent skips.\""
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 30.0,
+        "tokens": 21463,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Concludes the layout is over-split for an AI-heavy codebase",
+          "passed": true,
+          "evidence": "\"this is over-split for an AI-heavy codebase. Each file is small and single-purpose, which feels tidy, but 'single-purpose' is the wrong test here.\""
+        },
+        {
+          "text": "Recommends merging tightly-coupled view+logic+types into one component file",
+          "passed": true,
+          "evidence": "\"merge them into one UserBadge.tsx... JSX + the 40 lines of logic + prop types\"; types co-located unless genuinely shared."
+        },
+        {
+          "text": "Identifies the dumb-view-props-shaped-by-sibling smell (cross-file context the agent won't fetch)",
+          "passed": true,
+          "evidence": "\"Getting an agent to proactively open an adjacent file is like pulling teeth... makes confident edits that break because it never checked how a prop or type was shaped one file over.\" A view 'just JSX' can't be understood without the logic shaping its props."
+        },
+        {
+          "text": "Keeps genuinely isolatable styles as a defensible separate file (does not blanket-merge everything)",
+          "passed": true,
+          "evidence": "\"UserBadge.styles.ts \u2014 this one's defensible. Styles are reference data the agent rarely needs to reason about... leaving it separate is fine.\""
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 33.9,
+        "tokens": 22109,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Concludes the layout is over-split for an AI-heavy codebase",
+          "passed": true,
+          "evidence": "\"this is over-split for an AI-heavy codebase. Each file is small and single-purpose, which feels clean, but you've optimised for a metric... that doesn't actually serve the readers you care about \u2014 especially the AI ones.\""
+        },
+        {
+          "text": "Recommends merging tightly-coupled view+logic+types into one component file",
+          "passed": true,
+          "evidence": "\"Collapse view + logic + types + styles into UserBadge.tsx. One self-contained file an agent can open and fully understand.\""
+        },
+        {
+          "text": "Identifies the dumb-view-props-shaped-by-sibling smell (cross-file context the agent won't fetch)",
+          "passed": true,
+          "evidence": "\"A render file whose props are shaped in logic.ts and whose types live in types.ts cannot be understood or safely edited on its own... agents are markedly reluctant to open adjacent files... the agent lands in view.tsx, can't see the prop shape, and guesses.\""
+        },
+        {
+          "text": "Keeps genuinely isolatable styles as a defensible separate file (does not blanket-merge everything)",
+          "passed": true,
+          "evidence": "\"Styles can reasonably stay separate if they're genuinely standalone... Styles are the one piece here that often passes the isolation test.\""
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 33.8,
+        "tokens": 21870,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Concludes the layout is over-split for an AI-heavy codebase",
+          "passed": true,
+          "evidence": "\"I'd actually merge most of it back. The layout looks tidy, but 'small and single-purpose' is the wrong target when an AI assistant is one of your main readers.\""
+        },
+        {
+          "text": "Recommends merging tightly-coupled view+logic+types into one component file",
+          "passed": true,
+          "evidence": "\"Merge view + logic + types into UserBadge.tsx... gives the agent the whole component in one read.\""
+        },
+        {
+          "text": "Identifies the dumb-view-props-shaped-by-sibling smell (cross-file context the agent won't fetch)",
+          "passed": true,
+          "evidence": "\"they're very reluctant to look at files other than the one in front of them. They'll make confident edits to UserBadge.view.tsx... break things because the prop shape lives in types.ts... a 'dumb' render file whose meaning lives next door.\""
+        },
+        {
+          "text": "Keeps genuinely isolatable styles as a defensible separate file (does not blanket-merge everything)",
+          "passed": true,
+          "evidence": "\"Keep UserBadge.styles.ts separate if styles are genuinely bulky or use a styling system that wants its own file. Styles are closer to the 'understood in isolation' line.\""
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 38.5,
+        "tokens": 21910,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Advises starting coarser / not pre-splitting the three phases into many files up front",
+          "passed": true,
+          "evidence": "\"start coarser than your instinct probably tells you\"; \"resist the urge to add types.ts, constants.ts, utils.ts barrels up front\"; explicitly warns against pre-splitting the job into enqueue.ts/runner.ts/writer.ts."
+        },
+        {
+          "text": "Co-locates tightly coupled job lifecycle / polling",
+          "passed": true,
+          "evidence": "\"The job lifecycle is tightly coupled \u2014 co-locate it.\" Keeps enqueue/run/write-status in one export-job.ts; client trigger+poll pushed into one use-export() hook rather than split."
+        },
+        {
+          "text": "Recommends an abstraction (function/module) over bare file splits",
+          "passed": true,
+          "evidence": "\"prefer a hook over splitting UI from logic\" \u2014 useExport() that hides state; \"That's a real abstraction reducing context, not just relocated code.\""
+        },
+        {
+          "text": "Mentions a ~300-line threshold (or 'a few hundred lines') as the split trigger",
+          "passed": true,
+          "evidence": "\"Only split when it crosses ~300 lines or genuinely splits into separate concerns.\""
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 36.2,
+        "tokens": 22199,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Advises starting coarser / not pre-splitting the three phases into many files up front",
+          "passed": true,
+          "evidence": "\"Don't pre-split on reflex. You don't need csv-headers.ts, csv-rows.ts, csv-escape.ts on day one.\" Targets 5-6 files total; \"a cohesive 150-line file beats three 50-line ones.\""
+        },
+        {
+          "text": "Co-locates tightly coupled job lifecycle / polling",
+          "passed": true,
+          "evidence": "\"Co-locate the client polling logic in a use-export.ts hook \u2014 don't split start-vs-poll.\" Orchestration kept in one export-job.ts rather than scattered across routes."
+        },
+        {
+          "text": "Recommends an abstraction (function/module) over bare file splits",
+          "passed": true,
+          "evidence": "\"Prefer an abstraction over a new file whenever you can \u2014 it actually reduces the context needed.\" useExport() hook exposing { start, status, progress, downloadUrl }; \"reach for a well-named internal helper function before you reach for a new file.\""
+        },
+        {
+          "text": "Mentions a ~300-line threshold (or 'a few hundred lines') as the split trigger",
+          "passed": true,
+          "evidence": "\"Split it only if it crosses a few hundred lines or starts covering genuinely separate formats.\""
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 35.8,
+        "tokens": 22177,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Advises starting coarser / not pre-splitting the three phases into many files up front",
+          "passed": true,
+          "evidence": "\"resist the old reflex of carving everything into tiny files\"; \"Don't pre-split the job module into start-job.ts / poll-job.ts / complete-job.ts.\""
+        },
+        {
+          "text": "Co-locates tightly coupled job lifecycle / polling",
+          "passed": true,
+          "evidence": "\"Job orchestration \u2192 keep it together (export-job.ts)... co-locate the job lifecycle in one file.\" Polling kept in one useExportPoller hook."
+        },
+        {
+          "text": "Recommends an abstraction (function/module) over bare file splits",
+          "passed": true,
+          "evidence": "\"For the React side, reach for an abstraction rather than file structure. A useExportPoller(jobId) hook... has a real interface that hides its implementation.\""
+        },
+        {
+          "text": "Mentions a ~300-line threshold (or 'a few hundred lines') as the split trigger",
+          "passed": true,
+          "evidence": "\"Only split when it crosses ~300 lines or starts covering genuinely separate concerns.\""
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 29.1,
+        "tokens": 21803,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Clearly recommends splitting the file (does NOT advise keeping it as one file)",
+          "passed": true,
+          "evidence": "Title 'Split it \u2014 but for the right reason, not the line count'; 'This is the easy case: split.' and closing 'Split them.'"
+        },
+        {
+          "text": "Justifies the split by multiple independent concerns AND/OR exceeding the ~300-line ceiling, not blind line count",
+          "passed": true,
+          "evidence": "'roughly up to a few hundred lines before quality starts to degrade'; 'Five unrelated concerns living together'; explicitly says 'you shouldn't split just because a linter or an old instinct says so' \u2014 not blind line count."
+        },
+        {
+          "text": "Notes each group (dates/currency/validation/etc.) can be understood in isolation, so the boundaries are clean",
+          "passed": true,
+          "evidence": "'Each file is self-contained \u2014 props in, output out, no dependence on a sibling to make sense'; 'can each piece be understood in isolation?' ... 'your functions are already independent.'"
+        },
+        {
+          "text": "Corrects the misapplied 'big files are fine for agents' reasoning (that defense is for one cohesive concern, not a grab-bag)",
+          "passed": true,
+          "evidence": "'The \"big files are fine for AI now\" thing is half-true'; 'When code is coupled and only makes sense together, lean toward keeping it... Here you have neither coupling nor a case for a single abstraction'."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 31.6,
+        "tokens": 21832,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Clearly recommends splitting the file (does NOT advise keeping it as one file)",
+          "passed": true,
+          "evidence": "Title 'Split it \u2014 but along the seams that already exist'; 'Split it by concern, keep each resulting file cohesive and self-contained, and stop there.'"
+        },
+        {
+          "text": "Justifies the split by multiple independent concerns AND/OR exceeding the ~300-line ceiling, not blind line count",
+          "passed": true,
+          "evidence": "'It's five unrelated concerns sharing a filename by accident'; 'at ~550 lines you're well past the point where signal-to-noise starts hurting an agent'; explicitly warns against reflex-splitting on line count."
+        },
+        {
+          "text": "Notes each group (dates/currency/validation/etc.) can be understood in isolation, so the boundaries are clean",
+          "passed": true,
+          "evidence": "'Each of these passes the test that matters: can it be understood in isolation? Yes \u2014 every group is self-contained, mostly pure functions, props/args in and values out.'"
+        },
+        {
+          "text": "Corrects the misapplied 'big files are fine for agents' reasoning (that defense is for one cohesive concern, not a grab-bag)",
+          "passed": true,
+          "evidence": "'that argument only applies to code that's cohesive'; 'Bigger files win when the contents are one thing... They lose when the file is a junk drawer of unrelated things.'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 36.3,
+        "tokens": 22219,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Clearly recommends splitting the file (does NOT advise keeping it as one file)",
+          "passed": true,
+          "evidence": "Title 'Split it \u2014 but for the right reason'; 'Leave it as one file only if it were one concern. It's five. Split by concern...'"
+        },
+        {
+          "text": "Justifies the split by multiple independent concerns AND/OR exceeding the ~300-line ceiling, not blind line count",
+          "passed": true,
+          "evidence": "'You're past the ~300-line mark where signal-to-noise becomes the problem, and you're spanning several concerns. Both triggers for splitting are present.'"
+        },
+        {
+          "text": "Notes each group (dates/currency/validation/etc.) can be understood in isolation, so the boundaries are clean",
+          "passed": true,
+          "evidence": "'Can this concern be understood in isolation? Yes \u2014 emphatically \u2014 for every group here. That's the green light to split.'; 'Each function is props-in/output-out with no shared state.'"
+        },
+        {
+          "text": "Corrects the misapplied 'big files are fine for agents' reasoning (that defense is for one cohesive concern, not a grab-bag)",
+          "passed": true,
+          "evidence": "'that argument only holds for files that are one coherent concern'; 'The \"big files are fine\" advice protects cohesion; it was never a licence to keep a junk drawer.'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 35.2,
+        "tokens": 22131,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends extracting the shared Avatar component (NOT keeping 12 inline copies)",
+          "passed": true,
+          "evidence": "Title: 'Extract the shared <Avatar/>. The extract camp is right.' and Recommendation section: 'Extract <Avatar/> into its own file... replace all 12 inline copies with the import.'"
+        },
+        {
+          "text": "Grounds it in the pure-presentation / understood-in-isolation test (low external context to consume)",
+          "passed": true,
+          "evidence": "Runs 'Can this concern be understood in isolation? Yes, completely. It's pure presentation... no side effects... An agent landing in that file has everything it needs with zero external context.'"
+        },
+        {
+          "text": "Rejects the 'keep inline for self-containment' argument as misapplied to a reusable primitive",
+          "passed": true,
+          "evidence": "'that argument applies to tightly coupled code... Avatar is the exact opposite' \u2014 the inline-for-AI heuristic is 'a tiebreaker for coupled code, and Avatar isn't coupled to anything.'"
+        },
+        {
+          "text": "Frames the shared component as a real abstraction (read at call site without opening internals), not just DRY",
+          "passed": true,
+          "evidence": "'The agent reads the call site and knows enough to proceed without ever opening Avatar.tsx... the difference between split a file (relocates code) and extract an abstraction (hides implementation behind an interface).'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 33.2,
+        "tokens": 21844,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends extracting the shared Avatar component (NOT keeping 12 inline copies)",
+          "passed": true,
+          "evidence": "'Extract the shared <Avatar/>. The extract camp is right' and 'Bottom line: Extract it.'"
+        },
+        {
+          "text": "Grounds it in the pure-presentation / understood-in-isolation test (low external context to consume)",
+          "passed": true,
+          "evidence": "'It's a purely presentational unit: props in... markup out, no side effects... exactly the case the understood in isolation test is built to flag... An agent opening Avatar.tsx needs almost zero external context.'"
+        },
+        {
+          "text": "Rejects the 'keep inline for self-containment' argument as misapplied to a reusable primitive",
+          "passed": true,
+          "evidence": "'that argument applies to a specific failure mode: a split that leaves each file dependent on the others... Avatar is the opposite of that.' Inlining 'achieves the opposite' of self-containment."
+        },
+        {
+          "text": "Frames the shared component as a real abstraction (read at call site without opening internals), not just DRY",
+          "passed": true,
+          "evidence": "'An agent opening a host component sees <Avatar.../> \u2014 a real abstraction with a name and an interface. It knows enough to proceed without reading the internals... prefer a real abstraction (named, interfaced, implementation hidden).'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 34.8,
+        "tokens": 21833,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends extracting the shared Avatar component (NOT keeping 12 inline copies)",
+          "passed": true,
+          "evidence": "'Extract the shared <Avatar/>' and bottom line 'the textbook case for extraction... Extract it.'"
+        },
+        {
+          "text": "Grounds it in the pure-presentation / understood-in-isolation test (low external context to consume)",
+          "passed": true,
+          "evidence": "'It's a purely presentational unit... The test that matters... is can this concern be understood in isolation? Avatar passes that test trivially... edit it confidently with zero external context.'"
+        },
+        {
+          "text": "Rejects the 'keep inline for self-containment' argument as misapplied to a reusable primitive",
+          "passed": true,
+          "evidence": "'that argument only wins when the cross-file lookup actually costs the agent something... Avatar is the exact opposite.' The principle is 'worth keeping for the cases it fits: smart, stateful components... Avatar isn't one of those.'"
+        },
+        {
+          "text": "Frames the shared component as a real abstraction (read at call site without opening internals), not just DRY",
+          "passed": true,
+          "evidence": "'The import is a real abstraction with an interface, not a relocated blob \u2014 it hides the implementation, so the consuming code is understandable without reading the internals.'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 37.5,
+        "tokens": 22415,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Applies the reasoning to Python/backend (does NOT give React- or hook-specific advice)",
+          "passed": true,
+          "evidence": "Entirely FastAPI/SQLAlchemy/Pydantic framed: 'orders/ routes.py discounts.py', 'no FastAPI, no SQLAlchemy session'. No React or hook advice."
+        },
+        {
+          "text": "Recommends a real abstraction (pure function / service / repository) over reflexive file-splitting",
+          "passed": true,
+          "evidence": "'calculate_discount(subtotal, customer_tier, coupon) -> Decimal ... a real abstraction \u2014 a named interface that hides its internals \u2014 not just relocated code.'"
+        },
+        {
+          "text": "Co-locates tightly coupled handler+logic; separates only cleanly-standalone layers (e.g. discount calc or DB access)",
+          "passed": true,
+          "evidence": "'Keep handlers + schemas + queries together in one module \u2014 they're coupled'; extracts only the pure discount logic that passes the isolation test."
+        },
+        {
+          "text": "Applies the understood-in-isolation test and/or the ~300-line guidance to the module",
+          "passed": true,
+          "evidence": "'can this concern be understood in isolation?' plus 'it crosses ~300\u2013400 lines and signal-to-noise starts dropping'."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 37.1,
+        "tokens": 22320,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Applies the reasoning to Python/backend (does NOT give React- or hook-specific advice)",
+          "passed": true,
+          "evidence": "FastAPI/SQLAlchemy/Pydantic throughout: 'discounts.py calculate_discount(...) -> Decimal', 'repository.py SQLAlchemy queries'. No React/hook advice."
+        },
+        {
+          "text": "Recommends a real abstraction (pure function / service / repository) over reflexive file-splitting",
+          "passed": true,
+          "evidence": "'Pull the discount logic out \u2014 into a function/module, not just a file ... the abstraction reduces the context needed elsewhere'; repository.py with named functions."
+        },
+        {
+          "text": "Co-locates tightly coupled handler+logic; separates only cleanly-standalone layers (e.g. discount calc or DB access)",
+          "passed": true,
+          "evidence": "'Keep the handlers and their Pydantic models together ... tightly coupled'; queries split only 'If the queries are chunky or reused', discount extracted as pure logic."
+        },
+        {
+          "text": "Applies the understood-in-isolation test and/or the ~300-line guidance to the module",
+          "passed": true,
+          "evidence": "'can this be understood and edited without opening the file it came from?' and 'Cohesion beats line count until roughly the ~300-line mark'."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 42.2,
+        "tokens": 22591,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Applies the reasoning to Python/backend (does NOT give React- or hook-specific advice)",
+          "passed": true,
+          "evidence": "FastAPI-framed throughout: 'routes.py', 'discounts.py \u2014 no FastAPI, no DB', 'queries.py get_orders_for_customer(session, ...)'. No React/hook advice."
+        },
+        {
+          "text": "Recommends a real abstraction (pure function / service / repository) over reflexive file-splitting",
+          "passed": true,
+          "evidence": "'prefer extracting a well-named function or class over relocating code ... an abstraction like calculate_discount() or OrderRepository.get_for_customer() actually reduces the context'."
+        },
+        {
+          "text": "Co-locates tightly coupled handler+logic; separates only cleanly-standalone layers (e.g. discount calc or DB access)",
+          "passed": true,
+          "evidence": "'Keep the route handlers and their Pydantic models together ... tightly coupled'; thin queries kept inline, only chunky/reusable queries extracted, discount pulled out."
+        },
+        {
+          "text": "Applies the understood-in-isolation test and/or the ~300-line guidance to the module",
+          "passed": true,
+          "evidence": "'can this be understood in isolation?' and 'The real ceiling is around ~300 lines; past that, signal-to-noise genuinely drops'."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 6,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 36.7,
+        "tokens": 22182,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends splitting the class by responsibility (does NOT endorse keeping all 4 concerns in one file)",
+          "passed": true,
+          "evidence": "Title 'Split it' and 'Bottom line: Split it. Four capabilities that each pass the isolation test belong in four files'; proposes auth/tokens.ts, users/profile.ts, notifications/email.ts, analytics/events.ts."
+        },
+        {
+          "text": "Identifies the seams (auth / persistence / email / analytics) as genuinely independent and isolatable",
+          "passed": true,
+          "evidence": "Runs the isolation test across all four (auth tokens, profile CRUD, transactional email, analytics events) and concludes 'All four pass the isolation test independently... four loosely-related capabilities that happen to share a class name.'"
+        },
+        {
+          "text": "Cites the ~300-line ceiling AND/OR multiple-unrelated-concerns as the reason, not blind line count",
+          "passed": true,
+          "evidence": "'Split it \u2014 but not because it's too big'; 'that allowance is for one coherent concern. 420 lines across four unrelated concerns... You're over the line for the wrong reason \u2014 multiple concerns, not size alone.'"
+        },
+        {
+          "text": "Pushes back on the 'keep everything in one place for the agent' rationale as misapplied to a god object",
+          "passed": true,
+          "evidence": "'Why one place backfires here'; 'the right instinct applied to the wrong boundary'; explains co-location only wins when pieces need each other, which these don't, and a thin orchestrator/named abstraction serves the original goal better than a god file."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 6,
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 33.2,
+        "tokens": 21877,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends splitting the class by responsibility (does NOT endorse keeping all 4 concerns in one file)",
+          "passed": true,
+          "evidence": "'no, I'd split this'; 'Split by concern into focused, self-contained modules' listing auth-tokens.ts, user-repository.ts, user-emails.ts, user-analytics.ts with a thin UserService orchestrator."
+        },
+        {
+          "text": "Identifies the seams (auth / persistence / email / analytics) as genuinely independent and isolatable",
+          "passed": true,
+          "evidence": "Applies 'can each concern be understood in isolation?' to all four and states 'All four pass the isolation test. That's the signal that the boundary between them is real, not artificial.'"
+        },
+        {
+          "text": "Cites the ~300-line ceiling AND/OR multiple-unrelated-concerns as the reason, not blind line count",
+          "passed": true,
+          "evidence": "'not because of a line-count reflex'; 'The ~300-line ceiling is where signal-to-noise forces a split... The problem with your current file isn't its size, it's that it's four unrelated things.'"
+        },
+        {
+          "text": "Pushes back on the 'keep everything in one place for the agent' rationale as misapplied to a god object",
+          "passed": true,
+          "evidence": "'The keep it together so Claude never has to hunt instinct is right about the failure mode... but wrong about the cure here'; explains the cross-file tax doesn't apply because nothing crosses the boundary, and the 420-line bundle dilutes every prompt."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 6,
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 35.2,
+        "tokens": 22074,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends splitting the class by responsibility (does NOT endorse keeping all 4 concerns in one file)",
+          "passed": true,
+          "evidence": "'Short answer: no, I'd split this one'; 'Split by responsibility' into auth/tokens.ts, users/profile-repository.ts, notifications/user-emails.ts, analytics/user-events.ts plus thin orchestrator."
+        },
+        {
+          "text": "Identifies the seams (auth / persistence / email / analytics) as genuinely independent and isolatable",
+          "passed": true,
+          "evidence": "'four things that happen to touch a User... Each can be understood, and edited, with almost no reference to the others' \u2014 lists token, profile CRUD, email, analytics each 'Self-contained.'"
+        },
+        {
+          "text": "Cites the ~300-line ceiling AND/OR multiple-unrelated-concerns as the reason, not blind line count",
+          "passed": true,
+          "evidence": "'Past roughly 300 lines, and once a file spans several concerns, signal-to-noise is the dominant problem \u2014 and you've cleared both thresholds.'"
+        },
+        {
+          "text": "Pushes back on the 'keep everything in one place for the agent' rationale as misapplied to a god object",
+          "passed": true,
+          "evidence": "'The thing you're optimising for \u2014 Claude having full context \u2014 is exactly what this file undermines'; 'Your heuristic is sound; it's just mismatched to this file. UserService isn't one cohesive thing.'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 36.0,
+        "tokens": 22235,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends keeping calculatePrice as its own file (rejects inlining it into the component)",
+          "passed": true,
+          "evidence": "Title 'Don't inline it. Keep `calculatePrice.ts` as is.' and recommendation: 'Keep `pricing/calculatePrice.ts` and its test exactly where they are.'"
+        },
+        {
+          "text": "Grounds it in the abstraction-over-file-structure heuristic (clean typed interface, hides implementation)",
+          "passed": true,
+          "evidence": "'That's a real abstraction... It has an interface, it hides its implementation, and it reduces the context needed on both sides of the boundary. That's the single most valuable property you can have in an AI-assisted codebase.'"
+        },
+        {
+          "text": "Notes the agent uses the typed call site without needing the internals (understood in isolation)",
+          "passed": true,
+          "evidence": "'An agent editing CheckoutSummary reads calculatePrice(input): Price at the call site and knows everything it needs to proceed without opening the file.' and 'Understandable in isolation.'"
+        },
+        {
+          "text": "Rejects the 'inline so Claude sees it all' argument for a clean, reused, tested abstraction",
+          "passed": true,
+          "evidence": "Directly rebuts the teammate: 'it's solving a problem that calculatePrice.ts doesn't actually have' and 'agents follow a single explicit import far more reliably than they reconstruct logic buried in a 300-line component.'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 33.1,
+        "tokens": 22126,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends keeping calculatePrice as its own file (rejects inlining it into the component)",
+          "passed": true,
+          "evidence": "Title 'Don't inline it. Keep `calculatePrice.ts` as is.' and 'Keep `pricing/calculatePrice.ts` and its test exactly where they are.'"
+        },
+        {
+          "text": "Grounds it in the abstraction-over-file-structure heuristic (clean typed interface, hides implementation)",
+          "passed": true,
+          "evidence": "'calculatePrice is a real abstraction... It has a typed interface \u2014 inputs and outputs \u2014 and it hides its implementation behind a name.' and 'prefer an abstraction over file structure, and an abstraction over inlining.'"
+        },
+        {
+          "text": "Notes the agent uses the typed call site without needing the internals (understood in isolation)",
+          "passed": true,
+          "evidence": "'When Claude is editing CheckoutSummary, it reads const price = calculatePrice(inputs) and it knows enough to proceed. It doesn't need the 120 lines of logic in context.'"
+        },
+        {
+          "text": "Rejects the 'inline so Claude sees it all' argument for a clean, reused, tested abstraction",
+          "passed": true,
+          "evidence": "Addresses the teammate directly: '\"So Claude sees the whole pricing flow in one place\" \u2014 it already does, better than the inlined version would.' and 'The thing AI agents are bad at... does not apply here.'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 29.5,
+        "tokens": 21934,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends keeping calculatePrice as its own file (rejects inlining it into the component)",
+          "passed": true,
+          "evidence": "Title 'Don't inline it' and 'Keep the file... the single clearest \"don't merge\" case there is.'"
+        },
+        {
+          "text": "Grounds it in the abstraction-over-file-structure heuristic (clean typed interface, hides implementation)",
+          "passed": true,
+          "evidence": "'It's a real abstraction, not just a relocated blob. It has a typed interface \u2014 inputs in, outputs out \u2014 and it hides its implementation.' and 'an abstraction reduces the context an agent needs, whereas inlining just dumps 120 more lines.'"
+        },
+        {
+          "text": "Notes the agent uses the typed call site without needing the internals (understood in isolation)",
+          "passed": true,
+          "evidence": "'When an agent is editing CheckoutSummary and sees calculatePrice(cart, ...), the call site plus the types tell it everything it needs to proceed. It doesn't have to read the 120 lines.' and 'It can be understood in isolation.'"
+        },
+        {
+          "text": "Rejects the 'inline so Claude sees it all' argument for a clean, reused, tested abstraction",
+          "passed": true,
+          "evidence": "'The \"co-locate so the agent sees everything\" heuristic is for code that's meaningless apart... Pricing isn't that.' and 'The interface is the context the agent needs; the 120 lines of implementation are noise.'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 0,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 37.3,
+        "tokens": 19731,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Advises against the reflexive smart/dumb/styles 3-way split",
+          "passed": true,
+          "evidence": "\"probably not into the three-file container/presentational/styles shape you're reaching for out of habit\"; \"Don't do container/presentational.\""
+        },
+        {
+          "text": "Recommends extracting a hook (abstraction) instead of splitting container/view files",
+          "passed": true,
+          "evidence": "\"Pull each into a custom hook: useSavedCards()... useCheckoutSubmit()...\" instead of the layer split."
+        },
+        {
+          "text": "Notes ~180 lines is acceptable as one cohesive file (raised size threshold)",
+          "passed": true,
+          "evidence": "\"At ~180 lines... this file is still small and cohesive\"; revisit past ~300-400 lines."
+        },
+        {
+          "text": "Grounds advice in AI agents' reluctance to read adjacent files / cross-file context cost",
+          "passed": true,
+          "evidence": "\"forces it to open the container, the view, the props type, and the styles, reconcile them... more tokens spent rebuilding context. Locality of behaviour is the thing that makes an AI editor reliable.\""
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 0,
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 32.6,
+        "tokens": 19466,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Advises against the reflexive smart/dumb/styles 3-way split",
+          "passed": true,
+          "evidence": "\"The smart/dumb/styles split you're describing is a pattern from a specific era... it actively works against an AI-assisted workflow\"; \"Don't do the smart/dumb/styles split.\""
+        },
+        {
+          "text": "Recommends extracting a hook (abstraction) instead of splitting container/view files",
+          "passed": true,
+          "evidence": "\"Pull the data + side effects into a hook. useSavedCards()... and possibly useCheckoutSubmit().\""
+        },
+        {
+          "text": "Notes ~180 lines is acceptable as one cohesive file (raised size threshold)",
+          "passed": true,
+          "evidence": "\"180 lines of cohesive form code is fine\"; revisit past ~300-400 lines."
+        },
+        {
+          "text": "Grounds advice in AI agents' reluctance to read adjacent files / cross-file context cost",
+          "passed": true,
+          "evidence": "\"Split it three ways and every non-trivial change becomes a multi-file hop: the agent edits the container, then has to thread a new prop... More files to locate... You pay a real token and accuracy tax.\""
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 0,
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 32.0,
+        "tokens": 19429,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Advises against the reflexive smart/dumb/styles 3-way split",
+          "passed": true,
+          "evidence": "\"probably not into the three-file shape you're describing... Don't do the smart/dumb/styles split \u2014 it adds a prop-contract tax that buys you nothing here.\""
+        },
+        {
+          "text": "Recommends extracting a hook (abstraction) instead of splitting container/view files",
+          "passed": true,
+          "evidence": "\"The saved-cards fetch... is a good candidate for a useSavedCards() hook\"; extract along capability lines, not layer lines."
+        },
+        {
+          "text": "Notes ~180 lines is acceptable as one cohesive file (raised size threshold)",
+          "passed": true,
+          "evidence": "\"At 180 lines holding state, one effect, a submit handler, and JSX, this is a perfectly healthy single file\"; revisit at ~300-400 lines."
+        },
+        {
+          "text": "Grounds advice in AI agents' reluctance to read adjacent files / cross-file context cost",
+          "passed": true,
+          "evidence": "\"Split across three files, it has to open all three, reconstruct the prop contract in its head, and keep them in sync... Co-located code is easier for an LLM to reason about.\""
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 2,
+        "failed": 2,
+        "total": 4,
+        "time_seconds": 32.6,
+        "tokens": 19486,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Concludes the layout is over-split for an AI-heavy codebase",
+          "passed": true,
+          "evidence": "\"this is over-split. For a single small component, splitting one logical unit across five files is a net negative \u2014 and that's especially true in a codebase where AI assistants do a lot of the editing.\""
+        },
+        {
+          "text": "Recommends merging tightly-coupled view+logic+types into one component file",
+          "passed": true,
+          "evidence": "\"Collapse to a single file... UserBadge.tsx # everything\"; \"types + logic + styles + component, in that reading order.\""
+        },
+        {
+          "text": "Identifies the dumb-view-props-shaped-by-sibling smell (cross-file context the agent won't fetch)",
+          "passed": false,
+          "evidence": "Discusses 'context assembly cost' and that 'the view doesn't make sense without the logic,' but frames it as working-set size; does not identify the agent's reluctance to open adjacent siblings / props-shaped-elsewhere smell."
+        },
+        {
+          "text": "Keeps genuinely isolatable styles as a defensible separate file (does not blanket-merge everything)",
+          "passed": false,
+          "evidence": "Recommends collapsing to one file with 'types + logic + styles + component' folded together; only says co-located styles are fine 'until they're large' \u2014 blanket-merges styles in the actual recommendation rather than defending them as separate."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "time_seconds": 33.5,
+        "tokens": 19501,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Concludes the layout is over-split for an AI-heavy codebase",
+          "passed": true,
+          "evidence": "\"this is over-split for what it is, and I'd consolidate. The fact that you use AI assistants heavily is actually an argument against this layout, not for it.\""
+        },
+        {
+          "text": "Recommends merging tightly-coupled view+logic+types into one component file",
+          "passed": true,
+          "evidence": "\"Collapse it to one or two files... UserBadge.tsx # types + logic + JSX together.\""
+        },
+        {
+          "text": "Identifies the dumb-view-props-shaped-by-sibling smell (cross-file context the agent won't fetch)",
+          "passed": false,
+          "evidence": "Mentions 'hallucinate a prop that doesn't line up across types.ts and .logic.ts' and that split files 'tell the agent very little' alone, but frames it as context-assembly/sync cost rather than the specific reluctance to fetch a sibling that shapes a dumb view's props."
+        },
+        {
+          "text": "Keeps genuinely isolatable styles as a defensible separate file (does not blanket-merge everything)",
+          "passed": true,
+          "evidence": "\"Keep styles separate only if your styling system forces it (e.g. a .module.scss companion) \u2014 and a CSS/SCSS module is a fine exception because it's a different language and tooling.\""
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "time_seconds": 34.5,
+        "tokens": 19576,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Concludes the layout is over-split for an AI-heavy codebase",
+          "passed": true,
+          "evidence": "\"this is over-split for what it is. I'd collapse it... that cost is higher, not lower, when AI assistants are doing most of the editing.\""
+        },
+        {
+          "text": "Recommends merging tightly-coupled view+logic+types into one component file",
+          "passed": true,
+          "evidence": "\"Collapse to one file... UserBadge.tsx # types + logic (hook) + styles + JSX, in that reading order.\""
+        },
+        {
+          "text": "Identifies the dumb-view-props-shaped-by-sibling smell (cross-file context the agent won't fetch)",
+          "passed": false,
+          "evidence": "Notes a 'view that's just JSX can't be understood... without the logic and types open beside it' and that an agent 'adds a prop in view but forgets types,' but attributes it to context-load/sync cost, not the agent's unwillingness to fetch the sibling shaping the view's props."
+        },
+        {
+          "text": "Keeps genuinely isolatable styles as a defensible separate file (does not blanket-merge everything)",
+          "passed": true,
+          "evidence": "\"Styles earn their own file when there's a lot of them, or your styling lib mandates it (e.g. CSS/SCSS modules \u2014 which... you'd want as UserBadge.module.scss).\" Defends a separate stylesheet as a real exception rather than blanket-merging."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 2,
+        "failed": 2,
+        "total": 4,
+        "time_seconds": 36.7,
+        "tokens": 19759,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Advises starting coarser / not pre-splitting the three phases into many files up front",
+          "passed": false,
+          "evidence": "Recommends the opposite: \"One job, one file. Split the job lifecycle into createExportJob, getExportJob, and runExportJob rather than a single jobs.ts god-file.\" The proposed layout pre-splits into ~12 files up front. The brief 'don't over-fragment' caveat is outweighed by an explicitly fragmented design."
+        },
+        {
+          "text": "Co-locates tightly coupled job lifecycle / polling",
+          "passed": false,
+          "evidence": "Directly contradicted: job lifecycle is split across createExportJob.ts / getExportJob.ts / runExportJob.ts, justified as \"Small files mean a smaller, more accurate context window.\""
+        },
+        {
+          "text": "Recommends an abstraction (function/module) over bare file splits",
+          "passed": true,
+          "evidence": "\"A queue.ts seam. Wrap whatever background mechanism you use behind one small adapter\"; client polling behind useExportStatus hook so \"components just render.\""
+        },
+        {
+          "text": "Mentions a ~300-line threshold (or 'a few hundred lines') as the split trigger",
+          "passed": true,
+          "evidence": "\"only break a file further when it actually grows past comfortably-readable (a couple hundred lines, or two clearly different responsibilities).\""
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 2,
+        "failed": 2,
+        "total": 4,
+        "time_seconds": 48.5,
+        "tokens": 20307,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Advises starting coarser / not pre-splitting the three phases into many files up front",
+          "passed": false,
+          "evidence": "Proposes a heavily pre-split layout (~18 files across api/services/csv/jobs folders) on day one, splitting the lifecycle into create-export.ts / get-export-status.ts / process-export.ts and CSV into generate-csv/escape/columns. The 'don't over-build the seams' caveat applies only to DI/repository abstractions, not to the file fragmentation itself."
+        },
+        {
+          "text": "Co-locates tightly coupled job lifecycle / polling",
+          "passed": false,
+          "evidence": "Job lifecycle deliberately split into separate service files; \"Split the job concerns from the CSV concerns\" and one verb per file \u2014 the opposite of co-locating the coupled lifecycle."
+        },
+        {
+          "text": "Recommends an abstraction (function/module) over bare file splits",
+          "passed": true,
+          "evidence": "\"Wrap the queue behind an adapter (jobs/queue.ts)\"; \"A JobStatus state machine\"; \"index.ts as the public contract.\""
+        },
+        {
+          "text": "Mentions a ~300-line threshold (or 'a few hundred lines') as the split trigger",
+          "passed": true,
+          "evidence": "\"Keep files small \u2014 roughly under ~200 lines.\" Falls within 'a few hundred lines' as a size threshold."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 2,
+        "failed": 2,
+        "total": 4,
+        "time_seconds": 39.1,
+        "tokens": 19786,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Advises starting coarser / not pre-splitting the three phases into many files up front",
+          "passed": true,
+          "evidence": "\"Don't reach for this many folders if the module is genuinely small... a flat features/export/ with four or five files... is better than the nested version. Start flat, and split a folder out the moment one concern grows past two or three files.\""
+        },
+        {
+          "text": "Co-locates tightly coupled job lifecycle / polling",
+          "passed": false,
+          "evidence": "Lifecycle split into create-export-job.ts / run-export-job.ts / job-store.ts / queue.ts and status into get-export-status.ts \u2014 coupled job phases placed in separate files rather than co-located."
+        },
+        {
+          "text": "Recommends an abstraction (function/module) over bare file splits",
+          "passed": true,
+          "evidence": "\"job-store.ts read/write job state... behind one interface\"; \"queue.ts enqueue/handler wiring\"; \"index.ts re-exports the handful of functions... a clear front door.\""
+        },
+        {
+          "text": "Mentions a ~300-line threshold (or 'a few hundred lines') as the split trigger",
+          "passed": false,
+          "evidence": "No line-count threshold given. Split trigger is expressed only by file count \u2014 \"split a folder out the moment one concern grows past two or three files\" \u2014 not a ~300/few-hundred-line trigger."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 37.9,
+        "tokens": 19820,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Clearly recommends splitting the file (does NOT advise keeping it as one file)",
+          "passed": true,
+          "evidence": "'Short answer: split it.'; 'Split it by concern into well-named files... It's a mechanical, low-risk refactor with a clear payoff. Do it.'"
+        },
+        {
+          "text": "Justifies the split by multiple independent concerns AND/OR exceeding the ~300-line ceiling, not blind line count",
+          "passed": true,
+          "evidence": "'Five unrelated concerns that don't call each other'; 'None of these problems are about the number 550... The issue is mixed, low-cohesion concerns in a high-fan-in module.'"
+        },
+        {
+          "text": "Notes each group (dates/currency/validation/etc.) can be understood in isolation, so the boundaries are clean",
+          "passed": true,
+          "evidence": "'Split by concern, one file per coherent group'; 'Good file names are a huge, cheap signal... validation.ts tells them exactly what they'll find' \u2014 each group is treated as a self-contained coherent unit (pure, dependency-free utilities)."
+        },
+        {
+          "text": "Corrects the misapplied 'big files are fine for agents' reasoning (that defense is for one cohesive concern, not a grab-bag)",
+          "passed": true,
+          "evidence": "'\"Big files are fine for AI\" is true for cohesive files and false for grab-bag files. Yours is the grab-bag case.'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 36.9,
+        "tokens": 19723,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Clearly recommends splitting the file (does NOT advise keeping it as one file)",
+          "passed": true,
+          "evidence": "Title 'Split it \u2014 but the reason isn't \"550 lines is too big\"'; 'Bottom line: split by concern (5-ish small files)...'"
+        },
+        {
+          "text": "Justifies the split by multiple independent concerns AND/OR exceeding the ~300-line ceiling, not blind line count",
+          "passed": true,
+          "evidence": "'five unrelated concerns that \"just landed\"... they don't call each other'; 'the real principle isn't \"small files good, big files bad.\" It's: a file should have one clear reason to exist. Yours has five.'"
+        },
+        {
+          "text": "Notes each group (dates/currency/validation/etc.) can be understood in isolation, so the boundaries are clean",
+          "passed": true,
+          "evidence": "'Split by concern, one file per cohesive group'; treats each as standalone \u2014 'a file named currency.ts is a worse... helpers.ts forces the agent to read 550 lines to find the 15 it needs'; pure utilities with narrow dependency edges."
+        },
+        {
+          "text": "Corrects the misapplied 'big files are fine for agents' reasoning (that defense is for one cohesive concern, not a grab-bag)",
+          "passed": true,
+          "evidence": "'a large, cohesive file is fine... that argument only holds when the contents belong together. Your helpers.ts is the opposite case'; 'The one case where I'd say leave it... if this file were genuinely cohesive.'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 44.9,
+        "tokens": 20109,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Clearly recommends splitting the file (does NOT advise keeping it as one file)",
+          "passed": true,
+          "evidence": "Title 'Split it. This is the case big-file advice doesn't apply to.'; 'yes, split it'; 'Split by concern.'"
+        },
+        {
+          "text": "Justifies the split by multiple independent concerns AND/OR exceeding the ~300-line ceiling, not blind line count",
+          "passed": true,
+          "evidence": "'it's five unrelated modules sharing a filename by accident... it would fail even if it were 200 lines'; 'Split by concern, not by line count.'"
+        },
+        {
+          "text": "Notes each group (dates/currency/validation/etc.) can be understood in isolation, so the boundaries are clean",
+          "passed": true,
+          "evidence": "'One concern per file... Each file should be describable in a single phrase without \"and\"'; each named file (date.ts, currency.ts, validation.ts) is a precise self-contained target."
+        },
+        {
+          "text": "Corrects the misapplied 'big files are fine for agents' reasoning (that defense is for one cohesive concern, not a grab-bag)",
+          "passed": true,
+          "evidence": "'Cohesive and long \u2192 fine, leave it. Incoherent and any length (your case) \u2192 split it'; 'The \"big files are fine for agents\" idea... context window is not the binding constraint here. Precision is.'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 31.1,
+        "tokens": 19406,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends extracting the shared Avatar component (NOT keeping 12 inline copies)",
+          "passed": true,
+          "evidence": "Title 'Extract the shared <Avatar/> \u2014 the extract camp is right' and bottom line 'Extract <Avatar/> as a pure presentational component.'"
+        },
+        {
+          "text": "Grounds it in the pure-presentation / understood-in-isolation test (low external context to consume)",
+          "passed": true,
+          "evidence": "'Keep it a pure, presentational component: props in, markup out, no data fetching... This is the easiest possible thing to extract because there's no shared state to untangle \u2014 it's the textbook case for a shared component.' Also 'Self-contained != comprehensible' distinguishing inline noise from isolatable units."
+        },
+        {
+          "text": "Rejects the 'keep inline for self-containment' argument as misapplied to a reusable primitive",
+          "passed": true,
+          "evidence": "'The keep it inline so Claude sees everything self-contained argument sounds AI-friendly but it actually works against you.' 'A 50-line inline avatar block... isn't self-contained context, it's noise.'"
+        },
+        {
+          "text": "Frames the shared component as a real abstraction (read at call site without opening internals), not just DRY",
+          "passed": true,
+          "evidence": "'A single <Avatar size=lg presence=.../> line communicates intent far better than the full... implementation.' 'the name documents intent, the props document the variation points... exactly one place to change behaviour' \u2014 abstraction read at call site, beyond DRY."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 37.0,
+        "tokens": 19569,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends extracting the shared Avatar component (NOT keeping 12 inline copies)",
+          "passed": true,
+          "evidence": "'Extract the <Avatar/> component.' and bottom line 'extract it. The shared-component camp is right.'"
+        },
+        {
+          "text": "Grounds it in the pure-presentation / understood-in-isolation test (low external context to consume)",
+          "passed": true,
+          "evidence": "'Keep it a pure presentational component \u2014 no data fetching, no context coupling \u2014 so it stays trivial to drop in anywhere.' Distinguishes 'self-contained via copy-paste' from a genuinely isolatable component."
+        },
+        {
+          "text": "Rejects the 'keep inline for self-containment' argument as misapplied to a reusable primitive",
+          "passed": true,
+          "evidence": "'Locality of behaviour beats DRY is a real... heuristic... it's the right call for trivial, incidental duplication. A 50-line block... copied 12 times, is neither trivial nor incidental. It's a real component wearing a disguise.' 'The senior is conflating two different things.'"
+        },
+        {
+          "text": "Frames the shared component as a real abstraction (read at call site without opening internals), not just DRY",
+          "passed": true,
+          "evidence": "'The honest, legible version of this component uses an avatar is import { Avatar }... Name it discoverably... so an assistant finds it by convention' \u2014 a tight prop API as a contract, framed beyond mere deduplication."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 35.8,
+        "tokens": 19717,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends extracting the shared Avatar component (NOT keeping 12 inline copies)",
+          "passed": true,
+          "evidence": "'Extract the shared <Avatar/>.' Recommendation: 'Extract <Avatar/> into a shared component... and replace all 12 inline copies.'"
+        },
+        {
+          "text": "Grounds it in the pure-presentation / understood-in-isolation test (low external context to consume)",
+          "passed": true,
+          "evidence": "'Avatar is a pure presentational component \u2014 props in, markup out, no data fetching... Pure leaf components are the safest possible thing to share, because there's no hidden context to lose when you pull them out.' Also 'It's a leaf, not a dependency you have to chase... self-contained ~50-line file.'"
+        },
+        {
+          "text": "Rejects the 'keep inline for self-containment' argument as misapplied to a reusable primitive",
+          "passed": true,
+          "evidence": "'locality of behaviour is genuinely valuable... but Avatar is the wrong place to apply it.' 'true for genuinely local logic... But Avatar fails the test.' 'The senior is pricing in a cost that barely exists.'"
+        },
+        {
+          "text": "Frames the shared component as a real abstraction (read at call site without opening internals), not just DRY",
+          "passed": true,
+          "evidence": "'A clear name and a tight prop interface mean an agent grasps the full contract from the import line without even opening the file.'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 2,
+        "failed": 2,
+        "total": 4,
+        "time_seconds": 35.5,
+        "tokens": 19759,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Applies the reasoning to Python/backend (does NOT give React- or hook-specific advice)",
+          "passed": true,
+          "evidence": "FastAPI package layout: router.py/schemas.py/models.py/repository.py/service.py/discounts.py. No React/hook advice."
+        },
+        {
+          "text": "Recommends a real abstraction (pure function / service / repository) over reflexive file-splitting",
+          "passed": true,
+          "evidence": "'discounts.py \u2014 the business logic ... Make it pure functions'; repository behind named functions like get_order_by_id; service.py orchestration."
+        },
+        {
+          "text": "Co-locates tightly coupled handler+logic; separates only cleanly-standalone layers (e.g. discount calc or DB access)",
+          "passed": false,
+          "evidence": "Reflexively splits all four+ concerns into separate files; explicitly pulls schemas away from handlers ('Keeping these separate from the ORM models is the important one'). Does not co-locate the coupled handler+schemas."
+        },
+        {
+          "text": "Applies the understood-in-isolation test and/or the ~300-line guidance to the module",
+          "passed": false,
+          "evidence": "No isolation test; treats 250 lines as already split-worthy ('At ~250 lines you're right at the point where the package pays off'), not applying the ~300-line keep-together guidance."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "time_seconds": 37.7,
+        "tokens": 19838,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Applies the reasoning to Python/backend (does NOT give React- or hook-specific advice)",
+          "passed": true,
+          "evidence": "FastAPI package: router.py/schemas.py/repository.py/discounts.py/service.py. No React/hook advice."
+        },
+        {
+          "text": "Recommends a real abstraction (pure function / service / repository) over reflexive file-splitting",
+          "passed": true,
+          "evidence": "'discounts.py \u2014 the discount math as pure functions'; repository as 'plain functions like get_order(session, order_id)'; service orchestration layer."
+        },
+        {
+          "text": "Co-locates tightly coupled handler+logic; separates only cleanly-standalone layers (e.g. discount calc or DB access)",
+          "passed": false,
+          "evidence": "'Give each one a file' \u2014 splits all four concerns including pulling Pydantic schemas into their own file ('Pulling them out first is the highest-leverage move'); no co-location of coupled handler+schemas."
+        },
+        {
+          "text": "Applies the understood-in-isolation test and/or the ~300-line guidance to the module",
+          "passed": true,
+          "evidence": "Applies a line heuristic to the module: 'split when ... it gets large enough that you scroll ... very roughly past a few hundred lines ... 250 lines split four ways lands each file comfortably under that.'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "time_seconds": 34.5,
+        "tokens": 19640,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Applies the reasoning to Python/backend (does NOT give React- or hook-specific advice)",
+          "passed": true,
+          "evidence": "FastAPI package by layer: router.py/schemas.py/queries.py/discounts.py/service.py. No React/hook advice."
+        },
+        {
+          "text": "Recommends a real abstraction (pure function / service / repository) over reflexive file-splitting",
+          "passed": true,
+          "evidence": "'discounts.py ... Make it pure: functions that take plain inputs ... return a computed result'; queries as named functions get_order(session, order_id); optional service orchestration."
+        },
+        {
+          "text": "Co-locates tightly coupled handler+logic; separates only cleanly-standalone layers (e.g. discount calc or DB access)",
+          "passed": false,
+          "evidence": "Splits 'by layer' with Pydantic schemas in their own schemas.py separate from router.py handlers; does not co-locate the tightly coupled handler+schemas."
+        },
+        {
+          "text": "Applies the understood-in-isolation test and/or the ~300-line guidance to the module",
+          "passed": true,
+          "evidence": "Applies line guidance to the module: 'Split when a file has genuinely distinct responsibilities ... or crosses roughly 300\u2013400 lines, not on principle.'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 6,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 27.3,
+        "tokens": 19154,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends splitting the class by responsibility (does NOT endorse keeping all 4 concerns in one file)",
+          "passed": true,
+          "evidence": "'Short answer: no, I'd split it'; 'Split along the four seams' into authTokenService.ts, userRepository.ts, userNotifier.ts, userAnalytics.ts plus optional thin userService.ts orchestrator."
+        },
+        {
+          "text": "Identifies the seams (auth / persistence / email / analytics) as genuinely independent and isolatable",
+          "passed": true,
+          "evidence": "'four independent capabilities that happen to share the word user'; details different dependencies, reasons to change, and testing modes per concern; 'the seams already exist, you're just making them explicit.'"
+        },
+        {
+          "text": "Cites the ~300-line ceiling AND/OR multiple-unrelated-concerns as the reason, not blind line count",
+          "passed": true,
+          "evidence": "'splitting is justified by genuine independence, not a line count'; frames it as a textbook single-responsibility violation across four distinct external dependencies rather than blind size."
+        },
+        {
+          "text": "Pushes back on the 'keep everything in one place for the agent' rationale as misapplied to a god object",
+          "passed": true,
+          "evidence": "'Why one file isn't actually helping the AI'; 'A well-named file is a much stronger signal to an AI agent than physical proximity'; 'solving a navigation problem you don't have at the cost of focus you do need.'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 6,
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 39.5,
+        "tokens": 19812,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends splitting the class by responsibility (does NOT endorse keeping all 4 concerns in one file)",
+          "passed": true,
+          "evidence": "'Split it. The one place intuition is backwards here'; 'Split along the four seams' into tokenService, profileRepository/profileService, userEmailer, userEvents, with orchestration in a thin use-case/handler."
+        },
+        {
+          "text": "Identifies the seams (auth / persistence / email / analytics) as genuinely independent and isolatable",
+          "passed": true,
+          "evidence": "'four concerns, not one' \u2014 Auth, Profile, Email, Analytics; 'These don't share state or invariants. They share the word user'; 'they fail and change for different reasons.'"
+        },
+        {
+          "text": "Cites the ~300-line ceiling AND/OR multiple-unrelated-concerns as the reason, not blind line count",
+          "passed": true,
+          "evidence": "'The rule isn't small files good. It's one reason to change per file. Your UserService has four. That's the line it crosses.' \u2014 explicitly rejects blind line count in favor of multiple concerns."
+        },
+        {
+          "text": "Pushes back on the 'keep everything in one place for the agent' rationale as misapplied to a god object",
+          "passed": true,
+          "evidence": "'Why keep it together doesn't actually help Claude'; 'Hunting is cheap; reasoning is expensive'; 'The everything in one place instinct is the right instinct applied to the wrong boundary.'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 6,
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 36.0,
+        "tokens": 19617,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends splitting the class by responsibility (does NOT endorse keeping all 4 concerns in one file)",
+          "passed": true,
+          "evidence": "Title 'Split it'; 'no, keeping it together isn't the right call. I'd split UserService into focused modules' \u2014 auth/tokenService.ts, profile/profileRepository.ts, notifications/userEmailer.ts, analytics/userEvents.ts plus thin orchestrator."
+        },
+        {
+          "text": "Identifies the seams (auth / persistence / email / analytics) as genuinely independent and isolatable",
+          "passed": true,
+          "evidence": "'textbook god object. The four things... are genuinely different concerns with different reasons to change, different dependencies, and different testability profiles' \u2014 enumerates auth/tokens, profile CRUD, email, analytics."
+        },
+        {
+          "text": "Cites the ~300-line ceiling AND/OR multiple-unrelated-concerns as the reason, not blind line count",
+          "passed": true,
+          "evidence": "'A 420-line file with four unrelated responsibilities is harder to reason about than four 80-120 line files'; 'The goal isn't smaller files, it's one reason to change per file' \u2014 reasons from concerns, not blind count."
+        },
+        {
+          "text": "Pushes back on the 'keep everything in one place for the agent' rationale as misapplied to a god object",
+          "passed": true,
+          "evidence": "'Why the one place reasoning doesn't hold up'; 'Claude doesn't read files the way you scroll them... it's noise it has to load'; 'reasonable but it's solving the wrong problem.'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 31.1,
+        "tokens": 19519,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends keeping calculatePrice as its own file (rejects inlining it into the component)",
+          "passed": true,
+          "evidence": "Title 'Don't inline it' and 'Keep calculatePrice.ts separate.'"
+        },
+        {
+          "text": "Grounds it in the abstraction-over-file-structure heuristic (clean typed interface, hides implementation)",
+          "passed": true,
+          "evidence": "'Fully typed inputs and outputs. The signature is the contract. Anyone \u2014 human or AI \u2014 can understand what goes in and what comes out without reading the body.' and 'a pure, typed, tested, 6-times-reused function is one of the highest-leverage abstractions you can have.'"
+        },
+        {
+          "text": "Notes the agent uses the typed call site without needing the internals (understood in isolation)",
+          "passed": true,
+          "evidence": "'A typed import like import { calculatePrice } from ... is a clear, greppable signpost.' and 'The signature is the contract. Anyone \u2014 human or AI \u2014 can understand what goes in and what comes out without reading the body.'"
+        },
+        {
+          "text": "Rejects the 'inline so Claude sees it all' argument for a clean, reused, tested abstraction",
+          "passed": true,
+          "evidence": "'The AI argument doesn't survive scrutiny... \"One place\" is a context-window heuristic from a bygone era. Modern agents navigate multi-file codebases routinely.' and 'The \"see it all in one place\" benefit is illusory \u2014 agents follow imports fine.'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 31.4,
+        "tokens": 19467,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends keeping calculatePrice as its own file (rejects inlining it into the component)",
+          "passed": true,
+          "evidence": "Title 'Don't inline it. Keep `calculatePrice.ts` as is.' and 'Keep `pricing/calculatePrice.ts` and its test exactly where they are.'"
+        },
+        {
+          "text": "Grounds it in the abstraction-over-file-structure heuristic (clean typed interface, hides implementation)",
+          "passed": true,
+          "evidence": "'It's fully typed at the boundary. Inputs and outputs are explicit contracts.' and 'This is the opposite of a needless abstraction; it's a clean seam that's earning its keep.'"
+        },
+        {
+          "text": "Notes the agent uses the typed call site without needing the internals (understood in isolation)",
+          "passed": true,
+          "evidence": "'When an agent edits checkout, calculatePrice(...) is right there in the code. Go-to-definition, grep, and the import statement all point straight to the file.' plus the typed boundary framed as the contract; agent works without reading internals."
+        },
+        {
+          "text": "Rejects the 'inline so Claude sees it all' argument for a clean, reused, tested abstraction",
+          "passed": true,
+          "evidence": "'The AI argument is backwards. The teammate's premise is \"Claude sees the whole pricing flow in one place\"... But a separate, well-named file is better for AI assistants, not worse.'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 29.9,
+        "tokens": 19447,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Recommends keeping calculatePrice as its own file (rejects inlining it into the component)",
+          "passed": true,
+          "evidence": "Title 'Don't inline it' and 'Keep `calculatePrice.ts` as a separate pure, typed, tested module. Decline the inline.'"
+        },
+        {
+          "text": "Grounds it in the abstraction-over-file-structure heuristic (clean typed interface, hides implementation)",
+          "passed": true,
+          "evidence": "'It's pure and fully typed. This is the easiest possible thing to test, reason about, and reuse.' and 'The clean abstraction is the AI-friendly choice here.' Contrasts deterministic computation vs rendering as the boundary."
+        },
+        {
+          "text": "Notes the agent uses the typed call site without needing the internals (understood in isolation)",
+          "passed": true,
+          "evidence": "'A single named import is a signpost... it tells the agent exactly where pricing lives, with a typed signature describing the contract. That's higher-signal than 120 lines of arithmetic buried inside a component.'"
+        },
+        {
+          "text": "Rejects the 'inline so Claude sees it all' argument for a clean, reused, tested abstraction",
+          "passed": true,
+          "evidence": "Section 'Why the \"so Claude sees the whole flow\" reasoning is backwards': 'the AI-context argument is the weakest part of your teammate's case, not the strongest' and 'Agents follow imports just fine.'"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 34.4958,
+        "stddev": 3.1295,
+        "min": 29.1,
+        "max": 42.2
+      },
+      "tokens": {
+        "mean": 22030.7917,
+        "stddev": 245.2628,
+        "min": 21463,
+        "max": 22591
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.8542,
+        "stddev": 0.2074,
+        "min": 0.5,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 35.5542,
+        "stddev": 4.6405,
+        "min": 27.3,
+        "max": 48.5
+      },
+      "tokens": {
+        "mean": 19651.5833,
+        "stddev": 240.8162,
+        "min": 19154,
+        "max": 20307
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.15",
+      "time_seconds": "-1.1",
+      "tokens": "+2379"
+    }
+  },
+  "notes": [
+    "STRESS-TEST HEADLINE: the skill does not over-apply. On all 4 adversarial traps where the correct answer is to split/extract/keep-the-split (evals 3,4,6,7), with_skill scored 4/4 on every run. The anti-reflexive-split thrust never flipped a should-split case into a wrongly-kept-whole one.",
+    "Skill value concentrates on co-location / start-coarser / the agent-won't-look-sideways smell: evals 1 (+0.33), 2 (+0.50), 5 (+0.33). Baseline drops to 0.50-0.67 on these; with_skill is a clean 1.0.",
+    "Generalisation holds: eval 5 (Python/FastAPI, no React) \u2014 no with_skill run leaked hook-specific advice, and the skill still drove co-location of handler+logic that the baseline split into reflexive layer files (schemas.py/repository.py/...).",
+    "4 of 8 evals are non-discriminating (0,3,4,6,7) because the modern base model already gets them. For the traps this is the desired result (confirms no regression); for eval 0 it means that scenario adds no measurement signal and could be retired or made harder.",
+    "Cost of the skill is negligible: +2.4k tokens (~12%) and roughly neutral on wall-clock (with_skill 34.5s vs without 35.6s). No time/quality tradeoff.",
+    "Variance: with_skill pass-rate stddev is 0.0 across all 24 runs (perfectly stable). without_skill stddev 0.21 is across-eval spread, not run-to-run flakiness \u2014 within each eval the 3 baseline runs were consistent.",
+    "Eval-author critique from graders: eval 1 assertion 'over-split' and eval 1 assertion 'merge view+logic+types' are non-discriminating (all 6 runs pass); the discriminating one is the 'props-shaped-by-sibling, agent won't fetch siblings' smell. Consider trimming the redundant assertions so the scorecard reflects where the skill actually adds value."
+  ]
+}

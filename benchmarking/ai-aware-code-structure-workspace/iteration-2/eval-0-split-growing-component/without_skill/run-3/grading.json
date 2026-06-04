@@ -1,0 +1,9 @@
+{
+  "expectations": [
+    {"text": "Advises against the reflexive smart/dumb/styles 3-way split", "passed": true, "evidence": "\"probably not into the three-file shape you're describing... Don't do the smart/dumb/styles split — it adds a prop-contract tax that buys you nothing here.\""},
+    {"text": "Recommends extracting a hook (abstraction) instead of splitting container/view files", "passed": true, "evidence": "\"The saved-cards fetch... is a good candidate for a useSavedCards() hook\"; extract along capability lines, not layer lines."},
+    {"text": "Notes ~180 lines is acceptable as one cohesive file (raised size threshold)", "passed": true, "evidence": "\"At 180 lines holding state, one effect, a submit handler, and JSX, this is a perfectly healthy single file\"; revisit at ~300-400 lines."},
+    {"text": "Grounds advice in AI agents' reluctance to read adjacent files / cross-file context cost", "passed": true, "evidence": "\"Split across three files, it has to open all three, reconstruct the prop contract in its head, and keep them in sync... Co-located code is easier for an LLM to reason about.\""}
+  ],
+  "summary": {"passed": 4, "failed": 0, "total": 4, "pass_rate": 1.0}
+}

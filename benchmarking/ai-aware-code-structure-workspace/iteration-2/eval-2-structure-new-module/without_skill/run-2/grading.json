@@ -1,0 +1,9 @@
+{
+  "expectations": [
+    {"text": "Advises starting coarser / not pre-splitting the three phases into many files up front", "passed": false, "evidence": "Proposes a heavily pre-split layout (~18 files across api/services/csv/jobs folders) on day one, splitting the lifecycle into create-export.ts / get-export-status.ts / process-export.ts and CSV into generate-csv/escape/columns. The 'don't over-build the seams' caveat applies only to DI/repository abstractions, not to the file fragmentation itself."},
+    {"text": "Co-locates tightly coupled job lifecycle / polling", "passed": false, "evidence": "Job lifecycle deliberately split into separate service files; \"Split the job concerns from the CSV concerns\" and one verb per file — the opposite of co-locating the coupled lifecycle."},
+    {"text": "Recommends an abstraction (function/module) over bare file splits", "passed": true, "evidence": "\"Wrap the queue behind an adapter (jobs/queue.ts)\"; \"A JobStatus state machine\"; \"index.ts as the public contract.\""},
+    {"text": "Mentions a ~300-line threshold (or 'a few hundred lines') as the split trigger", "passed": true, "evidence": "\"Keep files small — roughly under ~200 lines.\" Falls within 'a few hundred lines' as a size threshold."}
+  ],
+  "summary": {"passed": 2, "failed": 2, "total": 4, "pass_rate": 0.50}
+}

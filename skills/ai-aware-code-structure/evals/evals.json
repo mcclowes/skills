@@ -6,21 +6,104 @@
       "name": "split-growing-component",
       "prompt": "I've got a React component file CheckoutForm.tsx that's grown to about 180 lines. It holds the form state, a useEffect that fetches saved cards, the submit handler that calls our payments API, and the JSX. My instinct is to break it into a smart container, a dumb presentational component, and a styles file like I used to. Most of my editing happens through Claude Code these days. Should I split it, and how?",
       "expected_output": "Recommends NOT reflexively doing the 3-file split because the logic and rendering are tightly coupled and would each be meaningless alone, forcing cross-file lookups the agent won't perform. 180 lines is fine for one cohesive file. Suggests extracting a real abstraction (e.g. a useCheckout hook) over splitting files; if the presentational part is genuinely props-in/JSX-out it can be peeled off. Applies the 'understood in isolation?' test.",
-      "files": []
+      "files": [],
+      "assertions": [
+        {"text": "Advises against the reflexive smart/dumb/styles 3-way split"},
+        {"text": "Recommends extracting a hook (abstraction) instead of splitting container/view files"},
+        {"text": "Notes ~180 lines is acceptable as one cohesive file (raised size threshold)"},
+        {"text": "Grounds advice in AI agents' reluctance to read adjacent files / cross-file context cost"}
+      ]
     },
     {
       "id": 1,
       "name": "review-over-split-feature",
       "prompt": "Review the file structure of this feature folder. We have: UserBadge/index.ts, UserBadge/UserBadge.view.tsx (just JSX), UserBadge/UserBadge.logic.ts (40 lines), UserBadge/UserBadge.styles.ts, UserBadge/types.ts. Each file is small and single-purpose. Is this a good layout for a codebase where we use AI assistants heavily?",
       "expected_output": "Flags that the view file's props are shaped by the logic file, so an agent editing the view lacks context and may make confident breaking changes — the classic smell. Notes the files are split below the human-era size reflex with no isolation benefit (40-line logic + small view could be one ~100-line file). Recommends co-locating tightly coupled pieces and keeping a split only where each side stands alone.",
-      "files": []
+      "files": [],
+      "assertions": [
+        {"text": "Concludes the layout is over-split for an AI-heavy codebase"},
+        {"text": "Recommends merging tightly-coupled view+logic+types into one component file"},
+        {"text": "Identifies the dumb-view-props-shaped-by-sibling smell (cross-file context the agent won't fetch)"},
+        {"text": "Keeps genuinely isolatable styles as a defensible separate file (does not blanket-merge everything)"}
+      ]
     },
     {
       "id": 2,
       "name": "structure-new-module",
       "prompt": "I'm starting a new data-export module from scratch in our Next.js app — it'll handle generating CSVs, kicking off a background job, and polling for status. How should I organise the files so it's easy for both me and Claude to work in?",
       "expected_output": "Advises starting coarser than the old instinct: let files grow to a few hundred lines while each stays one coherent concern, rather than pre-splitting. Reach for an abstraction (well-named function/module with a clear interface) when a part earns one, not a new file for its own sake. Keep tightly coupled code co-located so an agent works from a complete picture; split only when a piece can be understood in isolation or a file passes ~300 lines.",
-      "files": []
+      "files": [],
+      "assertions": [
+        {"text": "Advises starting coarser / not pre-splitting the three phases into many files up front"},
+        {"text": "Co-locates tightly coupled job lifecycle / polling"},
+        {"text": "Recommends an abstraction (function/module) over bare file splits"},
+        {"text": "Mentions a ~300-line threshold (or 'a few hundred lines') as the split trigger"}
+      ]
+    },
+    {
+      "id": 3,
+      "name": "oversized-mixed-utils-should-split",
+      "prompt": "We have a single helpers.ts file that's grown to about 550 lines. It's got date formatting functions, a currency formatter, a thin fetch wrapper, a bunch of form-validation predicates, and some array/object utilities. They don't really call each other — it's just where everything landed. It's imported all over the app. I've been reading that big files are actually fine for AI agents now, so should I just leave it as one file?",
+      "expected_output": "Should clearly recommend SPLITTING this file. It is past the ~300-line ceiling AND contains multiple genuinely independent concerns (dates, currency, fetch, validation, arrays) that do not need each other for context — each group can be understood in isolation, so the split boundaries are clean. The 'big files are fine for agents' point is being misapplied: that defense is for a single cohesive concern, not a grab-bag. Splitting here raises signal-to-noise. Must NOT advise keeping it whole on anti-reflexive-split grounds.",
+      "files": [],
+      "assertions": [
+        {"text": "Clearly recommends splitting the file (does NOT advise keeping it as one file)"},
+        {"text": "Justifies the split by multiple independent concerns AND/OR exceeding the ~300-line ceiling, not blind line count"},
+        {"text": "Notes each group (dates/currency/validation/etc.) can be understood in isolation, so the boundaries are clean"},
+        {"text": "Corrects the misapplied 'big files are fine for agents' reasoning (that defense is for one cohesive concern, not a grab-bag)"}
+      ]
+    },
+    {
+      "id": 4,
+      "name": "reusable-pure-component-should-extract",
+      "prompt": "We've got basically the same ~50-line Avatar markup (image with fallback initials, presence dot, size variants) copy-pasted inline inside about 12 different components. One of the seniors is arguing we should leave it inline in each file so that when Claude opens any one of those components it sees everything self-contained, rather than chasing an import. The other camp wants to extract a shared <Avatar/> component. Given we lean hard on AI assistants, who's right?",
+      "expected_output": "Should recommend EXTRACTING the shared Avatar component. It is purely presentational (props in, JSX out, no side effects) — the textbook 'understood in isolation' unit that costs an agent almost no external context to use. The 'keep inline for self-containment' argument is misapplied: a clean, well-named <Avatar/> is a real abstraction the agent reads at the call site without opening its internals, and 12 divergent copies is a maintenance/consistency hazard. Co-location is for tightly-coupled code, not reusable primitives.",
+      "files": [],
+      "assertions": [
+        {"text": "Recommends extracting the shared Avatar component (NOT keeping 12 inline copies)"},
+        {"text": "Grounds it in the pure-presentation / understood-in-isolation test (low external context to consume)"},
+        {"text": "Rejects the 'keep inline for self-containment' argument as misapplied to a reusable primitive"},
+        {"text": "Frames the shared component as a real abstraction (read at call site without opening internals), not just DRY"}
+      ]
+    },
+    {
+      "id": 5,
+      "name": "backend-python-fastapi-non-react",
+      "prompt": "Python / FastAPI backend, no frontend here. I have an orders.py route module that's about 250 lines: the route handlers, the Pydantic request/response models, the SQLAlchemy queries, and a chunk of discount-calculation business logic. It's growing and I want to organise it so Claude can work in it effectively. How should I lay it out?",
+      "expected_output": "Should give advice that GENERALISES beyond React — apply the 'understood in isolation?' test to Python modules. Co-locate the tightly coupled handler + the logic it drives; the discount calculation is a good candidate to pull into a well-named pure function/service (a real abstraction), and the DB/persistence layer can be separated if it stands alone (e.g. a repository). Prefer an abstraction over reflexive file-splitting; ~300-line guidance still applies. Must NOT give React/hook-specific advice ('extract a hook') that is irrelevant to a FastAPI module.",
+      "files": [],
+      "assertions": [
+        {"text": "Applies the reasoning to Python/backend (does NOT give React- or hook-specific advice)"},
+        {"text": "Recommends a real abstraction (pure function / service / repository) over reflexive file-splitting"},
+        {"text": "Co-locates tightly coupled handler+logic; separates only cleanly-standalone layers (e.g. discount calc or DB access)"},
+        {"text": "Applies the understood-in-isolation test and/or the ~300-line guidance to the module"}
+      ]
+    },
+    {
+      "id": 6,
+      "name": "god-object-class-should-split",
+      "prompt": "I have a UserService TypeScript class that's about 420 lines. It handles auth-token issuing and validation, profile CRUD against the database, sending transactional emails, and firing analytics events. It's all in one file. My reasoning was that keeping it together means Claude has everything in one place and never has to go hunting. Is that the right call?",
+      "expected_output": "Should recommend SPLITTING the god object by responsibility. It is past ~300 lines AND bundles four genuinely independent concerns (auth, persistence, email, analytics) that do not need each other's internals — each seam can be understood in isolation, so the boundaries are clean. The 'everything in one place for the agent' instinct is misapplied here: at 420 lines of unrelated responsibilities, signal-to-noise is the problem, and a focused auth/email/etc. module is a better prompt. Co-location is for coupled code, not a kitchen-sink class.",
+      "files": [],
+      "assertions": [
+        {"text": "Recommends splitting the class by responsibility (does NOT endorse keeping all 4 concerns in one file)"},
+        {"text": "Identifies the seams (auth / persistence / email / analytics) as genuinely independent and isolatable"},
+        {"text": "Cites the ~300-line ceiling AND/OR multiple-unrelated-concerns as the reason, not blind line count"},
+        {"text": "Pushes back on the 'keep everything in one place for the agent' rationale as misapplied to a god object"}
+      ]
+    },
+    {
+      "id": 7,
+      "name": "keep-clean-abstraction-dont-inline",
+      "prompt": "Review question. We have pricing/calculatePrice.ts — a pure function, ~120 lines, fully typed inputs and outputs, with its own calculatePrice.test.ts. It's imported by 6 different call sites. A teammate wants to inline it back into the main CheckoutSummary component 'so Claude sees the whole pricing flow in one place when it's editing checkout.' We use AI assistants a lot. Is inlining a good move here?",
+      "expected_output": "Should recommend KEEPING calculatePrice as its own file and reject inlining. It is a genuine abstraction with a clean, typed interface — the agent reads the call site (typed inputs/outputs) and proceeds without needing the internals, which is exactly the 'understood in isolation' win. Inlining would bloat CheckoutSummary, lose the isolated test, and duplicate logic across 6 callers. The skill explicitly prefers real abstractions over relocating/inlining code. This tests that the skill doesn't over-rotate into 'always co-locate / inline so the agent sees everything.'",
+      "files": [],
+      "assertions": [
+        {"text": "Recommends keeping calculatePrice as its own file (rejects inlining it into the component)"},
+        {"text": "Grounds it in the abstraction-over-file-structure heuristic (clean typed interface, hides implementation)"},
+        {"text": "Notes the agent uses the typed call site without needing the internals (understood in isolation)"},
+        {"text": "Rejects the 'inline so Claude sees it all' argument for a clean, reused, tested abstraction"}
+      ]
     }
   ]
 }

@@ -1,0 +1,9 @@
+{
+  "expectations": [
+    {"text": "Advises starting coarser / not pre-splitting the three phases into many files up front", "passed": true, "evidence": "\"Don't pre-split on reflex. You don't need csv-headers.ts, csv-rows.ts, csv-escape.ts on day one.\" Targets 5-6 files total; \"a cohesive 150-line file beats three 50-line ones.\""},
+    {"text": "Co-locates tightly coupled job lifecycle / polling", "passed": true, "evidence": "\"Co-locate the client polling logic in a use-export.ts hook — don't split start-vs-poll.\" Orchestration kept in one export-job.ts rather than scattered across routes."},
+    {"text": "Recommends an abstraction (function/module) over bare file splits", "passed": true, "evidence": "\"Prefer an abstraction over a new file whenever you can — it actually reduces the context needed.\" useExport() hook exposing { start, status, progress, downloadUrl }; \"reach for a well-named internal helper function before you reach for a new file.\""},
+    {"text": "Mentions a ~300-line threshold (or 'a few hundred lines') as the split trigger", "passed": true, "evidence": "\"Split it only if it crosses a few hundred lines or starts covering genuinely separate formats.\""}
+  ],
+  "summary": {"passed": 4, "failed": 0, "total": 4, "pass_rate": 1.00}
+}

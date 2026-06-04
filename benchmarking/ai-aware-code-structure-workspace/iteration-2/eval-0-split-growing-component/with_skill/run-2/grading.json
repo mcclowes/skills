@@ -1,0 +1,9 @@
+{
+  "expectations": [
+    {"text": "Advises against the reflexive smart/dumb/styles 3-way split", "passed": true, "evidence": "\"don't do the three-way smart/dumb/styles split here. At 180 lines this is one coherent concern\""},
+    {"text": "Recommends extracting a hook (abstraction) instead of splitting container/view files", "passed": true, "evidence": "\"reach for an abstraction, not a file split... a natural custom hook: const { savedCards, values, setValue, submit, status } = useCheckoutForm()\""},
+    {"text": "Notes ~180 lines is acceptable as one cohesive file (raised size threshold)", "passed": true, "evidence": "\"Leave it as one file for now. 180 lines of cohesive checkout logic is comfortably within the range an agent handles well.\""},
+    {"text": "Grounds advice in AI agents' reluctance to read adjacent files / cross-file context cost", "passed": true, "evidence": "\"An AI agent doesn't — it works with the file in front of it and is genuinely reluctant to go open adjacent files\"; \"doubled the cross-file lookups the agent won't perform.\""}
+  ],
+  "summary": {"passed": 4, "failed": 0, "total": 4, "pass_rate": 1.0}
+}

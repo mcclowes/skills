@@ -1,0 +1,11 @@
+{
+  "eval_id": 3,
+  "eval_name": "oversized-mixed-utils-should-split",
+  "prompt": "We have a single helpers.ts file that's grown to about 550 lines. It's got date formatting functions, a currency formatter, a thin fetch wrapper, a bunch of form-validation predicates, and some array/object utilities. They don't really call each other \u2014 it's just where everything landed. It's imported all over the app. I've been reading that big files are actually fine for AI agents now, so should I just leave it as one file?",
+  "assertions": [
+    "Clearly recommends splitting the file (does NOT advise keeping it as one file)",
+    "Justifies the split by multiple independent concerns AND/OR exceeding the ~300-line ceiling, not blind line count",
+    "Notes each group (dates/currency/validation/etc.) can be understood in isolation, so the boundaries are clean",
+    "Corrects the misapplied 'big files are fine for agents' reasoning (that defense is for one cohesive concern, not a grab-bag)"
+  ]
+}

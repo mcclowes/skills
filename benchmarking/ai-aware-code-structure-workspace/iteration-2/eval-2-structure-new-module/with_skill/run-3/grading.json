@@ -1,0 +1,9 @@
+{
+  "expectations": [
+    {"text": "Advises starting coarser / not pre-splitting the three phases into many files up front", "passed": true, "evidence": "\"resist the old reflex of carving everything into tiny files\"; \"Don't pre-split the job module into start-job.ts / poll-job.ts / complete-job.ts.\""},
+    {"text": "Co-locates tightly coupled job lifecycle / polling", "passed": true, "evidence": "\"Job orchestration → keep it together (export-job.ts)... co-locate the job lifecycle in one file.\" Polling kept in one useExportPoller hook."},
+    {"text": "Recommends an abstraction (function/module) over bare file splits", "passed": true, "evidence": "\"For the React side, reach for an abstraction rather than file structure. A useExportPoller(jobId) hook... has a real interface that hides its implementation.\""},
+    {"text": "Mentions a ~300-line threshold (or 'a few hundred lines') as the split trigger", "passed": true, "evidence": "\"Only split when it crosses ~300 lines or starts covering genuinely separate concerns.\""}
+  ],
+  "summary": {"passed": 4, "failed": 0, "total": 4, "pass_rate": 1.00}
+}

@@ -1,0 +1,11 @@
+{
+  "eval_id": 1,
+  "eval_name": "review-over-split-feature",
+  "prompt": "Review the file structure of this feature folder. We have: UserBadge/index.ts, UserBadge/UserBadge.view.tsx (just JSX), UserBadge/UserBadge.logic.ts (40 lines), UserBadge/UserBadge.styles.ts, UserBadge/types.ts. Each file is small and single-purpose. Is this a good layout for a codebase where we use AI assistants heavily?",
+  "assertions": [
+    "Concludes the layout is over-split for an AI-heavy codebase",
+    "Recommends merging tightly-coupled view+logic+types into one component file",
+    "Identifies the dumb-view-props-shaped-by-sibling smell (cross-file context the agent won't fetch)",
+    "Keeps genuinely isolatable styles as a defensible separate file (does not blanket-merge everything)"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "expectations": [
+    {"text": "Advises starting coarser / not pre-splitting the three phases into many files up front", "passed": false, "evidence": "Recommends the opposite: \"One job, one file. Split the job lifecycle into createExportJob, getExportJob, and runExportJob rather than a single jobs.ts god-file.\" The proposed layout pre-splits into ~12 files up front. The brief 'don't over-fragment' caveat is outweighed by an explicitly fragmented design."},
+    {"text": "Co-locates tightly coupled job lifecycle / polling", "passed": false, "evidence": "Directly contradicted: job lifecycle is split across createExportJob.ts / getExportJob.ts / runExportJob.ts, justified as \"Small files mean a smaller, more accurate context window.\""},
+    {"text": "Recommends an abstraction (function/module) over bare file splits", "passed": true, "evidence": "\"A queue.ts seam. Wrap whatever background mechanism you use behind one small adapter\"; client polling behind useExportStatus hook so \"components just render.\""},
+    {"text": "Mentions a ~300-line threshold (or 'a few hundred lines') as the split trigger", "passed": true, "evidence": "\"only break a file further when it actually grows past comfortably-readable (a couple hundred lines, or two clearly different responsibilities).\""}
+  ],
+  "summary": {"passed": 2, "failed": 2, "total": 4, "pass_rate": 0.50}
+}

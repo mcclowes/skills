@@ -1,0 +1,11 @@
+{
+  "eval_id": 7,
+  "eval_name": "keep-clean-abstraction-dont-inline",
+  "prompt": "Review question. We have pricing/calculatePrice.ts \u2014 a pure function, ~120 lines, fully typed inputs and outputs, with its own calculatePrice.test.ts. It's imported by 6 different call sites. A teammate wants to inline it back into the main CheckoutSummary component 'so Claude sees the whole pricing flow in one place when it's editing checkout.' We use AI assistants a lot. Is inlining a good move here?",
+  "assertions": [
+    "Recommends keeping calculatePrice as its own file (rejects inlining it into the component)",
+    "Grounds it in the abstraction-over-file-structure heuristic (clean typed interface, hides implementation)",
+    "Notes the agent uses the typed call site without needing the internals (understood in isolation)",
+    "Rejects the 'inline so Claude sees it all' argument for a clean, reused, tested abstraction"
+  ]
+}

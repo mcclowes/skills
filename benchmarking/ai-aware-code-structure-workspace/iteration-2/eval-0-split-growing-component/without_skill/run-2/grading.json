@@ -1,0 +1,9 @@
+{
+  "expectations": [
+    {"text": "Advises against the reflexive smart/dumb/styles 3-way split", "passed": true, "evidence": "\"The smart/dumb/styles split you're describing is a pattern from a specific era... it actively works against an AI-assisted workflow\"; \"Don't do the smart/dumb/styles split.\""},
+    {"text": "Recommends extracting a hook (abstraction) instead of splitting container/view files", "passed": true, "evidence": "\"Pull the data + side effects into a hook. useSavedCards()... and possibly useCheckoutSubmit().\""},
+    {"text": "Notes ~180 lines is acceptable as one cohesive file (raised size threshold)", "passed": true, "evidence": "\"180 lines of cohesive form code is fine\"; revisit past ~300-400 lines."},
+    {"text": "Grounds advice in AI agents' reluctance to read adjacent files / cross-file context cost", "passed": true, "evidence": "\"Split it three ways and every non-trivial change becomes a multi-file hop: the agent edits the container, then has to thread a new prop... More files to locate... You pay a real token and accuracy tax.\""}
+  ],
+  "summary": {"passed": 4, "failed": 0, "total": 4, "pass_rate": 1.0}
+}

@@ -1,0 +1,9 @@
+{
+  "expectations": [
+    {"text": "Concludes the layout is over-split for an AI-heavy codebase", "passed": true, "evidence": "\"this is over-split for an AI-heavy codebase. Each file is small and single-purpose, which feels tidy, but 'single-purpose' is the wrong test here.\""},
+    {"text": "Recommends merging tightly-coupled view+logic+types into one component file", "passed": true, "evidence": "\"merge them into one UserBadge.tsx... JSX + the 40 lines of logic + prop types\"; types co-located unless genuinely shared."},
+    {"text": "Identifies the dumb-view-props-shaped-by-sibling smell (cross-file context the agent won't fetch)", "passed": true, "evidence": "\"Getting an agent to proactively open an adjacent file is like pulling teeth... makes confident edits that break because it never checked how a prop or type was shaped one file over.\" A view 'just JSX' can't be understood without the logic shaping its props."},
+    {"text": "Keeps genuinely isolatable styles as a defensible separate file (does not blanket-merge everything)", "passed": true, "evidence": "\"UserBadge.styles.ts — this one's defensible. Styles are reference data the agent rarely needs to reason about... leaving it separate is fine.\""}
+  ],
+  "summary": {"passed": 4, "failed": 0, "total": 4, "pass_rate": 1.0}
+}

@@ -1,0 +1,9 @@
+{
+  "expectations": [
+    {"text": "Advises against the reflexive smart/dumb/styles 3-way split", "passed": true, "evidence": "\"don't do the three-file smart/dumb/styles split. At 180 lines and one coherent concern, that pattern would make this file worse\""},
+    {"text": "Recommends extracting a hook (abstraction) instead of splitting container/view files", "passed": true, "evidence": "\"reach for an abstraction, not a file split. ... Extract a useSavedCards() hook: const { cards, loading } = useSavedCards();\""},
+    {"text": "Notes ~180 lines is acceptable as one cohesive file (raised size threshold)", "passed": true, "evidence": "\"Keep it as one file. 180 lines of one cohesive component is comfortably under the threshold... (roughly a few hundred lines).\""},
+    {"text": "Grounds advice in AI agents' reluctance to read adjacent files / cross-file context cost", "passed": true, "evidence": "\"An agent... works with the file that's open and is reluctant to go read the siblings\"; \"doubled the cross-file lookups the agent skips.\""}
+  ],
+  "summary": {"passed": 4, "failed": 0, "total": 4, "pass_rate": 1.0}
+}

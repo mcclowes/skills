@@ -1,0 +1,9 @@
+{
+  "expectations": [
+    {"text": "Concludes the layout is over-split for an AI-heavy codebase", "passed": true, "evidence": "\"this is over-split. For a single small component, splitting one logical unit across five files is a net negative — and that's especially true in a codebase where AI assistants do a lot of the editing.\""},
+    {"text": "Recommends merging tightly-coupled view+logic+types into one component file", "passed": true, "evidence": "\"Collapse to a single file... UserBadge.tsx # everything\"; \"types + logic + styles + component, in that reading order.\""},
+    {"text": "Identifies the dumb-view-props-shaped-by-sibling smell (cross-file context the agent won't fetch)", "passed": false, "evidence": "Discusses 'context assembly cost' and that 'the view doesn't make sense without the logic,' but frames it as working-set size; does not identify the agent's reluctance to open adjacent siblings / props-shaped-elsewhere smell."},
+    {"text": "Keeps genuinely isolatable styles as a defensible separate file (does not blanket-merge everything)", "passed": false, "evidence": "Recommends collapsing to one file with 'types + logic + styles + component' folded together; only says co-located styles are fine 'until they're large' — blanket-merges styles in the actual recommendation rather than defending them as separate."}
+  ],
+  "summary": {"passed": 2, "failed": 2, "total": 4, "pass_rate": 0.5}
+}

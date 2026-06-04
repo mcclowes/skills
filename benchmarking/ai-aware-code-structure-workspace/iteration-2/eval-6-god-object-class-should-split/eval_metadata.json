@@ -1,0 +1,11 @@
+{
+  "eval_id": 6,
+  "eval_name": "god-object-class-should-split",
+  "prompt": "I have a UserService TypeScript class that's about 420 lines. It handles auth-token issuing and validation, profile CRUD against the database, sending transactional emails, and firing analytics events. It's all in one file. My reasoning was that keeping it together means Claude has everything in one place and never has to go hunting. Is that the right call?",
+  "assertions": [
+    "Recommends splitting the class by responsibility (does NOT endorse keeping all 4 concerns in one file)",
+    "Identifies the seams (auth / persistence / email / analytics) as genuinely independent and isolatable",
+    "Cites the ~300-line ceiling AND/OR multiple-unrelated-concerns as the reason, not blind line count",
+    "Pushes back on the 'keep everything in one place for the agent' rationale as misapplied to a god object"
+  ]
+}
