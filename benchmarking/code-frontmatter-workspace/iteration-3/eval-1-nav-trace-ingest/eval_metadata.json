@@ -1,0 +1,11 @@
+{
+  "eval_id": 1,
+  "eval_name": "nav-trace-ingest",
+  "suite": "navigation",
+  "prompt": "Trace POST /v1/events: files involved in order, where the event is validated, where it is written to storage.",
+  "assertions": [
+    {"text": "Traces routes/ingest.ts -> services/ingestion.ts as the entry path"},
+    {"text": "Locates validation in services/ingestion.ts via lib/validate.ts"},
+    {"text": "Locates the write at EventStore.insert in the selected store implementation"}
+  ]
+}

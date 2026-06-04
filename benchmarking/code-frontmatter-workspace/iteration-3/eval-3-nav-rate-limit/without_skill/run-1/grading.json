@@ -1,0 +1,20 @@
+{
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 2,
+    "failed": 0,
+    "total": 2
+  },
+  "expectations": [
+    {
+      "text": "States rate limiting is per-API-key (token bucket keyed by API key)",
+      "passed": true,
+      "evidence": "states rate limiting is per-API-key token bucket"
+    },
+    {
+      "text": "Identifies middleware/rateLimit.ts as the implementation",
+      "passed": true,
+      "evidence": "middleware/rateLimit.ts identified as implementation"
+    }
+  ]
+}

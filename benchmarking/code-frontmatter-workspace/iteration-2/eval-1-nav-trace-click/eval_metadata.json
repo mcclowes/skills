@@ -1,0 +1,10 @@
+{
+  "eval_id": 1,
+  "eval_name": "nav-trace-click",
+  "suite": "navigation",
+  "prompt": "Navigation question against fixture WITH frontmatter: trace what happens when a user visits a short link, and where the click counter is incremented.",
+  "assertions": [
+    {"text": "Traces the path through server.ts then shortener.ts"},
+    {"text": "Locates click increment in the store layer (incrementClicks), called from Shortener.resolve"}
+  ]
+}

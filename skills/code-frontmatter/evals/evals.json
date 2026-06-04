@@ -1,9 +1,15 @@
 {
   "skill_name": "code-frontmatter",
-  "notes": "Two suites. Navigation runs against a fixture that ALREADY has frontmatter (the skill's payoff case) and is graded on answer correctness while the benchmark tracks tokens — the skill's whole claim is token efficiency. Authoring runs against a stripped copy with no frontmatter and is graded on whether valid, accurate headers get added. Baseline for both is the pre-improvement skill snapshot.",
+  "notes": "Three things get measured. (1) Navigation runs against a fixture that ALREADY has frontmatter (the skill's payoff case), graded on answer correctness while the benchmark tracks tokens — the skill's whole claim is token efficiency. (2) Authoring runs against a stripped copy with no frontmatter, graded on whether valid, accurate headers get added. (3) The large analytics-api suite is the honest token test: the same nav question is asked against the documented fixture WITH the skill vs the identical bare fixture WITHOUT the skill (read files directly). This isolates the frontmatter payoff. Finding from iteration-3: broad 'map the codebase' questions save a lot of tokens; pinpoint single-file lookups are a wash because one grep is already cheap. Baselines: the small url-shortener suite uses the pre-improvement skill snapshot; the large analytics-api suite uses no-skill-on-bare-fixture.",
   "fixtures": {
     "navigation": "../../benchmarking/code-frontmatter-workspace/fixtures/url-shortener/src",
-    "authoring": "../../benchmarking/code-frontmatter-workspace/fixtures/url-shortener-bare/src"
+    "authoring": "../../benchmarking/code-frontmatter-workspace/fixtures/url-shortener-bare/src",
+    "large_documented": "../../benchmarking/code-frontmatter-workspace/fixtures/analytics-api/src",
+    "large_bare": "../../benchmarking/code-frontmatter-workspace/fixtures/analytics-api-bare/src"
+  },
+  "baselines": {
+    "small_suite": "snapshot of the pre-improvement skill (benchmarking/code-frontmatter-workspace/skill-snapshot)",
+    "large_suite": "no skill at all, run against the bare (undocumented) twin fixture — the with_skill arm runs against the documented twin"
   },
   "evals": [
     {
@@ -39,6 +45,52 @@
         {"text": "Every substantive source file (codec, store, store-redis, validate, config, shortener, server) has a frontmatter block", "kind": "script"},
         {"text": "`validate` reports zero issues across the files (parses, purpose present, related paths resolve)", "kind": "script"},
         {"text": "Purposes are accurate and specific to each file, not generic restatements of the filename", "kind": "manual"}
+      ]
+    },
+    {
+      "id": 3,
+      "name": "large-nav-add-backend",
+      "suite": "large-navigation",
+      "prompt": "I need to add a DynamoDB storage backend to this TypeScript service. Which file defines the interface my new backend must implement, which existing file is the best template to copy, and which file selects/wires the backend at startup? Answer concisely with file paths. (with_skill: <FIXTURE_LARGE_DOC>; without_skill: <FIXTURE_LARGE_BARE>)",
+      "expected_output": "store/store.ts defines the EventStore interface; a store-* file (e.g. store-postgres.ts) is the template; server.ts is the sole backend selector. A broad question — frontmatter should answer it from headers without reading the tree.",
+      "assertions": [
+        {"text": "Names store/store.ts as defining the EventStore interface to implement", "kind": "manual"},
+        {"text": "Identifies a store-* implementation (e.g. store-postgres.ts) as the template to copy", "kind": "manual"},
+        {"text": "Identifies server.ts as where the backend is selected/wired at startup", "kind": "manual"}
+      ]
+    },
+    {
+      "id": 4,
+      "name": "large-nav-trace-ingest",
+      "suite": "large-navigation",
+      "prompt": "Trace what happens when a client sends POST /v1/events to this service: list the files involved in order, and call out exactly where the event is validated and where it's written to storage. Keep it brief. (with_skill: <FIXTURE_LARGE_DOC>; without_skill: <FIXTURE_LARGE_BARE>)",
+      "expected_output": "routes/ingest.ts -> services/ingestion.ts (validates via lib/validate.ts) -> services/enrichment.ts -> EventStore.insert in the selected store. A broad trace spanning many files.",
+      "assertions": [
+        {"text": "Traces routes/ingest.ts -> services/ingestion.ts as the entry path", "kind": "manual"},
+        {"text": "Locates validation in services/ingestion.ts via lib/validate.ts", "kind": "manual"},
+        {"text": "Locates the write at EventStore.insert in the selected store implementation", "kind": "manual"}
+      ]
+    },
+    {
+      "id": 5,
+      "name": "large-nav-server-timestamp",
+      "suite": "large-navigation",
+      "prompt": "A customer reports that the event timestamps they send are being changed by the server. Which file is responsible, and what is the exact rule it applies to client timestamps? Be specific. (with_skill: <FIXTURE_LARGE_DOC>; without_skill: <FIXTURE_LARGE_BARE>)",
+      "expected_output": "services/enrichment.ts assigns an authoritative serverTimestamp that overrides the client value (kept as clientTimestamp for drift). A pinpoint single-file question — expected to be a token wash vs grep.",
+      "assertions": [
+        {"text": "Identifies services/enrichment.ts as responsible", "kind": "manual"},
+        {"text": "States the rule: the server assigns an authoritative timestamp that overrides the client-supplied one (client time kept only for drift)", "kind": "manual"}
+      ]
+    },
+    {
+      "id": 6,
+      "name": "large-nav-rate-limit",
+      "suite": "large-navigation",
+      "prompt": "In this service, is rate limiting applied globally or per-API-key, and which file implements it? Answer concisely. (with_skill: <FIXTURE_LARGE_DOC>; without_skill: <FIXTURE_LARGE_BARE>)",
+      "expected_output": "Per-API-key token bucket in middleware/rateLimit.ts. A pinpoint single-file question — expected to be a token wash vs grep.",
+      "assertions": [
+        {"text": "States rate limiting is per-API-key (token bucket keyed by API key)", "kind": "manual"},
+        {"text": "Identifies middleware/rateLimit.ts as the implementation", "kind": "manual"}
       ]
     }
   ]

@@ -1,0 +1,25 @@
+{
+  "expectations": [
+    {
+      "text": "Names store.ts as the file defining the interface to implement (LinkStore)",
+      "passed": true,
+      "evidence": "answer names LinkStore interface defined in store.ts with the 4 methods"
+    },
+    {
+      "text": "Identifies store-redis.ts as the existing implementation to model on",
+      "passed": true,
+      "evidence": "answer: model new PostgresStore on RedisStore in store-redis.ts"
+    },
+    {
+      "text": "Identifies server.ts as where the store is wired up at startup",
+      "passed": true,
+      "evidence": "answer: server.ts constructs RedisStore.fromConfig at startup; swap there"
+    }
+  ],
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 3,
+    "failed": 0,
+    "total": 3
+  }
+}

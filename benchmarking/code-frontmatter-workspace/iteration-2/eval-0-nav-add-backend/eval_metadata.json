@@ -1,0 +1,11 @@
+{
+  "eval_id": 0,
+  "eval_name": "nav-add-backend",
+  "suite": "navigation",
+  "prompt": "Navigation question against fixture WITH frontmatter: which file to model a new Postgres backend on, what interface to implement, where it's wired up.",
+  "assertions": [
+    {"text": "Names store.ts as the file defining the interface to implement (LinkStore)"},
+    {"text": "Identifies store-redis.ts as the existing implementation to model on"},
+    {"text": "Identifies server.ts as where the store is wired up at startup"}
+  ]
+}

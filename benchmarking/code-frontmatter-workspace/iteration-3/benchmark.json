@@ -1,0 +1,316 @@
+{
+  "metadata": {
+    "skill_name": "code-frontmatter",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-06-04T21:31:48Z",
+    "evals_run": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 0,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "time_seconds": 31.2,
+        "tokens": 26009,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Names store/store.ts as defining the EventStore interface to implement",
+          "passed": true,
+          "evidence": "store/store.ts named as defining the EventStore interface"
+        },
+        {
+          "text": "Identifies a store-* implementation (e.g. store-postgres.ts) as the template to copy",
+          "passed": true,
+          "evidence": "store-postgres.ts (with) / store-clickhouse.ts (without) identified as template impl"
+        },
+        {
+          "text": "Identifies server.ts as where the backend is selected/wired at startup",
+          "passed": true,
+          "evidence": "server.ts identified as the sole backend selector/wiring point"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "time_seconds": 39.5,
+        "tokens": 29147,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Traces routes/ingest.ts -> services/ingestion.ts as the entry path",
+          "passed": true,
+          "evidence": "traces routes/ingest.ts -> services/ingestion.ts"
+        },
+        {
+          "text": "Locates validation in services/ingestion.ts via lib/validate.ts",
+          "passed": true,
+          "evidence": "validation located in ingestion.ts via lib/validate.ts (validateRawEvent)"
+        },
+        {
+          "text": "Locates the write at EventStore.insert in the selected store implementation",
+          "passed": true,
+          "evidence": "write located at EventStore.insert in selected store impl (store-postgres default)"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 2,
+        "failed": 0,
+        "total": 2,
+        "time_seconds": 55.4,
+        "tokens": 29684,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Identifies services/enrichment.ts as responsible",
+          "passed": true,
+          "evidence": "services/enrichment.ts identified as responsible"
+        },
+        {
+          "text": "States the rule: the server assigns an authoritative timestamp that overrides the client-supplied one (client time kept only for drift)",
+          "passed": true,
+          "evidence": "rule stated: server serverTimestamp is authoritative, client kept as clientTimestamp for drift"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 2,
+        "failed": 0,
+        "total": 2,
+        "time_seconds": 27.9,
+        "tokens": 25912,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "States rate limiting is per-API-key (token bucket keyed by API key)",
+          "passed": true,
+          "evidence": "states rate limiting is per-API-key token bucket"
+        },
+        {
+          "text": "Identifies middleware/rateLimit.ts as the implementation",
+          "passed": true,
+          "evidence": "middleware/rateLimit.ts identified as implementation"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 0,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "time_seconds": 48.9,
+        "tokens": 35338,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Names store/store.ts as defining the EventStore interface to implement",
+          "passed": true,
+          "evidence": "store/store.ts named as defining the EventStore interface"
+        },
+        {
+          "text": "Identifies a store-* implementation (e.g. store-postgres.ts) as the template to copy",
+          "passed": true,
+          "evidence": "store-postgres.ts (with) / store-clickhouse.ts (without) identified as template impl"
+        },
+        {
+          "text": "Identifies server.ts as where the backend is selected/wired at startup",
+          "passed": true,
+          "evidence": "server.ts identified as the sole backend selector/wiring point"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "time_seconds": 57.5,
+        "tokens": 32508,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Traces routes/ingest.ts -> services/ingestion.ts as the entry path",
+          "passed": true,
+          "evidence": "traces routes/ingest.ts -> services/ingestion.ts"
+        },
+        {
+          "text": "Locates validation in services/ingestion.ts via lib/validate.ts",
+          "passed": true,
+          "evidence": "validation located in ingestion.ts via lib/validate.ts (validateRawEvent)"
+        },
+        {
+          "text": "Locates the write at EventStore.insert in the selected store implementation",
+          "passed": true,
+          "evidence": "write located at EventStore.insert in selected store impl (store-postgres default)"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 2,
+        "failed": 0,
+        "total": 2,
+        "time_seconds": 41.9,
+        "tokens": 29267,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Identifies services/enrichment.ts as responsible",
+          "passed": true,
+          "evidence": "services/enrichment.ts identified as responsible"
+        },
+        {
+          "text": "States the rule: the server assigns an authoritative timestamp that overrides the client-supplied one (client time kept only for drift)",
+          "passed": true,
+          "evidence": "rule stated: server serverTimestamp is authoritative, client kept as clientTimestamp for drift"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 2,
+        "failed": 0,
+        "total": 2,
+        "time_seconds": 25.3,
+        "tokens": 24511,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "States rate limiting is per-API-key (token bucket keyed by API key)",
+          "passed": true,
+          "evidence": "states rate limiting is per-API-key token bucket"
+        },
+        {
+          "text": "Identifies middleware/rateLimit.ts as the implementation",
+          "passed": true,
+          "evidence": "middleware/rateLimit.ts identified as implementation"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 38.5,
+        "stddev": 12.2782,
+        "min": 27.9,
+        "max": 55.4
+      },
+      "tokens": {
+        "mean": 27688.0,
+        "stddev": 2007.1467,
+        "min": 25912,
+        "max": 29684
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 43.4,
+        "stddev": 13.6494,
+        "min": 25.3,
+        "max": 57.5
+      },
+      "tokens": {
+        "mean": 30406.0,
+        "stddev": 4647.2707,
+        "min": 24511,
+        "max": 35338
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.00",
+      "time_seconds": "-4.9",
+      "tokens": "-2718"
+    }
+  },
+  "notes": [
+    "Correctness parity: 100% pass on both arms across all 4 nav evals. The skill never traded accuracy for efficiency.",
+    "Token win concentrated in BROAD questions: add-backend -9329 tokens (4 vs 9 tool calls), trace-ingest -3361 (6 vs 10). The index pass replaces many file reads.",
+    "PINPOINT single-file questions are a wash: server-timestamp +417, rate-limit +1401. When one grep finds the answer, the index pass is slight overhead \u2014 an honest limit of the skill, not a bug.",
+    "Aggregate: -2718 tokens (~9%) and -4.9s with full correctness. Effect size is bounded by the 50/50 broad/pinpoint mix; a nav-heavy real workload would show a larger win.",
+    "Caveat: 1 run per eval (no within-eval variance). The +417/+1401 pinpoint deltas are within plausible run-to-run noise; the -9329 broad delta is well outside it."
+  ]
+}

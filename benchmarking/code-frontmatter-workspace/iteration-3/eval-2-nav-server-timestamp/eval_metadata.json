@@ -1,0 +1,10 @@
+{
+  "eval_id": 2,
+  "eval_name": "nav-server-timestamp",
+  "suite": "navigation",
+  "prompt": "A customer reports event timestamps are being changed by the server. Which file is responsible and what is the exact rule applied to client timestamps.",
+  "assertions": [
+    {"text": "Identifies services/enrichment.ts as responsible"},
+    {"text": "States the rule: the server assigns an authoritative timestamp that overrides the client-supplied one (client time kept only for drift)"}
+  ]
+}

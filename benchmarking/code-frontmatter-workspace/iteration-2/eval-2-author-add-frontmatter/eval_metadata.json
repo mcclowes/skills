@@ -1,0 +1,11 @@
+{
+  "eval_id": 2,
+  "eval_name": "author-add-frontmatter",
+  "suite": "authoring",
+  "prompt": "Authoring task against the bare fixture (no frontmatter): add concise, valid frontmatter headers to each substantive source file.",
+  "assertions": [
+    {"text": "Every substantive source file (codec, store, store-redis, validate, config, shortener, server) has a frontmatter block"},
+    {"text": "validate reports zero issues across the files (parses, purpose present, related paths resolve)"},
+    {"text": "Purposes are accurate and specific to each file, not generic restatements of the filename"}
+  ]
+}

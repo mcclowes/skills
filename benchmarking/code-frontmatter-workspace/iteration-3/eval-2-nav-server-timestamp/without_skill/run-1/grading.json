@@ -1,0 +1,20 @@
+{
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 2,
+    "failed": 0,
+    "total": 2
+  },
+  "expectations": [
+    {
+      "text": "Identifies services/enrichment.ts as responsible",
+      "passed": true,
+      "evidence": "services/enrichment.ts identified as responsible"
+    },
+    {
+      "text": "States the rule: the server assigns an authoritative timestamp that overrides the client-supplied one (client time kept only for drift)",
+      "passed": true,
+      "evidence": "rule stated: server serverTimestamp is authoritative, client kept as clientTimestamp for drift"
+    }
+  ]
+}

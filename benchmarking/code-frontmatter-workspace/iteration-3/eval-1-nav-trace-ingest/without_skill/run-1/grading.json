@@ -1,0 +1,25 @@
+{
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 3,
+    "failed": 0,
+    "total": 3
+  },
+  "expectations": [
+    {
+      "text": "Traces routes/ingest.ts -> services/ingestion.ts as the entry path",
+      "passed": true,
+      "evidence": "traces routes/ingest.ts -> services/ingestion.ts"
+    },
+    {
+      "text": "Locates validation in services/ingestion.ts via lib/validate.ts",
+      "passed": true,
+      "evidence": "validation located in ingestion.ts via lib/validate.ts (validateRawEvent)"
+    },
+    {
+      "text": "Locates the write at EventStore.insert in the selected store implementation",
+      "passed": true,
+      "evidence": "write located at EventStore.insert in selected store impl (store-postgres default)"
+    }
+  ]
+}

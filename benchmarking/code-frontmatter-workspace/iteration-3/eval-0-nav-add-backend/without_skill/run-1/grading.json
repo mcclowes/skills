@@ -1,0 +1,25 @@
+{
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 3,
+    "failed": 0,
+    "total": 3
+  },
+  "expectations": [
+    {
+      "text": "Names store/store.ts as defining the EventStore interface to implement",
+      "passed": true,
+      "evidence": "store/store.ts named as defining the EventStore interface"
+    },
+    {
+      "text": "Identifies a store-* implementation (e.g. store-postgres.ts) as the template to copy",
+      "passed": true,
+      "evidence": "store-postgres.ts (with) / store-clickhouse.ts (without) identified as template impl"
+    },
+    {
+      "text": "Identifies server.ts as where the backend is selected/wired at startup",
+      "passed": true,
+      "evidence": "server.ts identified as the sole backend selector/wiring point"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "eval_id": 3,
+  "eval_name": "nav-rate-limit",
+  "suite": "navigation",
+  "prompt": "Is rate limiting global or per-API-key, and which file implements it.",
+  "assertions": [
+    {"text": "States rate limiting is per-API-key (token bucket keyed by API key)"},
+    {"text": "Identifies middleware/rateLimit.ts as the implementation"}
+  ]
+}

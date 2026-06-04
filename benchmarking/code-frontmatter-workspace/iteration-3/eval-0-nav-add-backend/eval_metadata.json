@@ -1,0 +1,11 @@
+{
+  "eval_id": 0,
+  "eval_name": "nav-add-backend",
+  "suite": "navigation",
+  "prompt": "Add a DynamoDB storage backend: which file defines the interface to implement, which existing file is the best template, which file selects/wires the backend at startup.",
+  "assertions": [
+    {"text": "Names store/store.ts as defining the EventStore interface to implement"},
+    {"text": "Identifies a store-* implementation (e.g. store-postgres.ts) as the template to copy"},
+    {"text": "Identifies server.ts as where the backend is selected/wired at startup"}
+  ]
+}
