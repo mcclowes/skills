@@ -4,7 +4,7 @@ description: 'Use when designing, reviewing, or implementing HTTP APIs — error
 license: MIT
 metadata:
   author: mcclowes
-  version: "1.4.0"
+  version: "1.3.0"
 ---
 
 # API design
@@ -96,16 +96,14 @@ These are the choices that separate a usable error contract from a frustrating o
 A `status` field gets overloaded because it's quietly asked three different questions at once. Pull them apart and each gets a cleaner home:
 
 - *What just happened?* → an **event**, a past-tense verb on the webhook envelope: `purchase.declined`.
-- *Where is the resource now?* → the **status**, one persistent value driven by a state machine: `purchase.unpaid`.
+- *Where is the resource now?* → the **status**, one persistent value driven by a state machine: `purchase.pending.payment_method`.
 - *Why, and what should I do?* → an **issue**, the structured annotation above: `payment.declined.insufficient_funds`, with a severity, message, and links.
 
-The status is the one that gets overloaded, because its job is the easiest to hand to a neighbour. Name a state for what just *happened* and it becomes the last event echoed back; name it for what must happen *next* (`pending`, `requires_action`) and it becomes a to-do list. The status's own job is the present tense: what the resource *is* right now. The past belongs to the event, the "do this" belongs to the issue.
+When a card is declined: the *event* is `purchase.declined`; the *status* reverts to `purchase.pending.payment_method` (the same value whether it's the first attempt or the fourth — failure loops back, it isn't terminal); and the *why* lives in an *issue*. The status stays honest about location; the issue carries cause and remedy.
 
-When a card is declined: the *event* is `purchase.declined`; the *status* reverts to `purchase.unpaid` (the same value whether it's the first attempt or the fourth — failure loops back, it isn't terminal); and the *why* lives in an *issue*. The status stays honest about the present condition; the issue carries cause and remedy.
+Two namespaced strings — the status and the issue code — share one grammar, `{domain}.{primary}.{detail}`, read left to right and parsed by prefix. The middle segment differs by design: in a status it's the *state* (`pending`), in an issue it's the *class* of problem (`unauthorized`). The shape is shared so the parsing discipline can be too.
 
-Two namespaced strings — the status and the issue code — share one grammar, `{domain}.{primary}.{detail}`, read left to right and parsed by prefix. The middle segment differs by design: in a status it's the *state* (`unpaid`), in an issue it's the *class* of problem (`unauthorized`). The shape is shared so the parsing discipline can be too.
-
-Full guidance — modelling the state machine, naming states for the present condition (and why `pending`/`requires_action` are traps), the middle segment as an axis, the enum-vs-string trade-off, and the unresolved boundary around `active` — is in [references/event-status-design.md](references/event-status-design.md). Read it before designing a `status` field, naming webhook events, or building a lifecycle state machine.
+Full guidance — modelling the state machine, naming states vs events, the enum-vs-string trade-off, and the unresolved boundary around `active` — is in [references/event-status-design.md](references/event-status-design.md). Read it before designing a `status` field, naming webhook events, or building a lifecycle state machine.
 
 ## View endpoints vs data endpoints
 
@@ -141,7 +139,7 @@ The contract is only as good as how cleanly clients can consume it. For TypeScri
 ## Applying this skill
 
 - **Designing a new endpoint's failures:** enumerate the ways it can fail, map each to a namespaced `{domain}.{class}.{reason}` `issue` code, and decide severity. Produce a concrete `issues` example, not just prose.
-- **Designing a resource's lifecycle:** draw the state machine first (nodes are states, edges are transitions), name states for the *present condition* (`authentication_required`, not `requires_action` or `pending` — those name a future step, which is the issue's job), keep failure recoverable where it can be, and split *what happened* / *where it is* / *why* across event, status, and issue. See [references/event-status-design.md](references/event-status-design.md).
+- **Designing a resource's lifecycle:** draw the state machine first (nodes are states, edges are transitions), name states for the obligation they imply (`requires_action` beats `pending`), keep failure recoverable where it can be, and split *what happened* / *where it is* / *why* across event, status, and issue. See [references/event-status-design.md](references/event-status-design.md).
 - **Designing a read endpoint:** first decide whether it renders a view or exposes a resource, and shape it for that job — don't let one endpoint do both. Choose pagination to match (cursor for throughput, offset/page-number when a UI needs it). See [references/view-vs-data-endpoints.md](references/view-vs-data-endpoints.md).
 - **Documenting auth:** enumerate the distinct schemes, name each, and make every endpoint declare the one it requires; keep the consumer-facing scheme separate from its implementation. See [references/auth-schemes.md](references/auth-schemes.md).
 - **Reviewing an existing API:** check it against the seven principles and the field table. The most common gaps are missing `correlationId`, numeric/opaque codes, errors and warnings split across different fields, no `links` to help the developer act, a `status` field doing the job of an event or an issue, one endpoint trying to be both a view and a canonical resource, and an ambiguous/jumbled auth story.
