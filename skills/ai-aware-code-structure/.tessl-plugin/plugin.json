@@ -1,7 +1,7 @@
 {
   "name": "mcclowes/ai-aware-code-structure",
   "description": "Use when deciding how to organise code in an AI-assisted codebase — whether to split or merge a file, where to draw module boundaries, how big a file should get, whether to separate logic from rendering/styles/data, whether to use barrel/index re-export files, or where types and test files should live. Triggers on \"should I split this file\", \"this file is getting too big\", \"separate concerns\", \"where should this code live\", \"are barrel files worth it\", \"central types file or co-locate\", \"colocate tests or a tests folder\", reviewing or refactoring file/module organisation, structuring a new component or feature, or any architecture decision where part of the audience is an AI coding agent. Apply this whenever someone is choosing how to lay code out across files and an LLM will be reading or editing it, even if they only say \"refactor this\" or \"clean up the structure\" without mentioning AI.",
-  "private": true,
+  "private": false,
   "skills": [
     "."
   ],

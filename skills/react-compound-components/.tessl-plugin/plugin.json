@@ -1,7 +1,7 @@
 {
   "name": "mcclowes/react-compound-components",
   "description": "Guide for implementing React compound component patterns with dot notation in this codebase. Use when creating new UI components that have multiple related sub-components, building forms, dashboards, or pages with distinct sections, or when refactoring components that have complex prop drilling. Activates for component composition, context providers, reusable UI patterns.",
-  "private": true,
+  "private": false,
   "skills": [
     "."
   ],

@@ -1,7 +1,7 @@
 {
   "name": "mcclowes/code-frontmatter",
   "description": "Context-efficient codebase navigation and documentation using structured frontmatter headers. Use this when exploring an unfamiliar codebase, answering \"where is X / how does Y work\" questions, or when asked to add/maintain file-level documentation. Index a tree's headers in one pass instead of reading every file, and generate or validate frontmatter with the bundled scripts. Reach for it whenever token budget matters while navigating code, even if the user does not say \"frontmatter\".",
-  "private": true,
+  "private": false,
   "skills": [
     "."
   ],

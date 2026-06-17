@@ -1,7 +1,7 @@
 {
   "name": "mcclowes/pseudocode",
   "description": "Use before implementing any non-trivial logic — algorithms with subtle invariants, state machines, parsers/evaluators, numerical or financial formulas, concurrency, or anything where correct-looking code is routinely subtly wrong. Write a short language-agnostic plan (data shapes + invariants, control flow, edge cases, interface contract) and check it before generating code. Triggers on \"implement this algorithm\", \"write a function that…\", \"build a parser/state machine/scheduler\", \"compute this formula\", reworking tricky logic, or any coding task where the hard part is getting the logic right rather than wiring things together. Skip it for CRUD, glue, config, and plumbing where the code is already the spec. Apply this whenever the expensive risk is a logic bug — an off-by-one, a missed null, a wrong ordering, a broken invariant — not just when the user says \"pseudocode\".",
-  "private": true,
+  "private": false,
   "skills": [
     "."
   ],
