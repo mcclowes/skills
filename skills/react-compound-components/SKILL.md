@@ -1,279 +1,35 @@
 ---
 name: react-compound-components
-description: Guide for implementing React compound component patterns with dot notation in this codebase. Use when creating new UI components that have multiple related sub-components, building forms, dashboards, or pages with distinct sections, or when refactoring components that have complex prop drilling. Activates for component composition, context providers, reusable UI patterns.
+description: Guide for implementing React compound component patterns with dot notation in this codebase. Use when creating new UI components that have multiple related sub-components, building forms, dashboards, or pages with distinct sections, or when refactoring components that have complex prop drilling. Covers how to create context providers, define typed sub-components with displayName, and export namespaced APIs via dot notation. Activates for component composition, context providers, reusable UI patterns.
 allowed-tools: Read, Write, Edit, Glob, Grep
 ---
 
 # React Compound Components Pattern
 
-## Overview
-
-This codebase uses compound components with dot notation for flexible, composable UI patterns. This approach allows consumers to declaratively compose components while sharing state through React Context.
-
 ## When to Use This Pattern
 
-Use compound components when:
+Use compound components when a component has multiple related sub-parts that need shared state — skip for simple 1-2 prop components or one-offs that won't be reused.
 
-- A component has multiple related sub-parts (e.g., Header, Body, Footer)
-- Props need to be shared between parent and children without drilling
-- Consumers need flexibility in how they compose the UI
-- You want a declarative API that reads like documentation
+## Next.js Server/Client Boundary (Important)
 
-**Don't use** compound components for:
+This pattern requires `'use client'` — `createContext`, `useContext`, and `useState` are client-only.
 
-- Simple components with 1-2 props
-- Components that don't have logical sub-parts
-- One-off components that won't be reused
+- **Fetch data in a Server Component parent**, pass as props; content via `children` can still be a Server Component (the "donut" pattern).
+- **Event handler props require a Client Component caller** — functions aren't serializable across the boundary; use Server Actions for mutations instead.
+- **If there's no shared state or interactivity**, skip the pattern — plain composition avoids an unnecessary client boundary.
 
-## Caveat: Next.js and the server/client boundary
-
-This pattern is built on React Context and hooks (`createContext`, `useContext`, `useState`), which are **client-only** APIs. In the Next.js App Router, components are Server Components by default, and Server Components cannot call these hooks. The moment a file uses them, it needs the `'use client'` directive — which is why the context example below starts with `'use client'`.
-
-The practical consequence: **a compound component is a Client Component**. The root provider and every sub-component that reads context render on the client and ship their JS to the browser. They can't be pure Server Components, so you don't get RSC's zero-JS rendering or the ability to `await` data directly inside them.
-
-This is **not** a reason to avoid the pattern — it's an effective, composable API and the cost is usually small (a layout shell is cheap). You just need to wire data and interactivity deliberately. Here's how the boundary actually behaves and how to work with it:
-
-### 1. Fetch data in a Server Component, pass it in as props
-
-Don't fetch inside the compound component. Keep the data fetching in a Server Component parent (where you can `await` directly) and pass plain data down as props. The client compound tree becomes a pure rendering/interaction layer.
-
-```tsx
-// app/team/page.tsx — Server Component (no 'use client')
-import Team from '@/components/Team';
-
-export default async function TeamPage() {
-  const team = await getTeam(); // server-side fetch, never reaches the client bundle
-  return <Team team={team} gameweek={20} />; // Team is the client boundary
-}
-```
-
-### 2. Server Components can still live *inside* the tree via `children`
-
-A crucial nuance: marking a component `'use client'` does **not** force everything it renders to be client-side. Anything you pass through `children` (or any prop slot) is rendered by its own parent — so a Server Component can be slotted into a client compound shell. Use this "donut" pattern when you want server-rendered content (heavy lists, server-only data) nested visually within the interactive layout.
-
-```tsx
-// page.tsx (Server Component)
-<Dashboard onPlayerClick={...}>          {/* client shell */}
-  <Dashboard.Section title="Feed">
-    <ServerRenderedFeed />               {/* stays a Server Component */}
-  </Dashboard.Section>
-</Dashboard>
-```
-
-Note that dot-notation sub-components (`Dashboard.Section`) are themselves client components — they're attached to the client root and read context. It's the content you *pass into* them that can stay on the server.
-
-### 3. Event handlers can't cross the server→client boundary
-
-Props passed from a Server Component into a Client Component must be serializable. **Functions are not serializable**, so you cannot pass an `onPlayerClick` handler from a Server Component into the compound root (see "Event Handler Props on Root" below — that best practice assumes a client-side caller). Options:
-
-- Make the immediate parent a Client Component (`'use client'`) so it can define the handler.
-- Use a [Server Action](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations) for mutations, which *can* be passed across the boundary.
-
-### 4. If there's no shared state or interactivity, you may not need context at all
-
-The whole point of the context machinery is sharing state without prop drilling. For a purely static, presentational layout, a context-based compound component forces an unnecessary client boundary. Plain composition (or keeping it as Server Components) is lighter. Reach for this pattern when the shared-state/interaction payoff justifies going client-side.
-
-## Existing Compound Components in This Codebase
-
-### 1. Team Component (`components/Team/`)
-
-```tsx
-import Team from '@/components/Team';
-
-// Full composition
-<Team team={teamData} gameweek={20}>
-  <Team.ShareButton />
-  <Team.Summary />
-  <Team.Formation>
-    <Team.Position type="goa" />
-    <Team.Position type="def" />
-    <Team.Position type="mid" />
-    <Team.Position type="fwd" />
-    <Team.Bench />
-  </Team.Formation>
-</Team>
-
-// Backwards compatible - renders default composition
-<Team team={teamData} gameweek={20} />
-```
-
-**Sub-components:**
-
-- `Team.ShareButton` - Share button with loading state
-- `Team.Summary` - Stats summary bar (cost, predicted, transfers)
-- `Team.Formation` - Wrapper for position rows
-- `Team.Position` - Position row (type: 'goa' | 'def' | 'mid' | 'fwd')
-- `Team.Bench` - Bench players section
-
-### 2. Dashboard Component (`components/Dashboard/`)
-
-```tsx
-import Dashboard from '@/components/Dashboard';
-
-<Dashboard
-  className={styles.pageContainer}
-  onPlayerClick={handlePlayerClick}
-  onHotPlayerClick={handleHotPlayerClick}
->
-  <Dashboard.Header
-    title="Team Name"
-    subtitle="Manager Name"
-    ctaText="Optimize your team"
-    ctaHref="/optimize"
-  />
-
-  <Dashboard.Stats
-    stats={[
-      { title: 'GW20', value: 65, description: 'Rank: 1,234' },
-      { title: 'Overall', value: 1250, description: 'Rank: 50,000' },
-    ]}
-  />
-
-  <Dashboard.PerformanceChart data={historyData} currentGameweek={20} />
-
-  <Dashboard.Deadline gameweekName="GW21" deadlineTime={deadline} />
-
-  <Dashboard.TeamGrid title="Starting XI" players={startingXI} />
-  <Dashboard.TeamGrid title="Bench" players={bench} />
-
-  <Dashboard.HotPlayers players={hotPlayers} />
-
-  <Dashboard.GameweekInfo gameweek={gameweekData} />
-
-  <Dashboard.AuthCTA isLoggedIn={!!user} hasFplTeamId={!!fplTeamId} />
-</Dashboard>;
-```
-
-**Sub-components:**
-
-- `Dashboard.Header` - Page header with title, subtitle, CTA
-- `Dashboard.Stats` - Row of stat cards
-- `Dashboard.Section` - Generic section wrapper
-- `Dashboard.PerformanceChart` - Weekly performance chart
-- `Dashboard.Deadline` - Next deadline display
-- `Dashboard.TeamGrid` - Player card grid
-- `Dashboard.HotPlayers` - Hot players section
-- `Dashboard.GameweekInfo` - Gameweek info for welcome page
-- `Dashboard.AuthCTA` - Login/signup prompt
-
-### 3. PlayersPage Component (`components/PlayersPage/`)
-
-```tsx
-import PlayersPage from '@/components/PlayersPage';
-
-<PlayersPage
-  className={styles.pageContainer}
-  view={view}
-  onTabChange={handleTabChange}
-  refetching={refetching}
->
-  <PlayersPage.Header title="Players" />
-  <PlayersPage.Tabs />
-
-  <PlayersPage.SearchInput
-    value={search}
-    onChange={setSearch}
-    placeholder="Search players..."
-  />
-
-  <PlayersPage.Table
-    data={players}
-    columns={columns}
-    sortBy={sortBy}
-    sortOrder={sortOrder}
-    onSort={handleSort}
-    onRowClick={handleRowClick}
-  />
-
-  <PlayersPage.LoadingSkeleton />
-  <PlayersPage.ErrorState error={error} onRetry={handleRetry} />
-  <PlayersPage.EmptyState onRetry={handleRetry} />
-  <PlayersPage.InlineError error={error} onRetry={handleRetry} />
-</PlayersPage>;
-```
-
-### 4. AuthForm Component (`components/AuthForm/`)
-
-```tsx
-import AuthForm from '@/components/AuthForm';
-
-<AuthForm
-  onSubmit={handleSubmit}
-  loading={loading}
-  error={error}
-  success={success}
-  hideFormOnSuccess
->
-  <AuthForm.Header title="Welcome back" subtitle="Sign in to your account" />
-
-  <AuthForm.Messages redirectMessage={redirectMessage} />
-
-  <AuthForm.Form>
-    <AuthForm.Group>
-      <AuthForm.Label htmlFor="email">Email</AuthForm.Label>
-      <AuthForm.Input
-        id="email"
-        name="email"
-        type="email"
-        placeholder="you@example.com"
-        required
-        autoComplete="email"
-      />
-    </AuthForm.Group>
-
-    <AuthForm.Group>
-      <AuthForm.Label htmlFor="password" forgotPasswordLink>
-        Password
-      </AuthForm.Label>
-      <AuthForm.Input
-        id="password"
-        name="password"
-        type="password"
-        placeholder="Your password"
-        required
-        autoComplete="current-password"
-      />
-    </AuthForm.Group>
-
-    <AuthForm.SubmitButton loadingText="Signing in...">
-      Sign in
-    </AuthForm.SubmitButton>
-  </AuthForm.Form>
-
-  <AuthForm.Footer>
-    Don't have an account? <AuthForm.Link href="/signup">Sign up</AuthForm.Link>
-  </AuthForm.Footer>
-</AuthForm>;
-```
-
-### 5. Modal Component (`components/UIKit/Modal/`)
-
-```tsx
-import Modal from '@/components/UIKit/Modal';
-
-<Modal open={isOpen} doClose={handleClose} closeIcon>
-  <Modal.Inner size="medium">
-    <Modal.Header>Modal Title</Modal.Header>
-    <Modal.Content>
-      <p>Modal content goes here</p>
-    </Modal.Content>
-  </Modal.Inner>
-</Modal>;
-```
+Full mechanics (donut pattern, why sub-components are themselves client, fix options): [references/nextjs-server-client-boundary.md](references/nextjs-server-client-boundary.md).
 
 ## Implementation Pattern
 
-### Step 1: Create Context
+Create context, root, and sub-components in a single file:
 
 ```tsx
 'use client';
 
-import React, {
-  createContext,
-  useContext,
-  type PropsWithChildren,
-} from 'react';
+import React, { createContext, useContext, type PropsWithChildren } from 'react';
 
+// --- Context ---
 interface MyComponentContextType {
   sharedState: string;
   onAction?: (value: string) => void;
@@ -283,18 +39,31 @@ const MyComponentContext = createContext<MyComponentContextType | null>(null);
 
 function useMyComponentContext() {
   const context = useContext(MyComponentContext);
-  if (!context) {
-    throw new Error(
-      'MyComponent compound components must be used within a MyComponent',
-    );
-  }
+  if (!context) throw new Error('MyComponent compound components must be used within a MyComponent');
   return context;
 }
-```
 
-### Step 2: Create Root Component with Type Annotation
+// --- Sub-components ---
+const MyComponentHeader: React.FC<{ title: string; subtitle?: string }> = ({ title, subtitle }) => (
+  <header>
+    <h1>{title}</h1>
+    {subtitle && <p>{subtitle}</p>}
+  </header>
+);
+MyComponentHeader.displayName = 'MyComponentHeader';
 
-```tsx
+const MyComponentContent: React.FC<PropsWithChildren> = ({ children }) => {
+  const { sharedState } = useMyComponentContext();
+  return <div><span>State: {sharedState}</span>{children}</div>;
+};
+MyComponentContent.displayName = 'MyComponentContent';
+
+const MyComponentFooter: React.FC<PropsWithChildren> = ({ children }) => (
+  <footer>{children}</footer>
+);
+MyComponentFooter.displayName = 'MyComponentFooter';
+
+// --- Root ---
 interface MyComponentOwnProps {
   sharedState: string;
   onAction?: (value: string) => void;
@@ -305,62 +74,16 @@ const MyComponent: React.FC<PropsWithChildren<MyComponentOwnProps>> & {
   Header: typeof MyComponentHeader;
   Content: typeof MyComponentContent;
   Footer: typeof MyComponentFooter;
-} = ({ children, sharedState, onAction, className }) => {
-  return (
-    <MyComponentContext.Provider value={{ sharedState, onAction }}>
-      <div className={className}>{children}</div>
-    </MyComponentContext.Provider>
-  );
-};
-```
-
-### Step 3: Create Sub-Components
-
-```tsx
-// Sub-component with own props
-interface MyComponentHeaderProps {
-  title: string;
-  subtitle?: string;
-}
-
-const MyComponentHeader: React.FC<MyComponentHeaderProps> = ({
-  title,
-  subtitle,
-}) => (
-  <header>
-    <h1>{title}</h1>
-    {subtitle && <p>{subtitle}</p>}
-  </header>
+} = ({ children, sharedState, onAction, className }) => (
+  <MyComponentContext.Provider value={{ sharedState, onAction }}>
+    <div className={className}>{children}</div>
+  </MyComponentContext.Provider>
 );
-MyComponentHeader.displayName = 'MyComponentHeader';
-MyComponent.Header = MyComponentHeader;
 
-// Sub-component using context
-const MyComponentContent: React.FC<PropsWithChildren> = ({ children }) => {
-  const { sharedState } = useMyComponentContext();
-
-  return (
-    <div>
-      <span>State: {sharedState}</span>
-      {children}
-    </div>
-  );
-};
-MyComponentContent.displayName = 'MyComponentContent';
-MyComponent.Content = MyComponentContent;
-
-// Sub-component with children
-const MyComponentFooter: React.FC<PropsWithChildren> = ({ children }) => (
-  <footer>{children}</footer>
-);
-MyComponentFooter.displayName = 'MyComponentFooter';
-MyComponent.Footer = MyComponentFooter;
-```
-
-### Step 4: Export
-
-```tsx
 MyComponent.displayName = 'MyComponent';
+MyComponent.Header = MyComponentHeader;
+MyComponent.Content = MyComponentContent;
+MyComponent.Footer = MyComponentFooter;
 
 export default MyComponent;
 ```
@@ -370,202 +93,49 @@ export default MyComponent;
 ```
 components/
   MyComponent/
-    MyComponent.tsx        # Main component with all sub-components
+    MyComponent.tsx         # Main component with all sub-components
     MyComponent.module.scss # Styles
-    index.tsx              # Re-exports
+    index.tsx               # Re-exports
 ```
 
 **index.tsx:**
-
 ```tsx
 import MyComponent from './MyComponent';
-
 export default MyComponent;
 ```
 
-## TypeScript Patterns
+## Existing Compound Components
 
-### Using PropsWithChildren
-
-```tsx
-import { type PropsWithChildren } from 'react';
-
-// For components that accept children
-const MyComponent: React.FC<PropsWithChildren<OwnProps>> = ({
-  children,
-  ...props
-}) => {
-  // ...
-};
-
-// For components that only accept children
-const Wrapper: React.FC<PropsWithChildren> = ({ children }) => (
-  <div>{children}</div>
-);
-```
-
-### Compound Component Type Definition
+This codebase already ships several. Example:
 
 ```tsx
-// Define the compound component type with all sub-components
-const MyComponent: React.FC<PropsWithChildren<OwnProps>> & {
-  Header: typeof MyComponentHeader;
-  Content: typeof MyComponentContent;
-  Footer: typeof MyComponentFooter;
-} = (props) => {
-  // ...
-};
+import Dashboard from '@/components/Dashboard';
 
-// Attach sub-components after definition
-MyComponent.Header = MyComponentHeader;
-MyComponent.Content = MyComponentContent;
-MyComponent.Footer = MyComponentFooter;
+<Dashboard onPlayerClick={handlePlayerClick}>
+  <Dashboard.Header title="Team Name" subtitle="Manager Name" ctaText="Optimize" ctaHref="/optimize" />
+  <Dashboard.Stats stats={[{ title: 'GW20', value: 65, description: 'Rank: 1,234' }]} />
+  <Dashboard.PerformanceChart data={historyData} currentGameweek={20} />
+  <Dashboard.TeamGrid title="Starting XI" players={startingXI} />
+  <Dashboard.HotPlayers players={hotPlayers} />
+</Dashboard>
 ```
+
+**Before composing `Team`, `Dashboard`, `PlayersPage`, `AuthForm`, or `UIKit/Modal`, get the exact sub-component names and props from [references/existing-components.md](references/existing-components.md)** — don't guess them (e.g. it's `Dashboard.Deadline`/`.GameweekInfo`/`.AuthCTA` and `Team.Summary`/`Team.Position type="goa|def|mid|fwd"`). Open the component's own file to confirm anything not listed there.
 
 ## Best Practices
 
-### 1. Backwards Compatibility
-
-When refactoring existing components, maintain backwards compatibility:
-
-```tsx
-const Team = ({ team, gameweek, children }: TeamProps) => {
-  // Default composition when no children provided
-  const defaultContent = (
-    <>
-      <Team.ShareButton />
-      <Team.Summary />
-      <Team.Formation>
-        <Team.Position type="goa" />
-        <Team.Position type="def" />
-        <Team.Position type="mid" />
-        <Team.Position type="fwd" />
-        <Team.Bench />
-      </Team.Formation>
-    </>
-  );
-
-  return (
-    <TeamContext.Provider value={{ team, gameweek }}>
-      <div>{children ?? defaultContent}</div>
-    </TeamContext.Provider>
-  );
-};
-```
-
-### 2. DisplayName for Debugging
-
-Always set displayName for better debugging:
-
-```tsx
-MyComponentHeader.displayName = 'MyComponentHeader';
-MyComponent.Header = MyComponentHeader;
-```
-
-### 3. Context Error Messages
-
-Provide helpful error messages when context is missing:
-
-```tsx
-function useMyComponentContext() {
-  const context = useContext(MyComponentContext);
-  if (!context) {
-    throw new Error('MyComponent.Header must be used within a MyComponent');
-  }
-  return context;
-}
-```
-
-### 4. Event Handler Props on Root
-
-Pass event handlers to the root component, access via context. **Next.js note:** this assumes the caller is a Client Component — functions can't be passed from a Server Component across the client boundary (see "Caveat: Next.js and the server/client boundary" above).
-
-```tsx
-// Root receives handlers
-<Dashboard onPlayerClick={handleClick}>
-
-// Sub-components access via context
-const DashboardTeamGrid = ({ players }) => {
-  const { onPlayerClick } = useDashboardContext();
-
-  return (
-    <div>
-      {players.map(player => (
-        <div key={player.id} onClick={() => onPlayerClick?.(player)}>
-          {player.name}
-        </div>
-      ))}
-    </div>
-  );
-};
-```
-
-### 5. Flexible Sub-Components
-
-Allow sub-components to be used independently or composed:
-
-```tsx
-// Can be used with default content
-<Dashboard.Section title="Stats">
-  <CustomContent />
-</Dashboard.Section>
-
-// Or with built-in functionality
-<Dashboard.Stats stats={statsArray} />
-```
-
-## Anti-Patterns to Avoid
-
-### ❌ Don't: Over-nest Context
-
-```tsx
-// Bad - too many nested contexts
-<OuterContext>
-  <MiddleContext>
-    <InnerContext>
-      <Content />
-    </InnerContext>
-  </MiddleContext>
-</OuterContext>
-```
-
-### ❌ Don't: Pass All Props Down
-
-```tsx
-// Bad - prop drilling defeats the purpose
-<MyComponent.Item {...allProps} onClick={onClick} disabled={disabled} />
-```
-
-### ❌ Don't: Require Specific Children Order
-
-```tsx
-// Bad - forces specific order
-<MyComponent>
-  <MyComponent.Header /> {/* Must be first */}
-  <MyComponent.Content /> {/* Must be second */}
-</MyComponent>
-```
-
-### ✅ Do: Use Context for Shared State
-
-```tsx
-// Good - context handles shared state
-<MyComponent state={state} onAction={onAction}>
-  <MyComponent.Header title="Title" />
-  <MyComponent.Content />
-</MyComponent>
-```
+- **Backwards compatibility**: default to a `children ?? defaultContent` fallback in root when refactoring.
+- **Event handlers on root**: pass them into the root, access via context in sub-components.
+- **displayName on every sub-component**: required for readable React DevTools output.
 
 ## Migration Checklist
-
-When converting an existing component to compound pattern:
 
 - [ ] Identify logical sub-sections of the component
 - [ ] Create context type with shared state/handlers
 - [ ] Create root component with context provider
 - [ ] Extract sub-components with displayName
-- [ ] Attach sub-components to root (Root.SubComponent)
+- [ ] Attach sub-components to root (`Root.SubComponent = ...`)
 - [ ] Add backwards compatibility if needed
-- [ ] Create index.tsx for clean exports
+- [ ] Create `index.tsx` for clean exports
 - [ ] Update existing usages
 - [ ] Add TypeScript types for all props
