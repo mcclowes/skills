@@ -1,0 +1,3 @@
+# Model a multi-actor KYB onboarding lifecycle
+
+We're modelling a business onboarding (KYB) flow as a status field. The applicant fills in disclosures (which can be not started, partially done, or complete), then we review it (which is either in progress, approved, or rejected). Sometimes the ball is in the applicant's court, sometimes in ours. Our dashboard's main job is showing our ops team which applications are waiting on us vs waiting on the customer. I was thinking statuses like `kyb.review` for in-review and `kyb.review.approved` / `kyb.review.rejected` for the outcomes. Does that work?

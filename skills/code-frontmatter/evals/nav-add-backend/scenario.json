@@ -1,0 +1,6 @@
+{
+  "description": "Navigate a documented url-shortener to find where to add a storage backend",
+  "fixtures": {
+    "codebase": { "type": "directory", "path": "./fixtures/code", "installPath": "code" }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "context": "The agent locates the file and rule that rewrites client-supplied timestamps in a documented analytics-api service (mounted at ./code). This is a pinpoint single-file question.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "Identifies responsible file",
+      "description": "Identifies services/enrichment.ts as responsible for the timestamp behaviour",
+      "max_score": 8
+    },
+    {
+      "name": "States the rule",
+      "description": "States the rule: the server assigns an authoritative timestamp that overrides the client-supplied one (the client time is kept only for drift)",
+      "max_score": 8
+    }
+  ]
+}

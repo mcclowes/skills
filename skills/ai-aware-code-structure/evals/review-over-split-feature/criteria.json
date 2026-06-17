@@ -1,0 +1,21 @@
+{
+  "context": "A tiny feature is split across view/logic/styles/types files. The criteria check whether the answer recognises the over-split smell for an AI-heavy codebase, names the cross-file-context problem, and still preserves genuinely isolatable splits rather than blanket-merging.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "Concludes over-split, consolidate coupled pieces",
+      "description": "Concludes the layout is over-split for an AI-heavy codebase and recommends consolidating the tightly coupled pieces",
+      "max_score": 8
+    },
+    {
+      "name": "Identifies dumb-view-props smell",
+      "description": "Identifies the smell that the view's props are shaped by the sibling logic file, so an agent editing the view lacks context it won't fetch",
+      "max_score": 8
+    },
+    {
+      "name": "Keeps isolatable styles separate",
+      "description": "Keeps genuinely isolatable styles as a defensible separate file rather than blanket-merging everything",
+      "max_score": 6
+    }
+  ]
+}

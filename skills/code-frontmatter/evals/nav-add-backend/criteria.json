@@ -1,0 +1,21 @@
+{
+  "context": "The agent navigates a small documented TypeScript project (mounted at ./code) to find where to add a Postgres storage backend. The criteria check whether it identifies the interface file, the implementation to model on, and the wiring file — ideally from frontmatter headers without reading every file body.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "Names interface file",
+      "description": "Names store.ts as the file defining the interface to implement (LinkStore)",
+      "max_score": 8
+    },
+    {
+      "name": "Names implementation to model on",
+      "description": "Identifies store-redis.ts as the existing implementation to model the new backend on",
+      "max_score": 8
+    },
+    {
+      "name": "Names wiring file",
+      "description": "Identifies server.ts as where the store is constructed/wired up at startup",
+      "max_score": 8
+    }
+  ]
+}

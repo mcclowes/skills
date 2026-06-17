@@ -1,0 +1,41 @@
+{
+  "context": "The user has divergent error shapes between REST responses and webhooks and wants one consistent shape plus a frontend consumption example. The criteria check whether the answer recommends a single shared issues shape, explains why consistency matters, and shows a tolerant React consumption example driven by severity and the parsed code.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "Single shared issues shape",
+      "description": "Recommends one consistent `issues` shape reused across both REST responses and webhook payloads",
+      "max_score": 8
+    },
+    {
+      "name": "Explains consistency principle",
+      "description": "Explains WHY one shape matters — the consumer writes the handling logic once instead of special-casing each channel",
+      "max_score": 6
+    },
+    {
+      "name": "React consumption example",
+      "description": "Provides a concrete React/frontend code example that consumes the unified shape",
+      "max_score": 8
+    },
+    {
+      "name": "Splits errors vs warnings by severity",
+      "description": "The frontend example branches on `severity` to separate errors from warnings/notices",
+      "max_score": 6
+    },
+    {
+      "name": "Surfaces correlationId",
+      "description": "The frontend example surfaces the correlationId (e.g. for support/debugging)",
+      "max_score": 4
+    },
+    {
+      "name": "Tolerates unknown codes",
+      "description": "The consumption approach tolerates unknown/new issue codes gracefully rather than exhaustively switching on a closed set",
+      "max_score": 6
+    },
+    {
+      "name": "Parses class from code",
+      "description": "The frontend derives the issue class from the namespaced code rather than relying on a separate `type` field",
+      "max_score": 8
+    }
+  ]
+}

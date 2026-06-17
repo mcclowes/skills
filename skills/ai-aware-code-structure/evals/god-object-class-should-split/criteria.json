@@ -1,0 +1,26 @@
+{
+  "context": "A 420-line UserService bundles auth, persistence, email, and analytics, defended as 'everything in one place for the agent'. The criteria check whether the answer splits by responsibility on clean seams and pushes back on the misapplied rationale.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "Recommends splitting by responsibility",
+      "description": "Recommends splitting the class by responsibility and does NOT endorse keeping all four concerns in one file",
+      "max_score": 8
+    },
+    {
+      "name": "Identifies independent seams",
+      "description": "Identifies the seams (auth / persistence / email / analytics) as genuinely independent and isolatable",
+      "max_score": 6
+    },
+    {
+      "name": "Ceiling and/or unrelated concerns",
+      "description": "Cites the ~300-line ceiling AND/OR multiple-unrelated-concerns as the reason, not blind line count",
+      "max_score": 6
+    },
+    {
+      "name": "Pushes back on keep-together rationale",
+      "description": "Pushes back on the 'keep everything in one place for the agent' rationale as misapplied to a god object",
+      "max_score": 6
+    }
+  ]
+}

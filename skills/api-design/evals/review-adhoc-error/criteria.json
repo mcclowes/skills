@@ -1,0 +1,51 @@
+{
+  "context": "The user shares an ad-hoc auth error body and asks for a review plus a more consistent, developer-friendly shape. The criteria check whether the response critiques the specific weaknesses of the current shape and recommends the skill's unified issues conventions with a concrete before/after.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "Critiques opaque numeric code",
+      "description": "Identifies that the numeric/opaque `code: 401` and terse `msg` are not developer-friendly or machine-actionable",
+      "max_score": 6
+    },
+    {
+      "name": "Critiques missing debug metadata",
+      "description": "Notes the absence of a correlationId / debuggability and that there is no path forward for the consumer",
+      "max_score": 4
+    },
+    {
+      "name": "Critiques ad-hoc inconsistent shape",
+      "description": "Calls out that the shape is ad-hoc and will not generalise consistently across endpoints",
+      "max_score": 6
+    },
+    {
+      "name": "Recommends unified issues array",
+      "description": "Recommends a unified `issues` array as the consistent shape across all endpoints",
+      "max_score": 8
+    },
+    {
+      "name": "Namespaced code, no separate type",
+      "description": "Recommends a single descriptive namespaced string code ({domain}.{class}.{reason}) with NO separate `type` field",
+      "max_score": 8
+    },
+    {
+      "name": "Includes severity",
+      "description": "The recommended shape includes a `severity` field",
+      "max_score": 4
+    },
+    {
+      "name": "Includes correlationId",
+      "description": "The recommended shape includes a `correlationId`",
+      "max_score": 6
+    },
+    {
+      "name": "Message title and detail",
+      "description": "The recommended shape carries a human-readable message (title and/or detail)",
+      "max_score": 4
+    },
+    {
+      "name": "Concrete before/after",
+      "description": "Shows a concrete before/after example, not just prose recommendations",
+      "max_score": 8
+    }
+  ]
+}

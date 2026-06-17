@@ -1,0 +1,26 @@
+{
+  "context": "A FastAPI orders.py mixes handlers, Pydantic models, SQLAlchemy queries, and discount logic. The criteria check whether the reasoning generalises beyond React, prefers a real abstraction over reflexive splitting, co-locates coupled handler+logic, and applies the isolation/line guidance — without giving React-specific advice.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "Applies to Python, not React-specific",
+      "description": "Applies the reasoning to Python/backend and does NOT give React- or hook-specific advice",
+      "max_score": 8
+    },
+    {
+      "name": "Real abstraction over file split",
+      "description": "Recommends a real abstraction (pure function / service / repository) over reflexive file-splitting",
+      "max_score": 6
+    },
+    {
+      "name": "Co-locate coupled, separate standalone",
+      "description": "Co-locates the tightly coupled handler+logic; separates only cleanly-standalone layers (e.g. discount calc or DB access)",
+      "max_score": 6
+    },
+    {
+      "name": "Isolation test / ~300-line guidance",
+      "description": "Applies the understood-in-isolation test and/or the ~300-line guidance to the module",
+      "max_score": 4
+    }
+  ]
+}

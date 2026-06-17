@@ -1,0 +1,6 @@
+{
+  "description": "Determine rate-limiting scope and implementation in a documented analytics-api",
+  "fixtures": {
+    "codebase": { "type": "directory", "path": "./fixtures/code", "installPath": "code" }
+  }
+}

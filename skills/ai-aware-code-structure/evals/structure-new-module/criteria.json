@@ -1,0 +1,26 @@
+{
+  "context": "A greenfield module with three phases (CSV generation, background job, status polling). The criteria check whether the answer advises starting coarse, co-locating coupled code, reaching for abstractions over file splits, and using a line threshold as the split trigger.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "Start coarser, don't pre-split",
+      "description": "Advises starting coarser / not pre-splitting the three phases into many files up front",
+      "max_score": 8
+    },
+    {
+      "name": "Co-locate coupled job lifecycle",
+      "description": "Recommends co-locating the tightly coupled job lifecycle and polling",
+      "max_score": 6
+    },
+    {
+      "name": "Abstraction over bare file split",
+      "description": "Recommends reaching for an abstraction (well-named function/module with a clear interface) rather than splitting files for their own sake",
+      "max_score": 6
+    },
+    {
+      "name": "~300-line split trigger",
+      "description": "Mentions a ~300-line threshold (or 'a few hundred lines') as the trigger to split",
+      "max_score": 4
+    }
+  ]
+}

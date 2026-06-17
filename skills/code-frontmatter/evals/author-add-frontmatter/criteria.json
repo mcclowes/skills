@@ -1,0 +1,21 @@
+{
+  "context": "The agent adds code-frontmatter headers to an undocumented TypeScript project (mounted at ./code). The criteria check coverage of substantive files, validity of the blocks (parse, purpose present, related paths resolve), and that purposes are specific rather than generic.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "All substantive files covered",
+      "description": "Every substantive source file (codec, store, store-redis, validate, config, shortener, server) gains a frontmatter block",
+      "max_score": 8
+    },
+    {
+      "name": "Blocks are valid",
+      "description": "Each frontmatter block is valid: it parses, has a purpose line, and its `related` paths resolve to real files — it would pass the skill's `validate` script with zero issues",
+      "max_score": 8
+    },
+    {
+      "name": "Purposes accurate and specific",
+      "description": "Purposes are accurate and specific to each file, not generic restatements of the filename",
+      "max_score": 6
+    }
+  ]
+}

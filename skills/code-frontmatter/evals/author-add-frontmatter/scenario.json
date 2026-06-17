@@ -1,0 +1,6 @@
+{
+  "description": "Add valid code-frontmatter headers to a bare (undocumented) url-shortener",
+  "fixtures": {
+    "codebase": { "type": "directory", "path": "./fixtures/code", "installPath": "code" }
+  }
+}

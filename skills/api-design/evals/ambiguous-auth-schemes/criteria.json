@@ -1,0 +1,36 @@
+{
+  "context": "The user has a normal token and a stepped-up token that are technically the same token type but gate different endpoints, and integrators are confused. The criteria check whether the answer models security schemes as discrete named contracts, separates the credential's implementation from the consumer-facing scheme, and treats normal vs stepped-up as functionally different schemes.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "Schemes as discrete named contracts",
+      "description": "Treats security schemes as discrete, named contracts rather than one vague 'API key' instruction",
+      "max_score": 8
+    },
+    {
+      "name": "Endpoint maps to one scheme",
+      "description": "Each endpoint maps to exactly one named scheme that it declares",
+      "max_score": 6
+    },
+    {
+      "name": "Separates credential from scheme",
+      "description": "Separates the credential's implementation (e.g. an API key) from the consumer-facing scheme — makes the API-key-to-header transform explicit",
+      "max_score": 6
+    },
+    {
+      "name": "Normal vs stepped-up are different schemes",
+      "description": "Explains that the normal and stepped-up tokens are functionally different schemes even though technically the same token type",
+      "max_score": 8
+    },
+    {
+      "name": "Each endpoint declares requirement",
+      "description": "Each endpoint declares which scheme (normal vs stepped-up) it requires",
+      "max_score": 6
+    },
+    {
+      "name": "Recommends explicit modelling",
+      "description": "Recommends modelling this explicitly, e.g. OpenAPI named `securitySchemes` plus per-operation `security`",
+      "max_score": 8
+    }
+  ]
+}

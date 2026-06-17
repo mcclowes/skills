@@ -1,0 +1,26 @@
+{
+  "context": "A 550-line helpers.ts holds several unrelated concerns and the user invokes 'big files are fine for agents' to justify leaving it. The criteria check whether the answer recommends splitting on clean concern boundaries and corrects the misapplied defense.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "Recommends splitting",
+      "description": "Clearly recommends splitting the file and does NOT advise keeping it as one file",
+      "max_score": 8
+    },
+    {
+      "name": "Justified by concerns and/or ceiling",
+      "description": "Justifies the split by multiple independent concerns AND/OR exceeding the ~300-line ceiling, not blind line count",
+      "max_score": 6
+    },
+    {
+      "name": "Clean boundaries (isolation test)",
+      "description": "Notes each group (dates/currency/validation/etc.) can be understood in isolation, so the boundaries are clean",
+      "max_score": 6
+    },
+    {
+      "name": "Corrects misapplied defense",
+      "description": "Corrects the 'big files are fine for agents' reasoning — that defense is for one cohesive concern, not a grab-bag",
+      "max_score": 8
+    }
+  ]
+}

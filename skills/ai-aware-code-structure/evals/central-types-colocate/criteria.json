@@ -1,0 +1,26 @@
+{
+  "context": "A 400-line central src/types.ts is imported everywhere, defended as 'single source of truth'. The criteria check whether the answer co-locates types by default, reframes the SoT idea, keeps genuinely shared types central without scattering, and grounds it in the agent skipping the cross-file lookup.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "Co-locate type with owning module",
+      "description": "Recommends co-locating a type with the module that owns it as the default, rather than a central types.ts",
+      "max_score": 8
+    },
+    {
+      "name": "Reframe single source of truth",
+      "description": "Reframes 'single source of truth' as defined-once, not all-in-one-file",
+      "max_score": 6
+    },
+    {
+      "name": "Keep shared types shared, no scattering",
+      "description": "Keeps genuinely shared/global types in a shared or feature-level file and does NOT advise one-type-per-file scattering",
+      "max_score": 6
+    },
+    {
+      "name": "Grounds in skipped cross-file lookup",
+      "description": "Grounds it in the agent skipping the cross-file lookup — the central types file is the sibling it won't open",
+      "max_score": 6
+    }
+  ]
+}

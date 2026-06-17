@@ -1,0 +1,26 @@
+{
+  "context": "An app re-exports everything through reflexive per-folder barrels plus a big aggregator, and edits mostly through AI tools. The criteria check whether the answer drops the reflexive barrels for direct imports, grounds it in agent indirection, preserves a deliberate public-API barrel, and names a concrete secondary cost.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "Drop reflexive barrels for direct imports",
+      "description": "Recommends dropping the reflexive per-folder and big aggregator barrels in favour of direct path imports",
+      "max_score": 8
+    },
+    {
+      "name": "Grounds in agent indirection",
+      "description": "Grounds it in agent indirection: the barrel hides where a symbol lives, so the agent hops through re-exports or guesses the shape",
+      "max_score": 8
+    },
+    {
+      "name": "Keeps deliberate public-API barrel",
+      "description": "Keeps a deliberate barrel only at a real public-API / package boundary and does NOT say delete all barrels indiscriminately",
+      "max_score": 6
+    },
+    {
+      "name": "Names a concrete secondary cost",
+      "description": "Names at least one concrete secondary cost (circular imports, broken tree-shaking, or slow build/test startup)",
+      "max_score": 4
+    }
+  ]
+}

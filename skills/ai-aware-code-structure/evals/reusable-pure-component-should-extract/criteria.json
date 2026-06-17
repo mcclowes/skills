@@ -1,0 +1,26 @@
+{
+  "context": "A pure presentational Avatar is copy-pasted into 12 components, defended as 'self-contained for the agent'. The criteria check whether the answer extracts the shared component, grounds it in the understood-in-isolation test, and rejects the self-containment argument for a reusable primitive.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "Recommends extracting shared Avatar",
+      "description": "Recommends extracting the shared Avatar component rather than keeping 12 inline copies",
+      "max_score": 8
+    },
+    {
+      "name": "Pure-presentation isolation test",
+      "description": "Grounds it in the pure-presentation / understood-in-isolation test (low external context to consume)",
+      "max_score": 6
+    },
+    {
+      "name": "Rejects keep-inline argument",
+      "description": "Rejects the 'keep inline for self-containment' argument as misapplied to a reusable primitive",
+      "max_score": 6
+    },
+    {
+      "name": "Frames as real abstraction",
+      "description": "Frames the shared component as a real abstraction (read at the call site without opening internals), not merely DRY",
+      "max_score": 6
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "context": "The agent traces a short-link visit through a small documented TypeScript project (mounted at ./code). The criteria check whether it follows the request path and correctly locates the click increment in the store layer.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "Traces server then shortener",
+      "description": "Traces the path through server.ts (the GET handler) then shortener.ts (resolve)",
+      "max_score": 8
+    },
+    {
+      "name": "Locates click increment in store",
+      "description": "Correctly locates the click increment in the store layer (incrementClicks in store.ts / store-redis.ts), called from Shortener.resolve",
+      "max_score": 8
+    }
+  ]
+}

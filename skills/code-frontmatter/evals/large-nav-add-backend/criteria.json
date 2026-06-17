@@ -1,0 +1,21 @@
+{
+  "context": "The agent navigates a larger documented analytics-api service (mounted at ./code) to find where to add a DynamoDB backend. This is a broad question frontmatter should answer from headers without reading the whole tree.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "Names interface file",
+      "description": "Names store/store.ts as defining the EventStore interface to implement",
+      "max_score": 8
+    },
+    {
+      "name": "Names template implementation",
+      "description": "Identifies a store-* implementation (e.g. store-postgres.ts) as the template to copy",
+      "max_score": 8
+    },
+    {
+      "name": "Names wiring file",
+      "description": "Identifies server.ts as where the backend is selected/wired at startup",
+      "max_score": 8
+    }
+  ]
+}

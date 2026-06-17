@@ -1,0 +1,6 @@
+{
+  "description": "Trace a short-link click through a documented url-shortener",
+  "fixtures": {
+    "codebase": { "type": "directory", "path": "./fixtures/code", "installPath": "code" }
+  }
+}

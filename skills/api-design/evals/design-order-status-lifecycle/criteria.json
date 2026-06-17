@@ -1,0 +1,51 @@
+{
+  "context": "The user has a flat order status enum where `payment_failed` conflates a state with a failure reason and forces frontend special-casing. The criteria check whether the answer separates event/status/issue, names states for present conditions, and routes recoverable failures back into the state machine rather than treating them as terminal.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "State machine first",
+      "description": "Recommends drawing/modelling the state machine (states and valid transitions) before settling on names",
+      "max_score": 6
+    },
+    {
+      "name": "Separates event, status, issue",
+      "description": "Distinguishes three concepts: the event (what happened), the status (where the resource is), and the issue (why / what to do)",
+      "max_score": 8
+    },
+    {
+      "name": "Events past-tense on envelope",
+      "description": "Events are modelled as past-tense verbs on the webhook envelope (e.g. `order.paid`), distinct from the persistent status",
+      "max_score": 6
+    },
+    {
+      "name": "Status is persistent namespaced string",
+      "description": "Status is a persistent string describing where the resource is (e.g. namespaced `{domain}.{state}`), not the event that just fired",
+      "max_score": 6
+    },
+    {
+      "name": "Flags payment_failed conflation",
+      "description": "Points out that `payment_failed` conflates a state with a failure reason and should be split",
+      "max_score": 8
+    },
+    {
+      "name": "Recoverable failure loops back",
+      "description": "Recommends that a failed payment loop back to a recoverable state (e.g. `unpaid`) rather than being a terminal dead-end",
+      "max_score": 8
+    },
+    {
+      "name": "States name present condition",
+      "description": "States are named for the present condition of the resource, explicitly avoiding `pending` and `requires_*` style next-step names",
+      "max_score": 8
+    },
+    {
+      "name": "Enum vs parseable string trade-off",
+      "description": "Discusses the trade-off between a closed enum and a parseable namespaced string for the status field",
+      "max_score": 4
+    },
+    {
+      "name": "Shared grammar with issue codes",
+      "description": "Notes the status grammar shares a structure with issue codes (a coherent naming system)",
+      "max_score": 4
+    }
+  ]
+}

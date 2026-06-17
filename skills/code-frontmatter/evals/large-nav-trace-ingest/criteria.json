@@ -1,0 +1,21 @@
+{
+  "context": "The agent traces the POST /v1/events ingestion path through a larger documented analytics-api service (mounted at ./code), a broad trace spanning many files. The criteria check the entry path, validation location, and storage write.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "Traces ingest entry path",
+      "description": "Traces routes/ingest.ts -> services/ingestion.ts as the entry path",
+      "max_score": 8
+    },
+    {
+      "name": "Locates validation",
+      "description": "Locates validation in services/ingestion.ts via lib/validate.ts",
+      "max_score": 8
+    },
+    {
+      "name": "Locates storage write",
+      "description": "Locates the write at EventStore.insert in the selected store implementation",
+      "max_score": 8
+    }
+  ]
+}

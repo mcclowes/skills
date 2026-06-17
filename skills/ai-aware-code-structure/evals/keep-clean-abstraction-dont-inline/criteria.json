@@ -1,0 +1,26 @@
+{
+  "context": "A clean, typed, tested, 6-times-reused calculatePrice function is proposed for inlining 'so the agent sees it all'. The criteria check whether the answer keeps the abstraction, grounds it in the abstraction-over-file-structure heuristic, and rejects the over-rotated inline argument.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "Recommends keeping the file",
+      "description": "Recommends keeping calculatePrice as its own file and rejects inlining it into the component",
+      "max_score": 8
+    },
+    {
+      "name": "Abstraction-over-structure heuristic",
+      "description": "Grounds it in the abstraction-over-file-structure heuristic (clean typed interface, hides implementation)",
+      "max_score": 6
+    },
+    {
+      "name": "Typed call site, no internals needed",
+      "description": "Notes the agent uses the typed call site without needing the internals (understood in isolation)",
+      "max_score": 6
+    },
+    {
+      "name": "Rejects inline-so-agent-sees-it argument",
+      "description": "Rejects the 'inline so Claude sees it all' argument for a clean, reused, tested abstraction",
+      "max_score": 6
+    }
+  ]
+}

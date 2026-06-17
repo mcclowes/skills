@@ -1,0 +1,16 @@
+{
+  "context": "The agent determines the rate-limiting scope and locates its implementation in a documented analytics-api service (mounted at ./code). This is a pinpoint single-file question.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "States per-API-key scope",
+      "description": "States that rate limiting is per-API-key (a token bucket keyed by API key), not global",
+      "max_score": 8
+    },
+    {
+      "name": "Identifies implementation file",
+      "description": "Identifies middleware/rateLimit.ts as the implementation",
+      "max_score": 8
+    }
+  ]
+}

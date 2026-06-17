@@ -1,0 +1,41 @@
+{
+  "context": "The user proposes `kyb.review` as a status that is both a leaf value and a parent of `kyb.review.approved`/`kyb.review.rejected`, for a dashboard whose job is to show who owns the next move. The criteria check whether the answer flags the parent-as-both-leaf-and-container problem and chooses the segment axis to match the dashboard's actual job.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "Flags bare parent used as leaf and container",
+      "description": "Flags that `kyb.review` used as BOTH a leaf status AND a container with children (approved/rejected) breaks prefix matching",
+      "max_score": 8
+    },
+    {
+      "name": "Parent must be pure container or flat leaf",
+      "description": "States the rule: a parent segment must be a pure container (every state carries a leaf) OR a flat state with no children — never both",
+      "max_score": 8
+    },
+    {
+      "name": "Worst when children terminal",
+      "description": "Notes this is worst when the children are terminal outcomes",
+      "max_score": 4
+    },
+    {
+      "name": "Middle segment is a chosen axis",
+      "description": "Explains that the middle segment is an axis you choose deliberately, not an incidental grouping",
+      "max_score": 6
+    },
+    {
+      "name": "Group by actor for the dashboard's job",
+      "description": "Recommends grouping by actor (e.g. awaiting_user vs in_review/awaiting_us) because the dashboard's job is 'who owns the next move'",
+      "max_score": 8
+    },
+    {
+      "name": "Enables one-segment prefix match",
+      "description": "Notes the actor-axis grouping makes the dashboard query a one-segment prefix match",
+      "max_score": 6
+    },
+    {
+      "name": "States name present conditions",
+      "description": "Resulting states are named for present conditions",
+      "max_score": 4
+    }
+  ]
+}

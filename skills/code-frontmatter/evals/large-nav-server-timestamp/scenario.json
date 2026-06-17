@@ -1,0 +1,6 @@
+{
+  "description": "Find the server-side timestamp-override rule in a documented analytics-api",
+  "fixtures": {
+    "codebase": { "type": "directory", "path": "./fixtures/code", "installPath": "code" }
+  }
+}

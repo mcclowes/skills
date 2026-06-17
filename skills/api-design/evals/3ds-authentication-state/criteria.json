@@ -1,0 +1,36 @@
+{
+  "context": "The user wants to copy Stripe's `requires_action` status to model a 3DS challenge pause. The criteria check whether the answer pushes back on next-step status naming, recommends a present-condition status, and routes the actionable challenge into an issue rather than the status field.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "Pushes back on requires_action/pending",
+      "description": "Pushes back on `requires_action` / `pending` as status names because they describe the consumer's next step (future tense) rather than the resource's present condition",
+      "max_score": 8
+    },
+    {
+      "name": "Recommends present-condition status",
+      "description": "Recommends a present-condition status name (e.g. `authentication_required`) describing what the resource currently is/lacks",
+      "max_score": 8
+    },
+    {
+      "name": "Leads with the missing thing",
+      "description": "Names the state by leading with the missing thing (e.g. `authentication_required`) rather than `requires_authentication`",
+      "max_score": 6
+    },
+    {
+      "name": "Actionable part in an issue",
+      "description": "Puts the actionable part (the challenge link / do-this) in an issue, not in the status field",
+      "max_score": 8
+    },
+    {
+      "name": "Failure loops back",
+      "description": "Notes that failure should loop back to a recoverable state rather than be terminal",
+      "max_score": 6
+    },
+    {
+      "name": "Parseable string over brittle enum",
+      "description": "May suggest a parseable `{domain}.{state}` string instead of a brittle closed enum",
+      "max_score": 4
+    }
+  ]
+}

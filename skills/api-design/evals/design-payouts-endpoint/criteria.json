@@ -1,0 +1,51 @@
+{
+  "context": "The user asks for the JSON error response body for a payouts endpoint with three distinct failure modes (expired bank token, daily limit exceeded, third-party vendor rejection). The criteria check whether the design follows the skill's error-handling conventions — a unified issues array, namespaced string codes with no separate type field, correlation metadata, and a dedicated structure for third-party errors — without those conventions being stated in the task.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "Unified issues array",
+      "description": "The response uses a single `issues` array with one entry per failure, not separate `errors`/`warnings` arrays or a single top-level error object",
+      "max_score": 8
+    },
+    {
+      "name": "Namespaced dot-string issue codes",
+      "description": "Each issue carries a single namespaced code in `{domain}.{class}.{reason}` form (e.g. `payout.unauthorized.token_expired`), not numeric or flat strings",
+      "max_score": 8
+    },
+    {
+      "name": "No separate type field",
+      "description": "Issue objects do NOT include a separate `type` field alongside the namespaced `code` — the class is parsed from the code itself",
+      "max_score": 8
+    },
+    {
+      "name": "Severity present",
+      "description": "Each issue includes a `severity` field (e.g. error/warning)",
+      "max_score": 6
+    },
+    {
+      "name": "correlationId present",
+      "description": "The response includes a `correlationId` for debugging",
+      "max_score": 6
+    },
+    {
+      "name": "Timestamp present",
+      "description": "The response includes a `dateTime`/timestamp field",
+      "max_score": 4
+    },
+    {
+      "name": "Third-party error surfaced via object",
+      "description": "The Sequra (vendor) rejection is surfaced via a dedicated `thirdParty` object that carries the vendor's own code, rather than being flattened into the top-level issue code",
+      "max_score": 8
+    },
+    {
+      "name": "Descriptive string codes not numeric",
+      "description": "Codes are descriptive strings, not opaque numeric codes",
+      "max_score": 6
+    },
+    {
+      "name": "Message and links where useful",
+      "description": "Issues include a human-readable `message` and/or `links` for at least some failures",
+      "max_score": 4
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+# Structure a new data-export module
+
+I'm starting a new data-export module from scratch in our Next.js app — it'll handle generating CSVs, kicking off a background job, and polling for status. How should I organise the files so it's easy for both me and Claude to work in?
