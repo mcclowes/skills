@@ -1,0 +1,9 @@
+{
+  "name": "mcclowes/writing-style",
+  "description": "Max's house writing style and grammar for any prose you generate for him - docs, READMEs, PR descriptions, commit messages, Slack, emails, code comments, error messages, blog posts, and replies in chat. Use this whenever you are writing or editing English prose meant for Max or sent on his behalf, even when he doesn't explicitly ask for a particular style. Apply it by default to anything wordier than a one-line answer; favour warm-but-blunt, concise writing, US English, sentence case, the Oxford comma, and zero AI jargon. Do not use it for code itself, config, or data formats.",
+  "private": true,
+  "skills": [
+    "."
+  ],
+  "version": "0.1.0"
+}

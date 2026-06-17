@@ -1,0 +1,9 @@
+{
+  "name": "mcclowes/api-design",
+  "description": "Use when designing, reviewing, or implementing HTTP APIs — error and warning handling, resource state and lifecycle, read-endpoint structure, pagination, and authentication. Triggers on error responses and formats, response envelopes, webhook payloads, how an endpoint should fail; modelling a resource lifecycle (status fields, state machines, webhook event names, enum vs parseable string); structuring read endpoints (screen-shaped/BFF vs canonical resource, aggregation, cursor vs offset pagination); and auth design (security schemes, API keys vs bearer tokens, stepped-up tokens). Apply whenever an API surfaces a failure, state change, view of data, or auth requirement to a client.",
+  "private": true,
+  "skills": [
+    "."
+  ],
+  "version": "0.1.0"
+}

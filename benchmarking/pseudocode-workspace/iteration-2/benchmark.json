@@ -1,0 +1,2039 @@
+{
+  "skill": "pseudocode",
+  "iteration": "iteration-2",
+  "total_runs": 135,
+  "buckets": {
+    "lcb": {
+      "label": "LiveCodeBench hard (stdio)",
+      "arms": {
+        "A_direct": {
+          "n": 33,
+          "base": 0.8787878787878788,
+          "plus": 0.8484848484848485,
+          "edge_gap": 0.030303030303030276,
+          "words": null,
+          "missing": 0
+        },
+        "B_pseudocode": {
+          "n": 33,
+          "base": 0.9090909090909091,
+          "plus": 0.8484848484848485,
+          "edge_gap": 0.06060606060606055,
+          "words": 509.6363636363636,
+          "missing": 0
+        },
+        "C_prose": {
+          "n": 33,
+          "base": 0.9090909090909091,
+          "plus": 0.8181818181818182,
+          "edge_gap": 0.09090909090909083,
+          "words": 355.1818181818182,
+          "missing": 0
+        }
+      }
+    },
+    "novel": {
+      "label": "Novel contamination-free (functional)",
+      "arms": {
+        "A_direct": {
+          "n": 12,
+          "base": 1.0,
+          "plus": 1.0,
+          "edge_gap": 0.0,
+          "words": null,
+          "missing": 0
+        },
+        "B_pseudocode": {
+          "n": 12,
+          "base": 1.0,
+          "plus": 1.0,
+          "edge_gap": 0.0,
+          "words": 318.25,
+          "missing": 0
+        },
+        "C_prose": {
+          "n": 12,
+          "base": 1.0,
+          "plus": 1.0,
+          "edge_gap": 0.0,
+          "words": 288.5,
+          "missing": 0
+        }
+      }
+    },
+    "all": {
+      "label": "All tasks",
+      "arms": {
+        "A_direct": {
+          "n": 45,
+          "base": 0.9111111111111111,
+          "plus": 0.8888888888888888,
+          "edge_gap": 0.022222222222222254,
+          "words": null,
+          "missing": 0
+        },
+        "B_pseudocode": {
+          "n": 45,
+          "base": 0.9333333333333333,
+          "plus": 0.8888888888888888,
+          "edge_gap": 0.04444444444444451,
+          "words": 458.6,
+          "missing": 0
+        },
+        "C_prose": {
+          "n": 45,
+          "base": 0.9333333333333333,
+          "plus": 0.8666666666666667,
+          "edge_gap": 0.06666666666666665,
+          "words": 337.4,
+          "missing": 0
+        }
+      }
+    }
+  },
+  "lint_health": {
+    "present": 45,
+    "of": 45,
+    "lint_pass": 16,
+    "mean_code_tells": 0.8444444444444444
+  },
+  "per_task_plus_pass": {
+    "lcb/abc325_d": {
+      "source": "livecodebench",
+      "A_direct": 1.0,
+      "B_pseudocode": 1.0,
+      "C_prose": 1.0
+    },
+    "lcb/abc325_e": {
+      "source": "livecodebench",
+      "A_direct": 0.6666666666666666,
+      "B_pseudocode": 1.0,
+      "C_prose": 1.0
+    },
+    "lcb/abc324_d": {
+      "source": "livecodebench",
+      "A_direct": 0.6666666666666666,
+      "B_pseudocode": 1.0,
+      "C_prose": 1.0
+    },
+    "lcb/abc324_e": {
+      "source": "livecodebench",
+      "A_direct": 1.0,
+      "B_pseudocode": 1.0,
+      "C_prose": 1.0
+    },
+    "lcb/abc323_d": {
+      "source": "livecodebench",
+      "A_direct": 1.0,
+      "B_pseudocode": 1.0,
+      "C_prose": 1.0
+    },
+    "lcb/abc323_e": {
+      "source": "livecodebench",
+      "A_direct": 1.0,
+      "B_pseudocode": 1.0,
+      "C_prose": 1.0
+    },
+    "lcb/abc322_e": {
+      "source": "livecodebench",
+      "A_direct": 1.0,
+      "B_pseudocode": 1.0,
+      "C_prose": 1.0
+    },
+    "lcb/abc320_e": {
+      "source": "livecodebench",
+      "A_direct": 1.0,
+      "B_pseudocode": 1.0,
+      "C_prose": 1.0
+    },
+    "lcb/abc319_e": {
+      "source": "livecodebench",
+      "A_direct": 1.0,
+      "B_pseudocode": 0.3333333333333333,
+      "C_prose": 0.0
+    },
+    "lcb/abc318_e": {
+      "source": "livecodebench",
+      "A_direct": 1.0,
+      "B_pseudocode": 1.0,
+      "C_prose": 1.0
+    },
+    "lcb/abc315_e": {
+      "source": "livecodebench",
+      "A_direct": 0.0,
+      "B_pseudocode": 0.0,
+      "C_prose": 0.0
+    },
+    "novel/token_bucket": {
+      "source": "novel",
+      "A_direct": 1.0,
+      "B_pseudocode": 1.0,
+      "C_prose": 1.0
+    },
+    "novel/elo_swing": {
+      "source": "novel",
+      "A_direct": 1.0,
+      "B_pseudocode": 1.0,
+      "C_prose": 1.0
+    },
+    "novel/eval_expr": {
+      "source": "novel",
+      "A_direct": 1.0,
+      "B_pseudocode": 1.0,
+      "C_prose": 1.0
+    },
+    "novel/merge_weighted_intervals": {
+      "source": "novel",
+      "A_direct": 1.0,
+      "B_pseudocode": 1.0,
+      "C_prose": 1.0
+    }
+  },
+  "runs": [
+    {
+      "task_id": "lcb/abc325_d",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "A_direct",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "lcb/abc325_d",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "A_direct",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "lcb/abc325_d",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "A_direct",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "lcb/abc325_d",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "B_pseudocode",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "code_tells": 0,
+        "sections": 4
+      },
+      "artifact_words": 620
+    },
+    {
+      "task_id": "lcb/abc325_d",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "B_pseudocode",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "code_tells": 1,
+        "sections": 4
+      },
+      "artifact_words": 732
+    },
+    {
+      "task_id": "lcb/abc325_d",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "B_pseudocode",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "code_tells": 0,
+        "sections": 4
+      },
+      "artifact_words": 614
+    },
+    {
+      "task_id": "lcb/abc325_d",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "C_prose",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 426
+    },
+    {
+      "task_id": "lcb/abc325_d",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "C_prose",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 378
+    },
+    {
+      "task_id": "lcb/abc325_d",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "C_prose",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 395
+    },
+    {
+      "task_id": "lcb/abc325_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "A_direct",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "lcb/abc325_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "A_direct",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": false,
+      "missing": false
+    },
+    {
+      "task_id": "lcb/abc325_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "A_direct",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "lcb/abc325_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "B_pseudocode",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "code_tells": 0,
+        "sections": 4
+      },
+      "artifact_words": 430
+    },
+    {
+      "task_id": "lcb/abc325_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "B_pseudocode",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "code_tells": 0,
+        "sections": 4
+      },
+      "artifact_words": 667
+    },
+    {
+      "task_id": "lcb/abc325_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "B_pseudocode",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "code_tells": 4,
+        "sections": 4
+      },
+      "artifact_words": 415
+    },
+    {
+      "task_id": "lcb/abc325_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "C_prose",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 313
+    },
+    {
+      "task_id": "lcb/abc325_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "C_prose",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 326
+    },
+    {
+      "task_id": "lcb/abc325_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "C_prose",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 358
+    },
+    {
+      "task_id": "lcb/abc324_d",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "A_direct",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "lcb/abc324_d",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "A_direct",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "lcb/abc324_d",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "A_direct",
+      "run": "run-3",
+      "base_pass": false,
+      "plus_pass": false,
+      "missing": false
+    },
+    {
+      "task_id": "lcb/abc324_d",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "B_pseudocode",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "code_tells": 2,
+        "sections": 4
+      },
+      "artifact_words": 537
+    },
+    {
+      "task_id": "lcb/abc324_d",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "B_pseudocode",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "code_tells": 0,
+        "sections": 4
+      },
+      "artifact_words": 440
+    },
+    {
+      "task_id": "lcb/abc324_d",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "B_pseudocode",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "code_tells": 1,
+        "sections": 4
+      },
+      "artifact_words": 422
+    },
+    {
+      "task_id": "lcb/abc324_d",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "C_prose",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 368
+    },
+    {
+      "task_id": "lcb/abc324_d",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "C_prose",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 377
+    },
+    {
+      "task_id": "lcb/abc324_d",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "C_prose",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 330
+    },
+    {
+      "task_id": "lcb/abc324_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "A_direct",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "lcb/abc324_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "A_direct",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "lcb/abc324_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "A_direct",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "lcb/abc324_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "B_pseudocode",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "code_tells": 1,
+        "sections": 4
+      },
+      "artifact_words": 712
+    },
+    {
+      "task_id": "lcb/abc324_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "B_pseudocode",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "code_tells": 2,
+        "sections": 4
+      },
+      "artifact_words": 479
+    },
+    {
+      "task_id": "lcb/abc324_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "B_pseudocode",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "code_tells": 0,
+        "sections": 4
+      },
+      "artifact_words": 506
+    },
+    {
+      "task_id": "lcb/abc324_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "C_prose",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 366
+    },
+    {
+      "task_id": "lcb/abc324_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "C_prose",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 375
+    },
+    {
+      "task_id": "lcb/abc324_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "C_prose",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 421
+    },
+    {
+      "task_id": "lcb/abc323_d",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "A_direct",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "lcb/abc323_d",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "A_direct",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "lcb/abc323_d",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "A_direct",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "lcb/abc323_d",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "B_pseudocode",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "code_tells": 2,
+        "sections": 4
+      },
+      "artifact_words": 482
+    },
+    {
+      "task_id": "lcb/abc323_d",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "B_pseudocode",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "code_tells": 1,
+        "sections": 4
+      },
+      "artifact_words": 649
+    },
+    {
+      "task_id": "lcb/abc323_d",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "B_pseudocode",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "code_tells": 3,
+        "sections": 4
+      },
+      "artifact_words": 591
+    },
+    {
+      "task_id": "lcb/abc323_d",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "C_prose",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 460
+    },
+    {
+      "task_id": "lcb/abc323_d",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "C_prose",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 386
+    },
+    {
+      "task_id": "lcb/abc323_d",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "C_prose",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 355
+    },
+    {
+      "task_id": "lcb/abc323_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "A_direct",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "lcb/abc323_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "A_direct",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "lcb/abc323_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "A_direct",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "lcb/abc323_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "B_pseudocode",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "code_tells": 1,
+        "sections": 4
+      },
+      "artifact_words": 405
+    },
+    {
+      "task_id": "lcb/abc323_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "B_pseudocode",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "code_tells": 2,
+        "sections": 4
+      },
+      "artifact_words": 485
+    },
+    {
+      "task_id": "lcb/abc323_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "B_pseudocode",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "code_tells": 0,
+        "sections": 4
+      },
+      "artifact_words": 660
+    },
+    {
+      "task_id": "lcb/abc323_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "C_prose",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 328
+    },
+    {
+      "task_id": "lcb/abc323_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "C_prose",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 413
+    },
+    {
+      "task_id": "lcb/abc323_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "C_prose",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 325
+    },
+    {
+      "task_id": "lcb/abc322_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "A_direct",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "lcb/abc322_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "A_direct",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "lcb/abc322_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "A_direct",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "lcb/abc322_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "B_pseudocode",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "code_tells": 0,
+        "sections": 4
+      },
+      "artifact_words": 378
+    },
+    {
+      "task_id": "lcb/abc322_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "B_pseudocode",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "code_tells": 0,
+        "sections": 4
+      },
+      "artifact_words": 401
+    },
+    {
+      "task_id": "lcb/abc322_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "B_pseudocode",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "code_tells": 0,
+        "sections": 4
+      },
+      "artifact_words": 394
+    },
+    {
+      "task_id": "lcb/abc322_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "C_prose",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 342
+    },
+    {
+      "task_id": "lcb/abc322_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "C_prose",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 305
+    },
+    {
+      "task_id": "lcb/abc322_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "C_prose",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 359
+    },
+    {
+      "task_id": "lcb/abc320_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "A_direct",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "lcb/abc320_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "A_direct",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "lcb/abc320_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "A_direct",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "lcb/abc320_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "B_pseudocode",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "code_tells": 0,
+        "sections": 4
+      },
+      "artifact_words": 505
+    },
+    {
+      "task_id": "lcb/abc320_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "B_pseudocode",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "code_tells": 0,
+        "sections": 4
+      },
+      "artifact_words": 424
+    },
+    {
+      "task_id": "lcb/abc320_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "B_pseudocode",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "code_tells": 1,
+        "sections": 4
+      },
+      "artifact_words": 442
+    },
+    {
+      "task_id": "lcb/abc320_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "C_prose",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 320
+    },
+    {
+      "task_id": "lcb/abc320_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "C_prose",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 289
+    },
+    {
+      "task_id": "lcb/abc320_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "C_prose",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 291
+    },
+    {
+      "task_id": "lcb/abc319_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "A_direct",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "lcb/abc319_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "A_direct",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "lcb/abc319_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "A_direct",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "lcb/abc319_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "B_pseudocode",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "code_tells": 7,
+        "sections": 4
+      },
+      "artifact_words": 587
+    },
+    {
+      "task_id": "lcb/abc319_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "B_pseudocode",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": false,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "code_tells": 1,
+        "sections": 4
+      },
+      "artifact_words": 545
+    },
+    {
+      "task_id": "lcb/abc319_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "B_pseudocode",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": false,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "code_tells": 0,
+        "sections": 4
+      },
+      "artifact_words": 424
+    },
+    {
+      "task_id": "lcb/abc319_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "C_prose",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": false,
+      "missing": false,
+      "artifact_words": 326
+    },
+    {
+      "task_id": "lcb/abc319_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "C_prose",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": false,
+      "missing": false,
+      "artifact_words": 309
+    },
+    {
+      "task_id": "lcb/abc319_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "C_prose",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": false,
+      "missing": false,
+      "artifact_words": 395
+    },
+    {
+      "task_id": "lcb/abc318_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "A_direct",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "lcb/abc318_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "A_direct",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "lcb/abc318_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "A_direct",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "lcb/abc318_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "B_pseudocode",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "code_tells": 1,
+        "sections": 4
+      },
+      "artifact_words": 585
+    },
+    {
+      "task_id": "lcb/abc318_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "B_pseudocode",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "code_tells": 1,
+        "sections": 4
+      },
+      "artifact_words": 589
+    },
+    {
+      "task_id": "lcb/abc318_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "B_pseudocode",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "code_tells": 2,
+        "sections": 4
+      },
+      "artifact_words": 347
+    },
+    {
+      "task_id": "lcb/abc318_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "C_prose",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 429
+    },
+    {
+      "task_id": "lcb/abc318_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "C_prose",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 325
+    },
+    {
+      "task_id": "lcb/abc318_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "C_prose",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 344
+    },
+    {
+      "task_id": "lcb/abc315_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "A_direct",
+      "run": "run-1",
+      "base_pass": false,
+      "plus_pass": false,
+      "missing": false
+    },
+    {
+      "task_id": "lcb/abc315_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "A_direct",
+      "run": "run-2",
+      "base_pass": false,
+      "plus_pass": false,
+      "missing": false
+    },
+    {
+      "task_id": "lcb/abc315_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "A_direct",
+      "run": "run-3",
+      "base_pass": false,
+      "plus_pass": false,
+      "missing": false
+    },
+    {
+      "task_id": "lcb/abc315_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "B_pseudocode",
+      "run": "run-1",
+      "base_pass": false,
+      "plus_pass": false,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "code_tells": 0,
+        "sections": 4
+      },
+      "artifact_words": 400
+    },
+    {
+      "task_id": "lcb/abc315_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "B_pseudocode",
+      "run": "run-2",
+      "base_pass": false,
+      "plus_pass": false,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "code_tells": 1,
+        "sections": 4
+      },
+      "artifact_words": 335
+    },
+    {
+      "task_id": "lcb/abc315_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "B_pseudocode",
+      "run": "run-3",
+      "base_pass": false,
+      "plus_pass": false,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "code_tells": 1,
+        "sections": 4
+      },
+      "artifact_words": 616
+    },
+    {
+      "task_id": "lcb/abc315_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "C_prose",
+      "run": "run-1",
+      "base_pass": false,
+      "plus_pass": false,
+      "missing": false,
+      "artifact_words": 307
+    },
+    {
+      "task_id": "lcb/abc315_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "C_prose",
+      "run": "run-2",
+      "base_pass": false,
+      "plus_pass": false,
+      "missing": false,
+      "artifact_words": 344
+    },
+    {
+      "task_id": "lcb/abc315_e",
+      "tier": "H",
+      "source": "livecodebench",
+      "harness": "stdio",
+      "arm": "C_prose",
+      "run": "run-3",
+      "base_pass": false,
+      "plus_pass": false,
+      "missing": false,
+      "artifact_words": 336
+    },
+    {
+      "task_id": "novel/token_bucket",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "A_direct",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "novel/token_bucket",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "A_direct",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "novel/token_bucket",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "A_direct",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "novel/token_bucket",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "B_pseudocode",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "code_tells": 0,
+        "sections": 4
+      },
+      "artifact_words": 261
+    },
+    {
+      "task_id": "novel/token_bucket",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "B_pseudocode",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "code_tells": 1,
+        "sections": 4
+      },
+      "artifact_words": 290
+    },
+    {
+      "task_id": "novel/token_bucket",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "B_pseudocode",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "code_tells": 1,
+        "sections": 4
+      },
+      "artifact_words": 376
+    },
+    {
+      "task_id": "novel/token_bucket",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "C_prose",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 257
+    },
+    {
+      "task_id": "novel/token_bucket",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "C_prose",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 317
+    },
+    {
+      "task_id": "novel/token_bucket",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "C_prose",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 292
+    },
+    {
+      "task_id": "novel/elo_swing",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "A_direct",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "novel/elo_swing",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "A_direct",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "novel/elo_swing",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "A_direct",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "novel/elo_swing",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "B_pseudocode",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "code_tells": 0,
+        "sections": 3
+      },
+      "artifact_words": 191
+    },
+    {
+      "task_id": "novel/elo_swing",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "B_pseudocode",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "code_tells": 0,
+        "sections": 3
+      },
+      "artifact_words": 203
+    },
+    {
+      "task_id": "novel/elo_swing",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "B_pseudocode",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "code_tells": 0,
+        "sections": 3
+      },
+      "artifact_words": 198
+    },
+    {
+      "task_id": "novel/elo_swing",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "C_prose",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 275
+    },
+    {
+      "task_id": "novel/elo_swing",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "C_prose",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 310
+    },
+    {
+      "task_id": "novel/elo_swing",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "C_prose",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 235
+    },
+    {
+      "task_id": "novel/eval_expr",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "A_direct",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "novel/eval_expr",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "A_direct",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "novel/eval_expr",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "A_direct",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "novel/eval_expr",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "B_pseudocode",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "code_tells": 0,
+        "sections": 4
+      },
+      "artifact_words": 379
+    },
+    {
+      "task_id": "novel/eval_expr",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "B_pseudocode",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "code_tells": 0,
+        "sections": 4
+      },
+      "artifact_words": 392
+    },
+    {
+      "task_id": "novel/eval_expr",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "B_pseudocode",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "code_tells": 1,
+        "sections": 4
+      },
+      "artifact_words": 383
+    },
+    {
+      "task_id": "novel/eval_expr",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "C_prose",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 264
+    },
+    {
+      "task_id": "novel/eval_expr",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "C_prose",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 245
+    },
+    {
+      "task_id": "novel/eval_expr",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "C_prose",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 256
+    },
+    {
+      "task_id": "novel/merge_weighted_intervals",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "A_direct",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "novel/merge_weighted_intervals",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "A_direct",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "novel/merge_weighted_intervals",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "A_direct",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "novel/merge_weighted_intervals",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "B_pseudocode",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "code_tells": 0,
+        "sections": 4
+      },
+      "artifact_words": 314
+    },
+    {
+      "task_id": "novel/merge_weighted_intervals",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "B_pseudocode",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "code_tells": 0,
+        "sections": 4
+      },
+      "artifact_words": 402
+    },
+    {
+      "task_id": "novel/merge_weighted_intervals",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "B_pseudocode",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "code_tells": 0,
+        "sections": 4
+      },
+      "artifact_words": 430
+    },
+    {
+      "task_id": "novel/merge_weighted_intervals",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "C_prose",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 325
+    },
+    {
+      "task_id": "novel/merge_weighted_intervals",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "C_prose",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 355
+    },
+    {
+      "task_id": "novel/merge_weighted_intervals",
+      "tier": "H",
+      "source": "novel",
+      "harness": "functional",
+      "arm": "C_prose",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 331
+    }
+  ]
+}

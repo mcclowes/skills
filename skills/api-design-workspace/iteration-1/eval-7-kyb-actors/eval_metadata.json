@@ -1,0 +1,11 @@
+{
+  "eval_id": 7,
+  "eval_name": "kyb-actors",
+  "prompt": "We're modelling a business onboarding (KYB) flow as a status field. The applicant fills in disclosures (which can be not started, partially done, or complete), then we review it (which is either in progress, approved, or rejected). Sometimes the ball is in the applicant's court, sometimes in ours. Our dashboard's main job is showing our ops team which applications are waiting on us vs waiting on the customer. I was thinking statuses like `kyb.review` for in-review and `kyb.review.approved` / `kyb.review.rejected` for the outcomes. Does that work?",
+  "assertions": [
+    {"text": "Flags that a bare kyb.review parent that also has children breaks prefix matching — a parent must be a pure container or a flat value, never both"},
+    {"text": "Recommends every state under review carry a leaf (e.g. review.in_progress / review.approved / review.rejected), no bare parent, especially because the children are terminal"},
+    {"text": "Explains the middle segment is a chooseable axis and recommends grouping by actor (who owns the next move) because that's the dashboard's job"},
+    {"text": "Names states for present conditions"}
+  ]
+}

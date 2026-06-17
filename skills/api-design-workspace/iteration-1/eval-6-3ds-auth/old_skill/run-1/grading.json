@@ -1,0 +1,30 @@
+{
+  "expectations": [
+    {
+      "text": "Pushes back on requires_action / pending as status names because they name the consumer's next step (future tense) not the resource's present condition",
+      "passed": false,
+      "evidence": "Endorses it: 'Your instinct to add requires_action is right... Yes to requires_action \u2014 it names the obligation, which is the whole point.'"
+    },
+    {
+      "text": "Recommends a present-condition status such as authentication_required, leading with the missing thing rather than requires_authentication",
+      "passed": false,
+      "evidence": "Recommends charge.requires_action.three_d_secure; never proposes authentication_required."
+    },
+    {
+      "text": "Puts the actionable part (the challenge link / do-this) in an issue, not in the status",
+      "passed": true,
+      "evidence": "Carries challenge URL in an issue or next_action sibling, not baked into status string."
+    },
+    {
+      "text": "Notes failure should loop back to a recoverable state rather than being terminal",
+      "passed": true,
+      "evidence": "Treats requires_action as a non-terminal detour; failed/abandoned challenge loops back to pending."
+    }
+  ],
+  "summary": {
+    "pass_rate": 0.5,
+    "passed": 2,
+    "failed": 2,
+    "total": 4
+  }
+}

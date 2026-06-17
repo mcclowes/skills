@@ -1,0 +1,37 @@
+name: tessl-publish
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "skills/**"
+      - ".github/workflows/tessl-publish.yml"
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        skill:
+          - skills/ai-aware-code-structure
+          - skills/api-design
+          - skills/code-frontmatter
+          - skills/language-design
+          - skills/react-compound-components
+          - skills/writing-style
+          - skills/pseudocode
+    defaults:
+      run:
+        working-directory: ${{ matrix.skill }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: tesslio/setup-tessl@v2
+        with:
+          token: ${{ secrets.TESSL_TOKEN }}
+      - run: tessl skill lint
+      - run: tessl skill publish --bump patch

@@ -1,0 +1,30 @@
+{
+  "expectations": [
+    {
+      "text": "Flags that a bare kyb.review parent that also has children breaks prefix matching \u2014 a parent must be a pure container or a flat value, never both",
+      "passed": true,
+      "evidence": "'a parent segment is either a container or a value, never both'; startsWith('kyb.review') can't separate in-review from approved."
+    },
+    {
+      "text": "Recommends every state under review carry a leaf (e.g. review.in_progress / review.approved / review.rejected), no bare parent, especially because the children are terminal",
+      "passed": true,
+      "evidence": "Gives review.in_progress/approved/rejected; notes it's worst because children are terminal."
+    },
+    {
+      "text": "Explains the middle segment is a chooseable axis and recommends grouping by actor (who owns the next move) because that's the dashboard's job",
+      "passed": true,
+      "evidence": "'the middle segment is an axis, not a fixed slot'; recommends actor axis kyb.awaiting_customer / kyb.in_review since dashboard tracks whose court."
+    },
+    {
+      "text": "Names states for present conditions",
+      "passed": true,
+      "evidence": "not_started/incomplete/in_progress, 'never pending/requires_x'."
+    }
+  ],
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 4,
+    "failed": 0,
+    "total": 4
+  }
+}

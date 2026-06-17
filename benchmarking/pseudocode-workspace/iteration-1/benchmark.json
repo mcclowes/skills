@@ -1,0 +1,1858 @@
+{
+  "skill": "pseudocode",
+  "iteration": "iteration-1",
+  "total_runs": 135,
+  "summary": {
+    "A_direct|H": {
+      "arm": "A_direct",
+      "tier": "H",
+      "n": 39,
+      "base_pass": 1.0,
+      "base_sd": 0.0,
+      "plus_pass": 0.9743589743589743,
+      "plus_sd": 0.15806189751202504,
+      "edge_gap": 0.02564102564102566,
+      "mean_artifact_words": null,
+      "missing": 0
+    },
+    "A_direct|L": {
+      "arm": "A_direct",
+      "tier": "L",
+      "n": 6,
+      "base_pass": 1.0,
+      "base_sd": 0.0,
+      "plus_pass": 1.0,
+      "plus_sd": 0.0,
+      "edge_gap": 0.0,
+      "mean_artifact_words": null,
+      "missing": 0
+    },
+    "B_pseudocode|H": {
+      "arm": "B_pseudocode",
+      "tier": "H",
+      "n": 39,
+      "base_pass": 1.0,
+      "base_sd": 0.0,
+      "plus_pass": 1.0,
+      "plus_sd": 0.0,
+      "edge_gap": 0.0,
+      "mean_artifact_words": 257.97435897435895,
+      "missing": 0
+    },
+    "B_pseudocode|L": {
+      "arm": "B_pseudocode",
+      "tier": "L",
+      "n": 6,
+      "base_pass": 1.0,
+      "base_sd": 0.0,
+      "plus_pass": 1.0,
+      "plus_sd": 0.0,
+      "edge_gap": 0.0,
+      "mean_artifact_words": 47.5,
+      "missing": 0
+    },
+    "C_prose|H": {
+      "arm": "C_prose",
+      "tier": "H",
+      "n": 39,
+      "base_pass": 1.0,
+      "base_sd": 0.0,
+      "plus_pass": 1.0,
+      "plus_sd": 0.0,
+      "edge_gap": 0.0,
+      "mean_artifact_words": 280.71794871794873,
+      "missing": 0
+    },
+    "C_prose|L": {
+      "arm": "C_prose",
+      "tier": "L",
+      "n": 6,
+      "base_pass": 1.0,
+      "base_sd": 0.0,
+      "plus_pass": 1.0,
+      "plus_sd": 0.0,
+      "edge_gap": 0.0,
+      "mean_artifact_words": 238.83333333333334,
+      "missing": 0
+    }
+  },
+  "lint_health": {
+    "artifacts_present": 41,
+    "of_total": 45,
+    "lint_pass": 27,
+    "mean_code_tells": 0.12195121951219512
+  },
+  "per_task_plus_pass": {
+    "HumanEval/108": {
+      "tier": "H",
+      "A_direct": 1.0,
+      "B_pseudocode": 1.0,
+      "C_prose": 1.0
+    },
+    "HumanEval/109": {
+      "tier": "H",
+      "A_direct": 1.0,
+      "B_pseudocode": 1.0,
+      "C_prose": 1.0
+    },
+    "HumanEval/126": {
+      "tier": "H",
+      "A_direct": 1.0,
+      "B_pseudocode": 1.0,
+      "C_prose": 1.0
+    },
+    "HumanEval/129": {
+      "tier": "H",
+      "A_direct": 1.0,
+      "B_pseudocode": 1.0,
+      "C_prose": 1.0
+    },
+    "HumanEval/147": {
+      "tier": "H",
+      "A_direct": 1.0,
+      "B_pseudocode": 1.0,
+      "C_prose": 1.0
+    },
+    "HumanEval/160": {
+      "tier": "H",
+      "A_direct": 1.0,
+      "B_pseudocode": 1.0,
+      "C_prose": 1.0
+    },
+    "HumanEval/100": {
+      "tier": "H",
+      "A_direct": 1.0,
+      "B_pseudocode": 1.0,
+      "C_prose": 1.0
+    },
+    "HumanEval/163": {
+      "tier": "H",
+      "A_direct": 0.6666666666666666,
+      "B_pseudocode": 1.0,
+      "C_prose": 1.0
+    },
+    "HumanEval/115": {
+      "tier": "H",
+      "A_direct": 1.0,
+      "B_pseudocode": 1.0,
+      "C_prose": 1.0
+    },
+    "HumanEval/23": {
+      "tier": "L",
+      "A_direct": 1.0,
+      "B_pseudocode": 1.0,
+      "C_prose": 1.0
+    },
+    "HumanEval/53": {
+      "tier": "L",
+      "A_direct": 1.0,
+      "B_pseudocode": 1.0,
+      "C_prose": 1.0
+    },
+    "novel/token_bucket": {
+      "tier": "H",
+      "A_direct": 1.0,
+      "B_pseudocode": 1.0,
+      "C_prose": 1.0
+    },
+    "novel/elo_swing": {
+      "tier": "H",
+      "A_direct": 1.0,
+      "B_pseudocode": 1.0,
+      "C_prose": 1.0
+    },
+    "novel/eval_expr": {
+      "tier": "H",
+      "A_direct": 1.0,
+      "B_pseudocode": 1.0,
+      "C_prose": 1.0
+    },
+    "novel/merge_weighted_intervals": {
+      "tier": "H",
+      "A_direct": 1.0,
+      "B_pseudocode": 1.0,
+      "C_prose": 1.0
+    }
+  },
+  "runs": [
+    {
+      "task_id": "HumanEval/108",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "HumanEval/108",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "HumanEval/108",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "HumanEval/108",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "sections": 4,
+        "code_tells": 0,
+        "lines": 24,
+        "problems": []
+      },
+      "artifact_words": 188
+    },
+    {
+      "task_id": "HumanEval/108",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "sections": 4,
+        "code_tells": 0,
+        "lines": 34,
+        "problems": []
+      },
+      "artifact_words": 277
+    },
+    {
+      "task_id": "HumanEval/108",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "sections": 4,
+        "code_tells": 1,
+        "lines": 26,
+        "problems": [
+          "1 code-collapse tell(s) \u2014 not language-agnostic"
+        ]
+      },
+      "artifact_words": 226
+    },
+    {
+      "task_id": "HumanEval/108",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 277
+    },
+    {
+      "task_id": "HumanEval/108",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 263
+    },
+    {
+      "task_id": "HumanEval/108",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 244
+    },
+    {
+      "task_id": "HumanEval/109",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "HumanEval/109",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "HumanEval/109",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "HumanEval/109",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "sections": 4,
+        "code_tells": 0,
+        "lines": 26,
+        "problems": []
+      },
+      "artifact_words": 251
+    },
+    {
+      "task_id": "HumanEval/109",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "sections": 4,
+        "code_tells": 0,
+        "lines": 27,
+        "problems": []
+      },
+      "artifact_words": 221
+    },
+    {
+      "task_id": "HumanEval/109",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "sections": 4,
+        "code_tells": 0,
+        "lines": 23,
+        "problems": []
+      },
+      "artifact_words": 211
+    },
+    {
+      "task_id": "HumanEval/109",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 278
+    },
+    {
+      "task_id": "HumanEval/109",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 292
+    },
+    {
+      "task_id": "HumanEval/109",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 311
+    },
+    {
+      "task_id": "HumanEval/126",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "HumanEval/126",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "HumanEval/126",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "HumanEval/126",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "sections": 4,
+        "code_tells": 0,
+        "lines": 23,
+        "problems": []
+      },
+      "artifact_words": 201
+    },
+    {
+      "task_id": "HumanEval/126",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "sections": 4,
+        "code_tells": 1,
+        "lines": 20,
+        "problems": [
+          "1 code-collapse tell(s) \u2014 not language-agnostic"
+        ]
+      },
+      "artifact_words": 182
+    },
+    {
+      "task_id": "HumanEval/126",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "sections": 4,
+        "code_tells": 0,
+        "lines": 25,
+        "problems": []
+      },
+      "artifact_words": 191
+    },
+    {
+      "task_id": "HumanEval/126",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 270
+    },
+    {
+      "task_id": "HumanEval/126",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 254
+    },
+    {
+      "task_id": "HumanEval/126",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 305
+    },
+    {
+      "task_id": "HumanEval/129",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "HumanEval/129",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "HumanEval/129",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "HumanEval/129",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "sections": 4,
+        "code_tells": 0,
+        "lines": 24,
+        "problems": []
+      },
+      "artifact_words": 340
+    },
+    {
+      "task_id": "HumanEval/129",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "sections": 4,
+        "code_tells": 0,
+        "lines": 29,
+        "problems": []
+      },
+      "artifact_words": 295
+    },
+    {
+      "task_id": "HumanEval/129",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "sections": 3,
+        "code_tells": 0,
+        "lines": 38,
+        "problems": [
+          "missing sections: edge_cases"
+        ]
+      },
+      "artifact_words": 427
+    },
+    {
+      "task_id": "HumanEval/129",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 313
+    },
+    {
+      "task_id": "HumanEval/129",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 275
+    },
+    {
+      "task_id": "HumanEval/129",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 289
+    },
+    {
+      "task_id": "HumanEval/147",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "HumanEval/147",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "HumanEval/147",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "HumanEval/147",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "sections": 3,
+        "code_tells": 0,
+        "lines": 30,
+        "problems": [
+          "missing sections: edge_cases"
+        ]
+      },
+      "artifact_words": 315
+    },
+    {
+      "task_id": "HumanEval/147",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "sections": 3,
+        "code_tells": 0,
+        "lines": 37,
+        "problems": [
+          "missing sections: edge_cases"
+        ]
+      },
+      "artifact_words": 350
+    },
+    {
+      "task_id": "HumanEval/147",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "sections": 3,
+        "code_tells": 0,
+        "lines": 22,
+        "problems": [
+          "missing sections: edge_cases"
+        ]
+      },
+      "artifact_words": 235
+    },
+    {
+      "task_id": "HumanEval/147",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 262
+    },
+    {
+      "task_id": "HumanEval/147",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 297
+    },
+    {
+      "task_id": "HumanEval/147",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 284
+    },
+    {
+      "task_id": "HumanEval/160",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "HumanEval/160",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "HumanEval/160",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "HumanEval/160",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "sections": 3,
+        "code_tells": 0,
+        "lines": 24,
+        "problems": [
+          "missing sections: edge_cases"
+        ]
+      },
+      "artifact_words": 179
+    },
+    {
+      "task_id": "HumanEval/160",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "sections": 4,
+        "code_tells": 0,
+        "lines": 28,
+        "problems": []
+      },
+      "artifact_words": 284
+    },
+    {
+      "task_id": "HumanEval/160",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "sections": 4,
+        "code_tells": 0,
+        "lines": 25,
+        "problems": []
+      },
+      "artifact_words": 215
+    },
+    {
+      "task_id": "HumanEval/160",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 272
+    },
+    {
+      "task_id": "HumanEval/160",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 239
+    },
+    {
+      "task_id": "HumanEval/160",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 254
+    },
+    {
+      "task_id": "HumanEval/100",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "HumanEval/100",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "HumanEval/100",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "HumanEval/100",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "sections": 4,
+        "code_tells": 0,
+        "lines": 16,
+        "problems": []
+      },
+      "artifact_words": 142
+    },
+    {
+      "task_id": "HumanEval/100",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "sections": 4,
+        "code_tells": 0,
+        "lines": 18,
+        "problems": []
+      },
+      "artifact_words": 120
+    },
+    {
+      "task_id": "HumanEval/100",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "sections": 3,
+        "code_tells": 0,
+        "lines": 15,
+        "problems": [
+          "missing sections: edge_cases"
+        ]
+      },
+      "artifact_words": 130
+    },
+    {
+      "task_id": "HumanEval/100",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 295
+    },
+    {
+      "task_id": "HumanEval/100",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 270
+    },
+    {
+      "task_id": "HumanEval/100",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 291
+    },
+    {
+      "task_id": "HumanEval/163",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "HumanEval/163",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": false,
+      "missing": false
+    },
+    {
+      "task_id": "HumanEval/163",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "HumanEval/163",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "sections": 4,
+        "code_tells": 0,
+        "lines": 20,
+        "problems": []
+      },
+      "artifact_words": 190
+    },
+    {
+      "task_id": "HumanEval/163",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "sections": 4,
+        "code_tells": 0,
+        "lines": 23,
+        "problems": []
+      },
+      "artifact_words": 183
+    },
+    {
+      "task_id": "HumanEval/163",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "sections": 4,
+        "code_tells": 0,
+        "lines": 21,
+        "problems": []
+      },
+      "artifact_words": 215
+    },
+    {
+      "task_id": "HumanEval/163",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 280
+    },
+    {
+      "task_id": "HumanEval/163",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 281
+    },
+    {
+      "task_id": "HumanEval/163",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 278
+    },
+    {
+      "task_id": "HumanEval/115",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "HumanEval/115",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "HumanEval/115",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "HumanEval/115",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "sections": 4,
+        "code_tells": 0,
+        "lines": 23,
+        "problems": []
+      },
+      "artifact_words": 193
+    },
+    {
+      "task_id": "HumanEval/115",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "sections": 4,
+        "code_tells": 0,
+        "lines": 22,
+        "problems": []
+      },
+      "artifact_words": 151
+    },
+    {
+      "task_id": "HumanEval/115",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "sections": 4,
+        "code_tells": 0,
+        "lines": 28,
+        "problems": []
+      },
+      "artifact_words": 229
+    },
+    {
+      "task_id": "HumanEval/115",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 272
+    },
+    {
+      "task_id": "HumanEval/115",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 276
+    },
+    {
+      "task_id": "HumanEval/115",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 311
+    },
+    {
+      "task_id": "HumanEval/23",
+      "tier": "L",
+      "arm": "A_direct",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "HumanEval/23",
+      "tier": "L",
+      "arm": "A_direct",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "HumanEval/23",
+      "tier": "L",
+      "arm": "A_direct",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "HumanEval/23",
+      "tier": "L",
+      "arm": "B_pseudocode",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "sections": 2,
+        "code_tells": 0,
+        "lines": 3,
+        "problems": [
+          "missing sections: data_and_invariants, control_flow",
+          "only 3 lines; too thin to be a plan"
+        ]
+      },
+      "artifact_words": 45
+    },
+    {
+      "task_id": "HumanEval/23",
+      "tier": "L",
+      "arm": "B_pseudocode",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": false,
+        "passed": false
+      },
+      "artifact_words": 0
+    },
+    {
+      "task_id": "HumanEval/23",
+      "tier": "L",
+      "arm": "B_pseudocode",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "sections": 3,
+        "code_tells": 0,
+        "lines": 3,
+        "problems": [
+          "missing sections: control_flow",
+          "only 3 lines; too thin to be a plan"
+        ]
+      },
+      "artifact_words": 50
+    },
+    {
+      "task_id": "HumanEval/23",
+      "tier": "L",
+      "arm": "C_prose",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 221
+    },
+    {
+      "task_id": "HumanEval/23",
+      "tier": "L",
+      "arm": "C_prose",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 231
+    },
+    {
+      "task_id": "HumanEval/23",
+      "tier": "L",
+      "arm": "C_prose",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 249
+    },
+    {
+      "task_id": "HumanEval/53",
+      "tier": "L",
+      "arm": "A_direct",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "HumanEval/53",
+      "tier": "L",
+      "arm": "A_direct",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "HumanEval/53",
+      "tier": "L",
+      "arm": "A_direct",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "HumanEval/53",
+      "tier": "L",
+      "arm": "B_pseudocode",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": false,
+        "passed": false
+      },
+      "artifact_words": 0
+    },
+    {
+      "task_id": "HumanEval/53",
+      "tier": "L",
+      "arm": "B_pseudocode",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": false,
+        "passed": false
+      },
+      "artifact_words": 0
+    },
+    {
+      "task_id": "HumanEval/53",
+      "tier": "L",
+      "arm": "B_pseudocode",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": false,
+        "passed": false
+      },
+      "artifact_words": 0
+    },
+    {
+      "task_id": "HumanEval/53",
+      "tier": "L",
+      "arm": "C_prose",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 244
+    },
+    {
+      "task_id": "HumanEval/53",
+      "tier": "L",
+      "arm": "C_prose",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 240
+    },
+    {
+      "task_id": "HumanEval/53",
+      "tier": "L",
+      "arm": "C_prose",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 248
+    },
+    {
+      "task_id": "novel/token_bucket",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "novel/token_bucket",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "novel/token_bucket",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "novel/token_bucket",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "sections": 4,
+        "code_tells": 0,
+        "lines": 45,
+        "problems": []
+      },
+      "artifact_words": 414
+    },
+    {
+      "task_id": "novel/token_bucket",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "sections": 4,
+        "code_tells": 0,
+        "lines": 38,
+        "problems": []
+      },
+      "artifact_words": 282
+    },
+    {
+      "task_id": "novel/token_bucket",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "sections": 4,
+        "code_tells": 0,
+        "lines": 39,
+        "problems": []
+      },
+      "artifact_words": 335
+    },
+    {
+      "task_id": "novel/token_bucket",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 277
+    },
+    {
+      "task_id": "novel/token_bucket",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 287
+    },
+    {
+      "task_id": "novel/token_bucket",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 284
+    },
+    {
+      "task_id": "novel/elo_swing",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "novel/elo_swing",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "novel/elo_swing",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "novel/elo_swing",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "sections": 4,
+        "code_tells": 0,
+        "lines": 27,
+        "problems": []
+      },
+      "artifact_words": 229
+    },
+    {
+      "task_id": "novel/elo_swing",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "sections": 3,
+        "code_tells": 0,
+        "lines": 26,
+        "problems": [
+          "missing sections: edge_cases"
+        ]
+      },
+      "artifact_words": 206
+    },
+    {
+      "task_id": "novel/elo_swing",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "sections": 3,
+        "code_tells": 0,
+        "lines": 24,
+        "problems": [
+          "missing sections: edge_cases"
+        ]
+      },
+      "artifact_words": 185
+    },
+    {
+      "task_id": "novel/elo_swing",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 285
+    },
+    {
+      "task_id": "novel/elo_swing",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 255
+    },
+    {
+      "task_id": "novel/elo_swing",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 283
+    },
+    {
+      "task_id": "novel/eval_expr",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "novel/eval_expr",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "novel/eval_expr",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "novel/eval_expr",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "sections": 4,
+        "code_tells": 0,
+        "lines": 42,
+        "problems": []
+      },
+      "artifact_words": 385
+    },
+    {
+      "task_id": "novel/eval_expr",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "sections": 4,
+        "code_tells": 0,
+        "lines": 60,
+        "problems": []
+      },
+      "artifact_words": 442
+    },
+    {
+      "task_id": "novel/eval_expr",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "sections": 4,
+        "code_tells": 0,
+        "lines": 47,
+        "problems": []
+      },
+      "artifact_words": 393
+    },
+    {
+      "task_id": "novel/eval_expr",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 258
+    },
+    {
+      "task_id": "novel/eval_expr",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 279
+    },
+    {
+      "task_id": "novel/eval_expr",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 266
+    },
+    {
+      "task_id": "novel/merge_weighted_intervals",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "novel/merge_weighted_intervals",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "novel/merge_weighted_intervals",
+      "tier": "H",
+      "arm": "A_direct",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false
+    },
+    {
+      "task_id": "novel/merge_weighted_intervals",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": true,
+        "sections": 4,
+        "code_tells": 0,
+        "lines": 36,
+        "problems": []
+      },
+      "artifact_words": 320
+    },
+    {
+      "task_id": "novel/merge_weighted_intervals",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "sections": 4,
+        "code_tells": 1,
+        "lines": 46,
+        "problems": [
+          "1 code-collapse tell(s) \u2014 not language-agnostic"
+        ]
+      },
+      "artifact_words": 375
+    },
+    {
+      "task_id": "novel/merge_weighted_intervals",
+      "tier": "H",
+      "arm": "B_pseudocode",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "lint": {
+        "present": true,
+        "passed": false,
+        "sections": 4,
+        "code_tells": 2,
+        "lines": 38,
+        "problems": [
+          "2 code-collapse tell(s) \u2014 not language-agnostic"
+        ]
+      },
+      "artifact_words": 354
+    },
+    {
+      "task_id": "novel/merge_weighted_intervals",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-1",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 340
+    },
+    {
+      "task_id": "novel/merge_weighted_intervals",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-2",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 307
+    },
+    {
+      "task_id": "novel/merge_weighted_intervals",
+      "tier": "H",
+      "arm": "C_prose",
+      "run": "run-3",
+      "base_pass": true,
+      "plus_pass": true,
+      "missing": false,
+      "artifact_words": 294
+    }
+  ]
+}

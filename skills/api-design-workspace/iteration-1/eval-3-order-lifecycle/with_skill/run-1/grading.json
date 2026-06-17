@@ -1,0 +1,30 @@
+{
+  "expectations": [
+    {
+      "text": "Separates event (past-tense verb on webhook) from status (persistent state) from issue (why / what to do)",
+      "passed": true,
+      "evidence": "Explicit three-carrier split: event order.payment_failed, status order.unpaid, issue payment.declined.insufficient_funds."
+    },
+    {
+      "text": "Names states for the present condition, NOT the obligation/next step \u2014 does not recommend pending or requires_* as status names",
+      "passed": true,
+      "evidence": "Uses order.unpaid and states 'never what's owed next (unpaid, not awaiting_payment or requires_payment)'. No pending status."
+    },
+    {
+      "text": "Says failure should loop back to a recoverable state rather than a terminal payment_failed",
+      "passed": true,
+      "evidence": "'delete payment_failed as a status value'; failed payment returns order to order.unpaid; two edges (unpaid vs canceled)."
+    },
+    {
+      "text": "Recommends a dot-separated {domain}.{state} parseable string and discusses the enum-vs-string trade-off",
+      "passed": true,
+      "evidence": "Dedicated enum-vs-parseable-string section, split('.') prefix matching, 'make the same choice for the issue codes'."
+    }
+  ],
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 4,
+    "failed": 0,
+    "total": 4
+  }
+}

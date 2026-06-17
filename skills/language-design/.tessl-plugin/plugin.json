@@ -1,0 +1,9 @@
+{
+  "name": "mcclowes/language-design",
+  "description": "Use when designing language features - covers lexer, parser, AST, and interpreter patterns",
+  "private": true,
+  "skills": [
+    "."
+  ],
+  "version": "0.1.0"
+}

@@ -1,0 +1,30 @@
+{
+  "expectations": [
+    {
+      "text": "Pushes back on requires_action / pending as status names because they name the consumer's next step (future tense) not the resource's present condition",
+      "passed": true,
+      "evidence": "'don't add requires_action. It's the classic trap \u2014 it names the consumer's to-do list... the future tense in a status field.' Also flags pending as non-discriminating."
+    },
+    {
+      "text": "Recommends a present-condition status such as authentication_required, leading with the missing thing rather than requires_authentication",
+      "passed": true,
+      "evidence": "status charge.authentication_required; 'authentication_required reads as a condition... Lead with the missing thing.'"
+    },
+    {
+      "text": "Puts the actionable part (the challenge link / do-this) in an issue, not in the status",
+      "passed": true,
+      "evidence": "Challenge URL in issue links.api; 'the instruction lives in the layer designed for instructions.'"
+    },
+    {
+      "text": "Notes failure should loop back to a recoverable state rather than being terminal",
+      "passed": true,
+      "evidence": "Failed/abandoned challenge returns to charge.unpaid, not terminal failed; reserve failed for retries exhausted."
+    }
+  ],
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 4,
+    "failed": 0,
+    "total": 4
+  }
+}

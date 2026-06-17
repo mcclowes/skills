@@ -1,0 +1,11 @@
+{
+  "eval_id": 6,
+  "eval_name": "3ds-auth",
+  "prompt": "We have a payments API and we're adding 3D Secure. When a charge needs the cardholder to complete a 3DS challenge, the payment pauses until they do it. I was going to add a `requires_action` status (copying Stripe) and have the frontend check for it to know when to pop the challenge. The status field is currently an enum: `pending`, `succeeded`, `failed`. How should I model the 3DS-pause state and tell the frontend to show the challenge?",
+  "assertions": [
+    {"text": "Pushes back on requires_action / pending as status names because they name the consumer's next step (future tense) not the resource's present condition"},
+    {"text": "Recommends a present-condition status such as authentication_required, leading with the missing thing rather than requires_authentication"},
+    {"text": "Puts the actionable part (the challenge link / do-this) in an issue, not in the status"},
+    {"text": "Notes failure should loop back to a recoverable state rather than being terminal"}
+  ]
+}

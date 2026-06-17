@@ -1,0 +1,30 @@
+{
+  "expectations": [
+    {
+      "text": "Separates event (past-tense verb on webhook) from status (persistent state) from issue (why / what to do)",
+      "passed": true,
+      "evidence": "Three-carrier split present: event order.payment_failed, status order.pending.payment, issue."
+    },
+    {
+      "text": "Names states for the present condition, NOT the obligation/next step \u2014 does not recommend pending or requires_* as status names",
+      "passed": false,
+      "evidence": "Recommends order.pending.payment and explicitly states 'Name states by what's needed next, not by where they sit in the lifecycle. pending.payment tells the consumer a payment is owed' \u2014 the reversed (old) advice."
+    },
+    {
+      "text": "Says failure should loop back to a recoverable state rather than a terminal payment_failed",
+      "passed": true,
+      "evidence": "Self-loop on pending_payment; no terminal payment_failed."
+    },
+    {
+      "text": "Recommends a dot-separated {domain}.{state} parseable string and discusses the enum-vs-string trade-off",
+      "passed": true,
+      "evidence": "Enum-vs-string section, prefix matching, decide once for status and issue codes."
+    }
+  ],
+  "summary": {
+    "pass_rate": 0.75,
+    "passed": 3,
+    "failed": 1,
+    "total": 4
+  }
+}

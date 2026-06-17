@@ -1,0 +1,293 @@
+{
+  "metadata": {
+    "skill_name": "api-design",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-06-04T23:06:53Z",
+    "evals_run": [
+      3,
+      6,
+      7
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 3,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "time_seconds": 80.7,
+        "tokens": 35414,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Separates event (past-tense verb on webhook) from status (persistent state) from issue (why / what to do)",
+          "passed": true,
+          "evidence": "Three-carrier split present: event order.payment_failed, status order.pending.payment, issue."
+        },
+        {
+          "text": "Names states for the present condition, NOT the obligation/next step \u2014 does not recommend pending or requires_* as status names",
+          "passed": false,
+          "evidence": "Recommends order.pending.payment and explicitly states 'Name states by what's needed next, not by where they sit in the lifecycle. pending.payment tells the consumer a payment is owed' \u2014 the reversed (old) advice."
+        },
+        {
+          "text": "Says failure should loop back to a recoverable state rather than a terminal payment_failed",
+          "passed": true,
+          "evidence": "Self-loop on pending_payment; no terminal payment_failed."
+        },
+        {
+          "text": "Recommends a dot-separated {domain}.{state} parseable string and discusses the enum-vs-string trade-off",
+          "passed": true,
+          "evidence": "Enum-vs-string section, prefix matching, decide once for status and issue codes."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 6,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 2,
+        "failed": 2,
+        "total": 4,
+        "time_seconds": 87.4,
+        "tokens": 36401,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Pushes back on requires_action / pending as status names because they name the consumer's next step (future tense) not the resource's present condition",
+          "passed": false,
+          "evidence": "Endorses it: 'Your instinct to add requires_action is right... Yes to requires_action \u2014 it names the obligation, which is the whole point.'"
+        },
+        {
+          "text": "Recommends a present-condition status such as authentication_required, leading with the missing thing rather than requires_authentication",
+          "passed": false,
+          "evidence": "Recommends charge.requires_action.three_d_secure; never proposes authentication_required."
+        },
+        {
+          "text": "Puts the actionable part (the challenge link / do-this) in an issue, not in the status",
+          "passed": true,
+          "evidence": "Carries challenge URL in an issue or next_action sibling, not baked into status string."
+        },
+        {
+          "text": "Notes failure should loop back to a recoverable state rather than being terminal",
+          "passed": true,
+          "evidence": "Treats requires_action as a non-terminal detour; failed/abandoned challenge loops back to pending."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.25,
+        "passed": 1,
+        "failed": 3,
+        "total": 4,
+        "time_seconds": 86.9,
+        "tokens": 34241,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Flags that a bare kyb.review parent that also has children breaks prefix matching \u2014 a parent must be a pure container or a flat value, never both",
+          "passed": false,
+          "evidence": "Reframes approved/rejected as outcomes/events and lifts them to top-level kyb.approved/kyb.rejected, but never articulates the prefix-matching break or the container-or-value rule."
+        },
+        {
+          "text": "Recommends every state under review carry a leaf (e.g. review.in_progress / review.approved / review.rejected), no bare parent, especially because the children are terminal",
+          "passed": false,
+          "evidence": "Removes approved/rejected from under review entirely rather than giving the in-progress state its own leaf; solves differently, doesn't state the rule."
+        },
+        {
+          "text": "Explains the middle segment is a chooseable axis and recommends grouping by actor (who owns the next move) because that's the dashboard's job",
+          "passed": false,
+          "evidence": "Arrives at actor-style naming (kyb.awaiting_applicant / kyb.in_review) via 'name states by the obligation they imply', but never explains the middle segment as a chooseable axis."
+        },
+        {
+          "text": "Names states for present conditions",
+          "passed": true,
+          "evidence": "awaiting_applicant / in_review are present-tense actor states; though it explicitly endorses 'name by obligation, not where they sit'."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 95.7,
+        "tokens": 41398,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Separates event (past-tense verb on webhook) from status (persistent state) from issue (why / what to do)",
+          "passed": true,
+          "evidence": "Explicit three-carrier split: event order.payment_failed, status order.unpaid, issue payment.declined.insufficient_funds."
+        },
+        {
+          "text": "Names states for the present condition, NOT the obligation/next step \u2014 does not recommend pending or requires_* as status names",
+          "passed": true,
+          "evidence": "Uses order.unpaid and states 'never what's owed next (unpaid, not awaiting_payment or requires_payment)'. No pending status."
+        },
+        {
+          "text": "Says failure should loop back to a recoverable state rather than a terminal payment_failed",
+          "passed": true,
+          "evidence": "'delete payment_failed as a status value'; failed payment returns order to order.unpaid; two edges (unpaid vs canceled)."
+        },
+        {
+          "text": "Recommends a dot-separated {domain}.{state} parseable string and discusses the enum-vs-string trade-off",
+          "passed": true,
+          "evidence": "Dedicated enum-vs-parseable-string section, split('.') prefix matching, 'make the same choice for the issue codes'."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 6,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 87.0,
+        "tokens": 40401,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Pushes back on requires_action / pending as status names because they name the consumer's next step (future tense) not the resource's present condition",
+          "passed": true,
+          "evidence": "'don't add requires_action. It's the classic trap \u2014 it names the consumer's to-do list... the future tense in a status field.' Also flags pending as non-discriminating."
+        },
+        {
+          "text": "Recommends a present-condition status such as authentication_required, leading with the missing thing rather than requires_authentication",
+          "passed": true,
+          "evidence": "status charge.authentication_required; 'authentication_required reads as a condition... Lead with the missing thing.'"
+        },
+        {
+          "text": "Puts the actionable part (the challenge link / do-this) in an issue, not in the status",
+          "passed": true,
+          "evidence": "Challenge URL in issue links.api; 'the instruction lives in the layer designed for instructions.'"
+        },
+        {
+          "text": "Notes failure should loop back to a recoverable state rather than being terminal",
+          "passed": true,
+          "evidence": "Failed/abandoned challenge returns to charge.unpaid, not terminal failed; reserve failed for retries exhausted."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 83.0,
+        "tokens": 36475,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Flags that a bare kyb.review parent that also has children breaks prefix matching \u2014 a parent must be a pure container or a flat value, never both",
+          "passed": true,
+          "evidence": "'a parent segment is either a container or a value, never both'; startsWith('kyb.review') can't separate in-review from approved."
+        },
+        {
+          "text": "Recommends every state under review carry a leaf (e.g. review.in_progress / review.approved / review.rejected), no bare parent, especially because the children are terminal",
+          "passed": true,
+          "evidence": "Gives review.in_progress/approved/rejected; notes it's worst because children are terminal."
+        },
+        {
+          "text": "Explains the middle segment is a chooseable axis and recommends grouping by actor (who owns the next move) because that's the dashboard's job",
+          "passed": true,
+          "evidence": "'the middle segment is an axis, not a fixed slot'; recommends actor axis kyb.awaiting_customer / kyb.in_review since dashboard tracks whose court."
+        },
+        {
+          "text": "Names states for present conditions",
+          "passed": true,
+          "evidence": "not_started/incomplete/in_progress, 'never pending/requires_x'."
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "old_skill": {
+      "pass_rate": {
+        "mean": 0.5,
+        "stddev": 0.25,
+        "min": 0.25,
+        "max": 0.75
+      },
+      "time_seconds": {
+        "mean": 85.0,
+        "stddev": 3.7323,
+        "min": 80.7,
+        "max": 87.4
+      },
+      "tokens": {
+        "mean": 35352.0,
+        "stddev": 1081.3339,
+        "min": 34241,
+        "max": 36401
+      }
+    },
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 88.5667,
+        "stddev": 6.4933,
+        "min": 83.0,
+        "max": 95.7
+      },
+      "tokens": {
+        "mean": 39424.6667,
+        "stddev": 2602.6722,
+        "min": 36475,
+        "max": 41398
+      }
+    },
+    "delta": {
+      "pass_rate": "-0.50",
+      "time_seconds": "-3.6",
+      "tokens": "-4073"
+    }
+  },
+  "notes": []
+}

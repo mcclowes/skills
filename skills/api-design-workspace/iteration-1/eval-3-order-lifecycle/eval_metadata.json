@@ -1,0 +1,11 @@
+{
+  "eval_id": 3,
+  "eval_name": "order-lifecycle",
+  "prompt": "We're modelling the lifecycle of an order in our API. Right now we have a single `status` string that can be `created`, `paid`, `payment_failed`, `shipped`, or `delivered`, and we fire a webhook on every change. But a failed payment can be retried, and the frontend keeps having to special-case `payment_failed` to know what to show the user and whether they can try again. How should we model and name the order's states and the events?",
+  "assertions": [
+    {"text": "Separates event (past-tense verb on webhook) from status (persistent state) from issue (why / what to do)"},
+    {"text": "Names states for the present condition, NOT the obligation/next step — does not recommend pending or requires_* as status names"},
+    {"text": "Says failure should loop back to a recoverable state rather than a terminal payment_failed"},
+    {"text": "Recommends a dot-separated {domain}.{state} parseable string and discusses the enum-vs-string trade-off"}
+  ]
+}

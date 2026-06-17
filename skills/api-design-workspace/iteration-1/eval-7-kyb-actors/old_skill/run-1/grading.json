@@ -1,0 +1,30 @@
+{
+  "expectations": [
+    {
+      "text": "Flags that a bare kyb.review parent that also has children breaks prefix matching \u2014 a parent must be a pure container or a flat value, never both",
+      "passed": false,
+      "evidence": "Reframes approved/rejected as outcomes/events and lifts them to top-level kyb.approved/kyb.rejected, but never articulates the prefix-matching break or the container-or-value rule."
+    },
+    {
+      "text": "Recommends every state under review carry a leaf (e.g. review.in_progress / review.approved / review.rejected), no bare parent, especially because the children are terminal",
+      "passed": false,
+      "evidence": "Removes approved/rejected from under review entirely rather than giving the in-progress state its own leaf; solves differently, doesn't state the rule."
+    },
+    {
+      "text": "Explains the middle segment is a chooseable axis and recommends grouping by actor (who owns the next move) because that's the dashboard's job",
+      "passed": false,
+      "evidence": "Arrives at actor-style naming (kyb.awaiting_applicant / kyb.in_review) via 'name states by the obligation they imply', but never explains the middle segment as a chooseable axis."
+    },
+    {
+      "text": "Names states for present conditions",
+      "passed": true,
+      "evidence": "awaiting_applicant / in_review are present-tense actor states; though it explicitly endorses 'name by obligation, not where they sit'."
+    }
+  ],
+  "summary": {
+    "pass_rate": 0.25,
+    "passed": 1,
+    "failed": 3,
+    "total": 4
+  }
+}
