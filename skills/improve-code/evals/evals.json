@@ -1,0 +1,64 @@
+{
+  "skill_name": "improve-code",
+  "evals": [
+    {
+      "id": 0,
+      "name": "broad-review-routes-findings",
+      "prompt": "Review this checkout feature for code-quality improvements. It repeats status checks, duplicates a fee formula, mixes API calls with rendering, and contains an unexplained 86400.",
+      "expected_output": "Reviews all four lenses, ranks concrete findings, and applies the matching specialist guidance without editing.",
+      "files": [],
+      "assertions": [
+        {"text": "Covers branching, duplication, responsibilities, and the hidden value"},
+        {"text": "Ranks findings by impact or confidence"},
+        {"text": "Does not edit because the request says review"}
+      ]
+    },
+    {
+      "id": 1,
+      "name": "cohesive-code-left-alone",
+      "prompt": "Clean up this cohesive 180-line parser module. It has one clear state machine, no repeated rules, and named constants for every protocol boundary.",
+      "expected_output": "Does not manufacture structural work merely to shorten the file and reports that the module is cohesive.",
+      "files": [],
+      "assertions": [
+        {"text": "Does not split the file based on line count alone"},
+        {"text": "Does not introduce speculative abstractions"},
+        {"text": "Explains why the existing cohesion is valuable"}
+      ]
+    },
+    {
+      "id": 2,
+      "name": "review-only-mode",
+      "prompt": "Audit the changed files for structural code smells and give me recommendations only.",
+      "expected_output": "Inspects and reports findings without changing files.",
+      "files": [],
+      "assertions": [
+        {"text": "Treats audit and recommendations only as read-only"},
+        {"text": "Reports locations and smallest recommended changes"}
+      ]
+    },
+    {
+      "id": 3,
+      "name": "refactor-sequences-work",
+      "prompt": "Refactor this tangled order handler. It repeats mode branches, copies tax logic, mixes persistence with formatting, and uses boolean arguments.",
+      "expected_output": "Preserves behavior, sequences relevant changes to avoid rework, checks each coherent unit, and stops when further abstraction would add navigation.",
+      "files": [],
+      "assertions": [
+        {"text": "Characterizes or preserves existing behavior"},
+        {"text": "Uses a sensible order rather than changing every lens at once"},
+        {"text": "Runs relevant checks"}
+      ]
+    },
+    {
+      "id": 4,
+      "name": "specific-concern-routes-directly",
+      "prompt": "Find duplicated business rules in these invoice services. Do not review anything else.",
+      "expected_output": "Uses consolidation guidance directly and does not expand into a broad quality audit.",
+      "files": [],
+      "assertions": [
+        {"text": "Stays focused on duplication"},
+        {"text": "Does not add branching, file-layout, or literal findings"},
+        {"text": "Reports without editing because the request says find"}
+      ]
+    }
+  ]
+}

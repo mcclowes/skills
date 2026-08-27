@@ -1,0 +1,64 @@
+{
+  "skill_name": "make-implicit-explicit",
+  "evals": [
+    {
+      "id": 0,
+      "name": "hidden-retention-rule",
+      "prompt": "A cleanup job compares timestamps against 7776000000 in three places. Review it.",
+      "expected_output": "Identifies a shared retention-period decision, gives it a domain name with units, and places it near the owning cleanup policy.",
+      "files": [],
+      "assertions": [
+        {"text": "Explains what the value means"},
+        {"text": "Uses a name or type with clear units"},
+        {"text": "Keeps the definition near its owner"}
+      ]
+    },
+    {
+      "id": 1,
+      "name": "obvious-literals-stay-inline",
+      "prompt": "Should we replace every 0, 1, empty string, and 8px spacing value in this small component with constants?",
+      "expected_output": "Rejects cosmetic extraction and leaves literals whose meaning is obvious in context inline.",
+      "files": [],
+      "assertions": [
+        {"text": "Does not name every literal"},
+        {"text": "Distinguishes harmless values from hidden decisions"}
+      ]
+    },
+    {
+      "id": 2,
+      "name": "review-only-hidden-concepts",
+      "prompt": "Audit this module for magic values and buried rules. Report only.",
+      "expected_output": "Reports the value or rule, locations, meaning, and narrowest replacement without editing.",
+      "files": [],
+      "assertions": [
+        {"text": "Does not edit"},
+        {"text": "Reports meaning and ownership, not only literal occurrences"},
+        {"text": "Leaves harmless literals alone"}
+      ]
+    },
+    {
+      "id": 3,
+      "name": "implement-options-object",
+      "prompt": "Refactor calls like sendReport(report, true, false, 3) so their intent is visible while preserving behavior.",
+      "expected_output": "Replaces opaque positional arguments with a narrow options shape and meaningful names, updates callers, and runs checks.",
+      "files": [],
+      "assertions": [
+        {"text": "Uses named options instead of positional booleans and numbers"},
+        {"text": "Preserves caller behavior"},
+        {"text": "Runs relevant checks"}
+      ]
+    },
+    {
+      "id": 4,
+      "name": "duplication-overlap-keeps-owner",
+      "prompt": "The string pending-review appears in six modules as one workflow status. Should each module define its own named constant?",
+      "expected_output": "Recognizes both a hidden domain state and meaningful duplication, defines it once at the workflow owner, and avoids a global constants dump.",
+      "files": [],
+      "assertions": [
+        {"text": "Defines the workflow state once rather than once per module"},
+        {"text": "Places it with the domain owner"},
+        {"text": "Does not create a generic global constants file"}
+      ]
+    }
+  ]
+}

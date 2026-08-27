@@ -1,0 +1,63 @@
+{
+  "skill_name": "consolidate",
+  "evals": [
+    {
+      "id": 0,
+      "name": "duplicated-domain-rule",
+      "prompt": "The same refund eligibility rule appears in an API handler, a UI selector, and a background worker. Review and recommend a fix.",
+      "expected_output": "Names the shared domain concept and recommends one narrowly owned rule used by all three consumers.",
+      "files": [],
+      "assertions": [
+        {"text": "Recognizes one domain rule that must evolve together"},
+        {"text": "Recommends a narrow domain-named extraction"},
+        {"text": "Reports without editing"}
+      ]
+    },
+    {
+      "id": 1,
+      "name": "incidental-similarity-left-alone",
+      "prompt": "A login timeout and an animation duration are both 300. Should we extract SHARED_300?",
+      "expected_output": "Rejects consolidation because the values have different meanings and change pressures.",
+      "files": [],
+      "assertions": [
+        {"text": "Leaves the values separate"},
+        {"text": "Explains that shared syntax is not shared meaning"}
+      ]
+    },
+    {
+      "id": 2,
+      "name": "review-only-duplication",
+      "prompt": "Find meaningful duplication in these components and report candidates only.",
+      "expected_output": "Reports locations, shared concept, recommendation, confidence, and deliberate non-extractions without editing.",
+      "files": [],
+      "assertions": [
+        {"text": "Does not edit"},
+        {"text": "Names the shared concept for each candidate"},
+        {"text": "Includes at least one deliberate non-extraction when applicable"}
+      ]
+    },
+    {
+      "id": 3,
+      "name": "implement-smallest-extraction",
+      "prompt": "Refactor twelve copies of the same avatar markup and behavior into one maintained implementation.",
+      "expected_output": "Extracts a narrow presentational component, preserves variants and behavior, and runs relevant checks.",
+      "files": [],
+      "assertions": [
+        {"text": "Chooses a small presentational component rather than a configuration framework"},
+        {"text": "Preserves meaningful differences between callers"},
+        {"text": "Runs relevant checks"}
+      ]
+    },
+    {
+      "id": 4,
+      "name": "mixed-responsibility-routes-away",
+      "prompt": "A single service handles authentication, email, analytics, and profile persistence, but none of those implementations are duplicated. Consolidate it.",
+      "expected_output": "Identifies responsibility separation as the concern and does not merge or abstract unrelated code.",
+      "files": [],
+      "assertions": [
+        {"text": "Routes the problem to responsibility separation"},
+        {"text": "Does not create a generic shared helper"}
+      ]
+    }
+  ]
+}

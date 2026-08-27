@@ -1,0 +1,63 @@
+{
+  "skill_name": "flatten-branching",
+  "evals": [
+    {
+      "id": 0,
+      "name": "repeated-status-checks",
+      "prompt": "Refactor a component that checks paymentStatus seven times across its heading, body, actions, and analytics effect.",
+      "expected_output": "Resolves the status at an owning boundary, keeps meaningful shared work shared, and reduces repeated consultations without changing behavior.",
+      "files": [],
+      "assertions": [
+        {"text": "Counts or identifies repeated status consultations"},
+        {"text": "Chooses a boundary that owns the divergent behavior"},
+        {"text": "Preserves effects and rendered behavior"}
+      ]
+    },
+    {
+      "id": 1,
+      "name": "local-guard-left-local",
+      "prompt": "Review a function whose only conditional is an early return when the input list is empty.",
+      "expected_output": "Leaves the clear local guard in place rather than extracting a branch abstraction.",
+      "files": [],
+      "assertions": [
+        {"text": "Treats the single guard as harmless"},
+        {"text": "Does not split the function or introduce dispatch machinery"}
+      ]
+    },
+    {
+      "id": 2,
+      "name": "review-only-branching",
+      "prompt": "Review this reducer for nested and repeated decisions, but don't change it.",
+      "expected_output": "Reports the decisions, locations, counts or depth, and proposed boundary without editing.",
+      "files": [],
+      "assertions": [
+        {"text": "Does not edit"},
+        {"text": "Reports repeated consultations or nesting depth"},
+        {"text": "Recommends a concrete boundary"}
+      ]
+    },
+    {
+      "id": 3,
+      "name": "implement-preserves-convergence",
+      "prompt": "Flatten this three-mode import flow. All modes validate differently, then call the same persist function and emit the same success event.",
+      "expected_output": "Separates divergent validation while retaining one shared persistence and success path, then runs checks.",
+      "files": [],
+      "assertions": [
+        {"text": "Keeps the shared persistence and event code single"},
+        {"text": "Does not duplicate convergence code into each mode"},
+        {"text": "Runs relevant checks"}
+      ]
+    },
+    {
+      "id": 4,
+      "name": "duplication-routes-away",
+      "prompt": "Two unrelated modules contain similar five-line date formatting blocks, but neither has repeated or nested conditions. Use flatten-branching to clean them up.",
+      "expected_output": "Explains that this is a consolidation question, not a branching problem, and does not force a branch refactor.",
+      "files": [],
+      "assertions": [
+        {"text": "Identifies consolidation as the relevant concern"},
+        {"text": "Does not invent a control-flow change"}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "skill_name": "separate-responsibilities",
+  "evals": [
+    {
+      "id": 0,
+      "name": "god-service-splits",
+      "prompt": "Refactor a 420-line UserService that issues tokens, persists profiles, sends email, and records analytics.",
+      "expected_output": "Separates independently understandable responsibilities behind narrow interfaces while preserving behavior.",
+      "files": [],
+      "assertions": [
+        {"text": "Identifies the independent responsibilities"},
+        {"text": "Proposes boundaries each understandable on its own"},
+        {"text": "Does not create a generic helpers module"}
+      ]
+    },
+    {
+      "id": 1,
+      "name": "cohesive-large-file-stays",
+      "prompt": "Review a cohesive 280-line numerical solver whose functions share one invariant and are always changed together.",
+      "expected_output": "Leaves the file intact because splitting would force cross-reading and line count alone is insufficient.",
+      "files": [],
+      "assertions": [
+        {"text": "Does not split based on size alone"},
+        {"text": "Uses shared invariants or change patterns to justify cohesion"}
+      ]
+    },
+    {
+      "id": 2,
+      "name": "review-only-boundaries",
+      "prompt": "Review this route module for mixed responsibilities. Recommend boundaries, but make no changes.",
+      "expected_output": "Reports each responsibility and proposed independently understandable boundary without editing.",
+      "files": [],
+      "assertions": [
+        {"text": "Does not edit"},
+        {"text": "Names each responsibility concretely"},
+        {"text": "Explains why each proposed unit stands alone"}
+      ]
+    },
+    {
+      "id": 3,
+      "name": "implement-one-extraction-at-time",
+      "prompt": "Split this checkout controller's pure pricing calculation from its network and rendering work, preserving behavior.",
+      "expected_output": "Extracts the self-contained calculation first behind a narrow interface, reassesses the remainder, and runs checks.",
+      "files": [],
+      "assertions": [
+        {"text": "Extracts the pure calculation rather than merely relocating code"},
+        {"text": "Keeps tightly coupled orchestration and rendering together if they cannot stand alone"},
+        {"text": "Runs relevant checks"}
+      ]
+    },
+    {
+      "id": 4,
+      "name": "duplication-routes-away",
+      "prompt": "Three cohesive modules independently implement the same tax rule. Their internal responsibilities are otherwise clean. Separate them further.",
+      "expected_output": "Identifies consolidation as the needed change and does not split already cohesive modules.",
+      "files": [],
+      "assertions": [
+        {"text": "Routes the repeated tax rule to consolidation"},
+        {"text": "Does not split cohesive modules"}
+      ]
+    }
+  ]
+}
