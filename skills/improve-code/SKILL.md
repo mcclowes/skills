@@ -1,6 +1,6 @@
 ---
 name: improve-code
-description: Review code for structural improvement opportunities across branching, duplication, mixed responsibilities, and hidden concepts. Use for broad requests to clean up, simplify, refactor, or identify code smells; use a narrower specialist skill when the request names one specific concern.
+description: Route broad code-quality reviews and refactors across branching, duplication, mixed responsibilities, and hidden concepts. Use for broad requests to clean up, simplify, refactor, or identify code smells; use the matching specialist directly when the request names one concern.
 license: MIT
 metadata:
   author: mcclowes
@@ -9,7 +9,18 @@ metadata:
 
 # Improve code deliberately
 
-Review code through a small set of opinionated lenses. Find changes that reduce the amount a reader must hold in their head without replacing straightforward code with abstraction machinery.
+Route broad code-quality work through a small set of opinionated lenses. Find changes that reduce the amount a reader must hold in their head without replacing straightforward code with abstraction machinery.
+
+## Route the request
+
+- For a broad review or refactor, start here, inspect all four lenses, then load only the specialist skills supported by credible findings.
+- For repeated or nested control flow, use `flatten-branching`.
+- For repeated concepts or implementations, use `consolidate`.
+- For mixed responsibilities or weak module boundaries, use `separate-responsibilities`.
+- For magic values, anonymous options, or buried domain rules, use `make-implicit-explicit`.
+- If the user names one concern, use its specialist directly and do not run the broad review.
+
+Do not load every specialist speculatively. A broad review identifies which deeper guidance is useful; it is not permission to expand a focused request.
 
 ## Scope the mode
 
@@ -49,6 +60,19 @@ Prioritize changes that:
 5. Reduce repeated presentation without inventing a premature design system.
 
 Treat broad line-count reductions and abstraction counts as weak evidence. The target is lower cognitive load and safer change.
+
+## Sequence a refactor
+
+Choose the order that minimizes rework. A useful default is:
+
+1. Characterize current behavior and run baseline checks when available.
+2. Flatten control flow so the real branches are visible.
+3. Consolidate concepts that should change together.
+4. Separate responsibilities along the stable boundaries that remain.
+5. Name important decisions still hidden in literals, booleans, or conditionals.
+6. Run relevant checks after each coherent change.
+
+This is a default, not a ritual. Skip irrelevant lenses, and change the order when one finding blocks the others.
 
 ## Guardrails
 

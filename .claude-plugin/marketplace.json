@@ -18,8 +18,13 @@
         "./skills/ai-aware-code-structure",
         "./skills/api-design",
         "./skills/code-frontmatter",
+        "./skills/consolidate",
+        "./skills/flatten-branching",
+        "./skills/improve-code",
         "./skills/language-design",
-        "./skills/react-compound-components"
+        "./skills/make-implicit-explicit",
+        "./skills/react-compound-components",
+        "./skills/separate-responsibilities"
       ]
     }
   ]
